@@ -1,10 +1,12 @@
-import React from 'react';
-import Button from 'components/atoms/Button';
+import React from "react";
+import UserList from "components/organisms/UserBoard";
+import GlobalStyle from "styles/GlobalStyle";
 
 function App() {
   return (
     <div>
-     <Button />
+      <GlobalStyle />
+      <UserList />
     </div>
   );
 }
