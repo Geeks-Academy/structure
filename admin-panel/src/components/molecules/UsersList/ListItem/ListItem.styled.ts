@@ -1,5 +1,6 @@
 import Button from "components/atoms/Button";
 import styled, { keyframes } from "styled-components";
+import { colors } from "styles/colors";
 
 const buttonAnimation = keyframes`
   from {
@@ -59,21 +60,21 @@ export const StyledCounter = styled.span`
 `;
 
 export const StyledEditButton = styled(Button)`
-  background-color: #F0AD4E;
+  background-color: ${colors.background.orange};
   width: 80px;
   margin-bottom: 10px;
   animation: ${buttonAnimation} .3s ease-in;
 `;
 
 export const StyledDeleteButton = styled(Button)`
-  background-color: #D9534F;
+  background-color: ${colors.background.red};
   width: 80px;
   margin-bottom: 10px;
   animation: ${buttonAnimation} .3s ease-in;
 `;
 
 export const StyledUpdateButton = styled(Button)`
-  background-color: #0375D8;
+  background-color: ${colors.background.blue};
   width: 80px;
   animation: ${buttonAnimation} .3s ease-in;
 `;

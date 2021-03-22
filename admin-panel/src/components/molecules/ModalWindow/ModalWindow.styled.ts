@@ -62,8 +62,8 @@ export const StyledWrapper = styled.div`
   }
 `;
 
-export const StyledDeleteButton = styled(Button)`
-  background-color: #F4493D;
+export const StyledButton = styled(Button)<{bgColor: string }>`
+  background-color: ${({ bgColor }) => bgColor};
 `;
 
 export const StyledCancelButton = styled(Button)`

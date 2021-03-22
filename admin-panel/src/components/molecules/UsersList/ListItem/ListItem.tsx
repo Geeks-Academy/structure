@@ -12,6 +12,7 @@ import {
   StyledPropertiesWrapper,
   StyledUpdateButton,
 } from "./ListItem.styled";
+import { TButton } from "components/molecules/ModalWindow/ModalWindow.model";
 
 const ListItem = ({ user }: IListItem): JSX.Element => {
   const {
@@ -29,9 +30,9 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
   const [buttonVisibility, setButtonVisibility] = useState(false);
   const [isActive, setActive] = useState(false);
   const [modalDescription, setModalDescription] = useState("");
-  const [modalTitle, setModalTitle] = useState("");
+  const [modalTitle, setModalTitle] = useState<TButton>('Delete');
 
-  const handleButton = (title: string, description: string) => {
+  const handleButton = (title: TButton, description: string) => {
     setActive(true);
     setModalTitle(title);
     setModalDescription(description);
