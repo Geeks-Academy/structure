@@ -57,19 +57,16 @@ export const StyledWrapper = styled.div`
 
   :nth-of-type(3) {
     flex: 1.5;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 5px 10px;
   }
 `;
 
 export const StyledDeleteButton = styled(Button)`
-  width: 120px;
   background-color: #F4493D;
-  margin-left: 10px;
 `;
 
 export const StyledCancelButton = styled(Button)`
-  width: 90px;
   background-color: #656565;
 `;
 

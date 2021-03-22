@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ModalWindow from "components/molecules/ModalWindow";
 import { IListItem } from "./ListItem.model";
 import {
   StyledRow,
@@ -26,6 +27,21 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
   } = user;
   const [edition, setEdition] = useState(false);
   const [buttonVisibility, setButtonVisibility] = useState(false);
+  const [isActive, setActive] = useState(false);
+  const [modalDescription, setModalDescription] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+
+  const handleButton = (title: string, description: string) => {
+    setActive(true);
+    setModalTitle(title);
+    setModalDescription(description);
+  };
+
+  const handleCancel = () => {
+    setActive(false);
+  };
+
+  const handleConfirm = () => {};
 
   return (
     <StyledListItem
@@ -63,7 +79,7 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
           <StyledStrong>Title: </StyledStrong>
           {edition ? <input defaultValue={title} /> : title}
         </StyledRow>
-   
+
         <StyledRow>
           <StyledCounter>9</StyledCounter>
           <StyledStrong>OpenToWork:</StyledStrong>
@@ -103,7 +119,6 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
             `${boss}`
           )}
         </StyledRow>
-    
       </StyledPropertiesWrapper>
       <StyleButtonWrapper>
         {buttonVisibility && (
@@ -112,9 +127,26 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
             edit{" "}
           </StyledEditButton>
         )}
-        {buttonVisibility && <StyledDeleteButton> delete </StyledDeleteButton>}
-        {buttonVisibility && <StyledUpdateButton> update </StyledUpdateButton>}
+        {buttonVisibility && (
+          <StyledDeleteButton onClick={() => handleButton('Delete', 'Wanna delete user?')}>
+            {" "}
+            delete{" "}
+          </StyledDeleteButton>
+        )}
+        {buttonVisibility && (
+          <StyledUpdateButton onClick={() => handleButton('Update', 'Wanna update user?')}>
+            {" "}
+            update{" "}
+          </StyledUpdateButton>
+        )}
       </StyleButtonWrapper>
+      <ModalWindow
+        title={modalTitle}
+        description={modalDescription}
+        handleCancel={() => handleCancel()}
+        handleConfirm={() => handleConfirm()}
+        isActive={isActive}
+      />
     </StyledListItem>
   );
 };

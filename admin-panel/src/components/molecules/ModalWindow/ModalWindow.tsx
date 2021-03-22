@@ -1,4 +1,5 @@
-import React from "react";
+import { useOutsideClick } from "hooks";
+import React, { useRef } from "react";
 import { IModalWindow } from "./ModalWindow.model";
 import {
   StyledDeleteButton,
@@ -11,17 +12,21 @@ import {
 } from "./ModalWindow.styled";
 
 const ModalWindow = ({
+  title,
   isActive,
   description,
   handleCancel,
   handleConfirm,
 }: IModalWindow) => {
+  const modalRef = useRef(null);
+  useOutsideClick(modalRef, () => isActive && handleCancel());
+
   if (!isActive) return <></>;
   return (
     <StyledContainer>
-      <StyledWindow>
+      <StyledWindow ref={modalRef}>
         <StyledWrapper>
-          <StyledTitle> Delete </StyledTitle>
+          <StyledTitle> {title} </StyledTitle>
         </StyledWrapper>
         <StyledWrapper>
           <StyledParagraph> {description} </StyledParagraph>
