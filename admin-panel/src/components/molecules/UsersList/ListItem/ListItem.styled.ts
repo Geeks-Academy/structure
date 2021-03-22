@@ -1,5 +1,23 @@
 import Button from "components/atoms/Button";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const buttonAnimation = keyframes`
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+`
+export const StyledListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 10px;
+  transition: .3s ease-in;
+  :hover {
+    box-shadow: 0 0 3px 1px lightslategray;
+  }
+`;
 
 export const StyledPropertiesWrapper = styled.div`
   display: flex;
@@ -17,12 +35,6 @@ export const StyleButtonWrapper = styled.div`
   width: fit-content;
 `;
 
-export const StyledListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 10px;
-`;
 
 export const StyledRow = styled.p`
   display: flex;
@@ -49,9 +61,13 @@ export const StyledEditButton = styled(Button)`
   background-color: #F0AD4E;
   width: 80px;
   margin-bottom: 10px;
+  animation: ${buttonAnimation} .3s ease-in;
+
 `;
 
 export const StyledDeleteButton = styled(Button)`
   background-color: #D9534F;
   width: 80px;
+  animation: ${buttonAnimation} .3s ease-in;
+
 `;
