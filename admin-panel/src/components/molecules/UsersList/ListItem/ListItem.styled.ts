@@ -15,7 +15,7 @@ export const StyledListItem = styled.li`
   padding: 10px;
   transition: .3s ease-in;
   :hover {
-    box-shadow: 0 0 3px 1px lightslategray;
+    box-shadow: 0 0 5px .1px lightslategray;
   }
 `;
 
@@ -38,6 +38,7 @@ export const StyleButtonWrapper = styled.div`
 
 export const StyledRow = styled.p`
   display: flex;
+  align-items: center;
   font-size: 18px;
   color: gray;
   line-height: 1.35;
@@ -62,12 +63,17 @@ export const StyledEditButton = styled(Button)`
   width: 80px;
   margin-bottom: 10px;
   animation: ${buttonAnimation} .3s ease-in;
-
 `;
 
 export const StyledDeleteButton = styled(Button)`
   background-color: #D9534F;
   width: 80px;
+  margin-bottom: 10px;
   animation: ${buttonAnimation} .3s ease-in;
+`;
 
+export const StyledUpdateButton = styled(Button)`
+  background-color: #0375D8;
+  width: 80px;
+  animation: ${buttonAnimation} .3s ease-in;
 `;
