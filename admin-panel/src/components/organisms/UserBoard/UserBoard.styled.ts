@@ -25,6 +25,6 @@ export const StyledButton = styled(Button)`
   height: 40px;
   color: white;
   font-weight: bold;
-  background-color: blue;
+  background-color: #5CB85C;
   border-radius: 4px;
 `;
