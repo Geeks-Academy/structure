@@ -1,12 +1,12 @@
 import React from "react";
-import UserList from "components/organisms/UserBoard";
 import GlobalStyle from "styles/GlobalStyle";
+import Routes from "Routes";
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <UserList />
+      <Routes />
     </div>
   );
 }

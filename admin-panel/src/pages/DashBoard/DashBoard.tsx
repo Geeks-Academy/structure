@@ -5,10 +5,10 @@ import {
   StyledContainer,
   StyledButton,
   StyledTitle,
-} from "./UserBoard.styled";
+} from "./DashBoard.styled";
 import { Users } from "Types/constants";
 
-const UsersBoard = (): JSX.Element => {
+const DashBoard = (): JSX.Element => {
   return (
     <StyledContainer>
       <StyledTopWrapper>
@@ -20,4 +20,4 @@ const UsersBoard = (): JSX.Element => {
   );
 };
 
-export default UsersBoard;
+export default DashBoard;
