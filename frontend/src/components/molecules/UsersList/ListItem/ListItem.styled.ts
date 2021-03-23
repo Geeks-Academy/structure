@@ -15,6 +15,7 @@ export const StyledListItem = styled.li`
   background-color: white;
   padding: 10px;
   transition: .3s ease-in;
+  border-radius: 5px;
   :hover {
     box-shadow: 0 0 5px .1px lightslategray;
   }
