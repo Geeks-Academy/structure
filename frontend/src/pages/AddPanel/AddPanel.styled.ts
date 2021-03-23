@@ -1,15 +1,39 @@
 import styled from "styled-components";
 import Button from "components/atoms/Button";
+import { colors } from "styles/colors";
 
 export const StyledContainer = styled.div`
-  box-shadow: 0 0 3px 0.01px gray;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+`;
+
+export const StyledTopWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1.5px solid lightgray;
+`;
+
+export const StyledBottomWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
 
 export const StyledForm = styled.form`
-  padding: 20px;
+  padding: 100px;
+  width: 100%;
+  margin: 0;
+  @media (min-width: 768px) {
+    width: 600px;
+  }
+  @media (min-width: 1440px) {
+    width: 1200px;
+  }
 `;
 
 export const StyledButtonWrapper = styled.div`
@@ -27,25 +51,10 @@ export const StyledCancelButton = styled(Button)`
 `;
 
 export const StyledSubmitButton = styled(Button)`
-  background-color: #5CB85C;
-`;
-
-
-export const StyledTopWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  width: 100%;
-  padding: 10px;
-  border-bottom: 1.5px solid lightgray;
+  background-color: ${colors.background.green};
 `;
 
 export const StyledTitle = styled.span`
   color: black;
   font-size: 18px;
-`;
-
-export const StyledBottomWrapper = styled.div`
-  padding: 10px;
 `;

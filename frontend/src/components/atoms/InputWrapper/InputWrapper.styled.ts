@@ -4,19 +4,17 @@ export const StyledContainer = styled.div`
   display: flex;
   height: 80px;
   width: 100%;
-  padding: 20px 0 20px 40px;
 `;
 
 export const StyledLeftWrapper = styled.div`
   display: flex;
   height: 100%;
-  flex: 1;
-  justify-content: center;
+  min-width: 100px;
+  justify-content: flex-end;
 `;
 
 export const StyledRightWrapper = styled.div`
-  height: 100%;
-  flex: 3;
+  width: 100%;
 `;
 
 export const StyledInput = styled.input<{error: boolean}>`
@@ -32,6 +30,7 @@ export const StyledInput = styled.input<{error: boolean}>`
 export const StyledLabel = styled.label`
   font-size: 16px;
   color: gray;
+  margin-right: 20px;
 `;
 
 export const StyledErrorMessage = styled.span`

@@ -5,13 +5,11 @@ import { Route, Switch } from "react-router-dom";
 
 const Routes = (): JSX.Element => {
   return (
-    <>
-      <Switch>
-        <Route exact path="/" component={Structure} />
-        <Route exact path="/admin" component={Dashboard} />
-        <Route exact path="/admin/add" component={AddPanel} />
-      </Switch>
-    </>
+    <Switch>
+      <Route exact path="/" component={Structure} />
+      <Route exact path="/admin" component={Dashboard} />
+      <Route exact path="/admin/add" component={AddPanel} />
+    </Switch>
   );
 };
 

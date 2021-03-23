@@ -1,5 +1,6 @@
 import Button from "components/atoms/Button";
 import styled from "styled-components";
+import { colors } from "styles/colors";
 
 export const StyledContainer = styled.div`
   border-radius: 4px;
@@ -25,6 +26,6 @@ export const StyledButton = styled(Button)`
   height: 40px;
   color: white;
   font-weight: bold;
-  background-color: #5CB85C;
+  background-color: ${colors.background.green};
   border-radius: 4px;
 `;

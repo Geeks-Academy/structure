@@ -7,13 +7,17 @@ import {
   StyledTitle,
 } from "./DashBoard.styled";
 import { Users } from "Types/constants";
+import { useHistory } from "react-router-dom";
 
 const DashBoard = (): JSX.Element => {
+  const history = useHistory();
+  const goToAddPanel = () => history.replace("/admin/add");
+  
   return (
     <StyledContainer>
       <StyledTopWrapper>
         <StyledTitle> User list </StyledTitle>
-        <StyledButton> Add new </StyledButton>
+        <StyledButton onClick={goToAddPanel}> Add new </StyledButton>
       </StyledTopWrapper>
       <UsersList users={Users} />
     </StyledContainer>

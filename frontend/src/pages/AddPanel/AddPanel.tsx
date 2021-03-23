@@ -12,13 +12,16 @@ import {
   StyledTitle,
   StyledForm,
 } from "./AddPanel.styled";
+import { useHistory } from "react-router";
 
 const AddPanel = (): JSX.Element => {
+  const history = useHistory();
   const onSubmit = () => {};
+  const onCancel = () => history.replace("/admin");
   return (
     <StyledContainer>
       <StyledTopWrapper>
-        <StyledTitle>Form</StyledTitle>
+        <StyledTitle>AddPanel</StyledTitle>
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <Formik
@@ -70,7 +73,6 @@ const AddPanel = (): JSX.Element => {
                 onBlur={handleBlur}
                 onChange={handleChange}
               />
-
               <InputWrapper
                 label="E-mail"
                 type="email"
@@ -108,7 +110,7 @@ const AddPanel = (): JSX.Element => {
                 onChange={handleChange}
               />
               <StyledButtonWrapper>
-                <StyledCancelButton type="button">Cancel</StyledCancelButton>
+                <StyledCancelButton onClick={onCancel} type="button">Cancel</StyledCancelButton>
                 <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
               </StyledButtonWrapper>
             </StyledForm>
