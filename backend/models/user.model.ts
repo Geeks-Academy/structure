@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
-  email: String,
   name: String,
   title: String,
   openToWork: { type: Boolean, default: true },
