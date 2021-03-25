@@ -1,0 +1,1 @@
+export { ReactComponent as UserIcon } from './Profile.svg';

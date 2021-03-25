@@ -1,4 +1,4 @@
-import AddPanel from "pages/AddPanel";
+import FormPanel from "pages/Form";
 import Dashboard from "pages/DashBoard";
 import Structure from "pages/Structure";
 import { Route, Switch } from "react-router-dom";
@@ -8,7 +8,12 @@ const Routes = (): JSX.Element => {
     <Switch>
       <Route exact path="/" component={Structure} />
       <Route exact path="/admin" component={Dashboard} />
-      <Route exact path="/admin/add" component={AddPanel} />
+      <Route exact path="/admin/add">
+        <FormPanel />
+      </Route>
+      <Route exact path="/admin/edit/:id">
+        <FormPanel edit/>
+      </Route>
     </Switch>
   );
 };

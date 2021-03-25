@@ -1,63 +1,60 @@
-import React, { useState } from "react";
-import ModalWindow from "components/molecules/ModalWindow";
+import React from "react";
 import { IListItem } from "./ListItem.model";
 import {
-  StyledRow,
+  StyledImageWrapper,
   StyledListItem,
-  StyledStrong,
-  StyledCounter,
-  StyledEditButton,
-  StyledDeleteButton,
-  StyleButtonWrapper,
-  StyledPropertiesWrapper,
-  StyledUpdateButton,
+  StyledUserIcon,
+  StyledImage,
+  StyledName,
 } from "./ListItem.styled";
-import { TButton } from "components/molecules/ModalWindow/ModalWindow.model";
+
+import { useHistory } from "react-router";
 
 const ListItem = ({ user }: IListItem): JSX.Element => {
-  const {
-    id,
-    boss,
-    name,
-    image,
-    email,
-    title,
-    active,
-    manager,
-    openToWork,
-  } = user;
-  const [edition, setEdition] = useState(false);
-  const [buttonVisibility, setButtonVisibility] = useState(false);
-  const [isActive, setActive] = useState(false);
-  const [modalDescription, setModalDescription] = useState("");
-  const [modalTitle, setModalTitle] = useState<TButton>('Delete');
+  const history = useHistory();
+  const { id, name, image } = user;
+  // const [edition, setEdition] = useState(false);
+  // const [buttonVisibility, setButtonVisibility] = useState(false);
+  // const [isActive, setActive] = useState(false);
+  // const [modalDescription, setModalDescription] = useState("");
+  // const [modalTitle, setModalTitle] = useState<TButton>("Delete");
 
-  const handleButton = (title: TButton, description: string) => {
-    setActive(true);
-    setModalTitle(title);
-    setModalDescription(description);
+  // const handleButton = (title: TButton, description: string) => {
+  //   setActive(true);
+  //   setModalTitle(title);
+  //   setModalDescription(description);
+  // };
+
+  // const handleCancel = () => {
+  //   setActive(false);
+  // };
+
+  // const handleConfirm = () => {};
+
+  const editUser = (id: string) => {
+    history.push(`/admin/edit/${id}`);
   };
-
-  const handleCancel = () => {
-    setActive(false);
-  };
-
-  const handleConfirm = () => {};
 
   return (
-    <StyledListItem
-      onMouseEnter={() => setButtonVisibility(true)}
-      onMouseLeave={() => setButtonVisibility(false)}
-      key={id}
-    >
-      <StyledPropertiesWrapper>
-        <StyledRow>
+    <StyledListItem onClick={() => editUser(id)} key={id}>
+      {image ? (
+        <StyledImageWrapper>
+          <StyledImage src={image} />
+        </StyledImageWrapper>
+      ) : (
+        <StyledImageWrapper>
+          <StyledUserIcon />
+        </StyledImageWrapper>
+      )}
+      <StyledName> {name} </StyledName>
+      {/* <StyledPropertiesWrapper> */}
+      {/* <StyledRow>
           <StyledCounter>1</StyledCounter>
           <StyledStrong>ID: </StyledStrong>
           {id}
-        </StyledRow>
+        </StyledRow> */}
 
-        <StyledRow>
+      {/* <StyledRow>
           <StyledCounter>2</StyledCounter>
           <StyledStrong>Name: </StyledStrong>
           {edition ? <input defaultValue={name} /> : name}
@@ -119,9 +116,9 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
           ) : (
             `${boss}`
           )}
-        </StyledRow>
-      </StyledPropertiesWrapper>
-      <StyleButtonWrapper>
+        </StyledRow> */}
+      {/* </StyledPropertiesWrapper> */}
+      {/* <StyleButtonWrapper>
         {buttonVisibility && (
           <StyledEditButton onClick={() => setEdition(!edition)}>
             {" "}
@@ -129,13 +126,17 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
           </StyledEditButton>
         )}
         {buttonVisibility && (
-          <StyledDeleteButton onClick={() => handleButton('Delete', 'Wanna delete user?')}>
+          <StyledDeleteButton
+            onClick={() => handleButton("Delete", "Wanna delete user?")}
+          >
             {" "}
             delete{" "}
           </StyledDeleteButton>
         )}
         {buttonVisibility && (
-          <StyledUpdateButton onClick={() => handleButton('Update', 'Wanna update user?')}>
+          <StyledUpdateButton
+            onClick={() => handleButton("Update", "Wanna update user?")}
+          >
             {" "}
             update{" "}
           </StyledUpdateButton>
@@ -147,7 +148,7 @@ const ListItem = ({ user }: IListItem): JSX.Element => {
         handleCancel={() => handleCancel()}
         handleConfirm={() => handleConfirm()}
         isActive={isActive}
-      />
+      /> */}
     </StyledListItem>
   );
 };

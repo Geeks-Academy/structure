@@ -11,17 +11,19 @@ import {
   StyledContainer,
   StyledTitle,
   StyledForm,
-} from "./AddPanel.styled";
+} from "./Form.styled";
 import { useHistory } from "react-router";
+import { IForm } from "./Form.model";
 
-const AddPanel = (): JSX.Element => {
+const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
   const onSubmit = () => {};
   const onCancel = () => history.replace("/admin");
+  
   return (
     <StyledContainer>
       <StyledTopWrapper>
-        <StyledTitle>AddPanel</StyledTitle>
+        <StyledTitle> AddPanel </StyledTitle>
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <Formik
@@ -121,4 +123,4 @@ const AddPanel = (): JSX.Element => {
   );
 };
 
-export default AddPanel;
+export default Form;

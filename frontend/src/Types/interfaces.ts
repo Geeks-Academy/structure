@@ -10,7 +10,7 @@ export interface Socials {
 }
 
 export interface User {
-  id: number;
+  id: string;
   email: string;
   name: string;
   title: string;
