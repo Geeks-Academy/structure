@@ -402,6 +402,21 @@ key[30] = {
     }
 }
 
+key[31] = { 
+    "key": 31, 
+    parent: key[14], 
+    stackChildren: true,
+    name: "Krzysztof Męcik", 
+    title: "Junior Frontend Developer", 
+    image: "https://scontent.fpoz5-1.fna.fbcdn.net/v/t1.0-9/118858716_3213278425424902_4367096746847197373_o.jpg?_nc_cat=107&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=HueQ7MVwLWsAX-42fgm&_nc_ht=scontent.fpoz5-1.fna&oh=72a4c27995c4c561080db4b62e3962dc&oe=60828EBE",
+    socials: {
+        email: "krzysztof.mecik@poczta.fm",
+        facebook:"https://www.facebook.com/krzysztof.mecik/",
+        instagram: "https://www.instagram.com/krzysztofmecik/",
+        linkedin:"https://www.linkedin.com/in/krzysztof-m%C4%99cik-2302a017a/",
+    }
+}
+
 export const members = [
     ...key
 ];
