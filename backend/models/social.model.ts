@@ -1,4 +1,10 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
+
+export interface ISocial extends Document {
+  name: string;
+  image: string;
+  active: boolean;
+}
 
 const socialModel = new Schema({
   name: String,
@@ -6,4 +12,4 @@ const socialModel = new Schema({
   active: Boolean
 });
 
-export default model('Social', socialModel);
+export default model<ISocial>('Social', socialModel);
