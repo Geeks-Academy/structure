@@ -6,10 +6,10 @@ export interface ISocial extends Document {
   active: boolean;
 }
 
-const socialModel = new Schema({
+const socialSchema = new Schema({
   name: String,
   image: String,
   active: Boolean
 });
 
-export default model<ISocial>('Social', socialModel);
+export default model<ISocial>('Social', socialSchema);

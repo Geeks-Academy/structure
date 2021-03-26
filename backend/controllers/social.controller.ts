@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import socialModel, { ISocial } from '../models/social.model';
+import Social, { ISocial } from '../models/social.model';
 
-export const getAllSocials = async (_req: Request, res: Response) => {
+export const getAll = async (_req: Request, res: Response) => {
   try {
-    const socials = await socialModel.find();
+    const socials = await Social.find();
     res.json(socials);
   } catch (error) {
     console.log(error);
@@ -14,7 +14,7 @@ export const getAllSocials = async (_req: Request, res: Response) => {
 export const getOne = async (req: Request, res: Response) => {
   const socialId = req.params.id;
   try {
-    const social = await socialModel.findOne({ _id: socialId });
+    const social = await Social.findOne({ _id: socialId });
     res.json(social);
   } catch (error) {
     console.log(error);
@@ -25,7 +25,7 @@ export const getOne = async (req: Request, res: Response) => {
 export const createSocial = async (req: Request, res: Response) => {
   const social = req.body;
   try {
-    const result = await socialModel.create(social);
+    const result = await Social.create(social);
     res.status(201).json(result);
   } catch (error) {
     console.log(error)
@@ -37,7 +37,7 @@ export const updateSocial = async (req: Request, res: Response) => {
   const socialId = req.params.id
   const social = req.body as Partial<ISocial>
   try {
-    await socialModel.updateOne({ _id: socialId }, social);
+    await Social.updateOne({ _id: socialId }, social);
     res.json({ ok: true, message: 'Social updated successfully' });
   } catch (error) {
     console.log(error);
