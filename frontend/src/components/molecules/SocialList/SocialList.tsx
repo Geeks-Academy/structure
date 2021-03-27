@@ -6,7 +6,11 @@ const SocialList = ({ socials }: ISocialList): JSX.Element => {
   return (
     <ul>
       {socials.map(({ link, social }) => {
-        return <li><Social link={link} social={social}/></li>;
+        return (
+          <li>
+            <Social link={link} social={social} />
+          </li>
+        );
       })}
     </ul>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import InputWrapper from "components/atoms/InputWrapper";
 import { Formik } from "formik";
 import { validation } from "./validation";
@@ -18,9 +18,9 @@ import SocialList from "components/molecules/SocialList";
 
 const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
-  // const [initialValues, setInitialValues] = useState();
   const onSubmit = () => {};
   const onCancel = () => history.replace("/admin");
+
 
   return (
     <StyledContainer>
