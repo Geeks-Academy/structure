@@ -376,18 +376,6 @@ key[28] = {
 }
 
 key[29] = { 
-    "key": 29, 
-    parent: key[4],
-    stackChildren: true,
-    name: "Grzegorz Szewc", 
-    title: "Trainee Java Developer", 
-    image: "https://ca.slack-edge.com/T017TS5J06T-U01P8DV6U49-g5966e1b5e53-512",
-    socials: {
-        email: "szewc.kgrzegorz@gmail.com",
-    }
-}
-
-key[30] = { 
     "key": 30, 
     parent: key[11], 
     stackChildren: true,
