@@ -26,7 +26,7 @@ export const getOne = async (req: Request, res: Response) => {
   }
 }
 
-export const createSocial = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   const social = req.body;
   try {
     const result = await Social.create(social);
@@ -37,7 +37,7 @@ export const createSocial = async (req: Request, res: Response) => {
   }
 }
 
-export const updateSocial = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response) => {
   const socialId = req.params.id
   const social = req.body as Partial<ISocial>
   try {

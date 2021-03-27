@@ -25,7 +25,7 @@ export const getOne = async (req: Request, res: Response) => {
   }
 }
 
-export const createUser = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   const user = req.body;
   try {
     const result = await User.create(user);
@@ -36,7 +36,7 @@ export const createUser = async (req: Request, res: Response) => {
   }
 }
 
-export const updateUser = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response) => {
   const userId = req.params.id
   const user = req.body as Partial<IUser>
   try {

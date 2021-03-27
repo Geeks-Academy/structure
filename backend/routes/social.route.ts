@@ -5,9 +5,9 @@ const router = express.Router();
 
 router
   .get('/', socialController.getAll)
-  .post('/', socialController.createSocial)
+  .post('/', socialController.create)
   .get('/:id', socialController.getOne)
-  .put('/:id', socialController.updateSocial);
+  .put('/:id', socialController.update);
 
 
 export default router;

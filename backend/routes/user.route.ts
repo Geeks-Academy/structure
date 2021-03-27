@@ -6,9 +6,9 @@ const router = express.Router();
 
 router
   .get('/', userController.getAll)
-  .post('/', userController.createUser)
+  .post('/', userController.create)
   .get('/:id', userController.getOne)
-  .put('/:id', userController.updateUser);
+  .put('/:id', userController.update);
 
 
 export default router;
