@@ -1,25 +1,25 @@
-export interface Social {
+export interface ISocialPart {
   name: string;
   image: string;
   active: boolean;
 }
 
-export interface Socials {
+export interface ISocial {
   link: string;
-  social: Social;
+  social: ISocialPart;
 }
 
-export interface User {
+export interface IUser {
   id: string;
-  email: string;
   name: string;
-  title: string;
-  openToWork: boolean;
-  manager: boolean;
-  active: boolean;
   image: string;
-  boss: boolean;
-  socials: Socials[];
+  email?: string;
+  title?: string;
+  openToWork?: boolean;
+  manager?: boolean;
+  active?: boolean;
+  boss?: boolean;
+  socials?: ISocial[];
 }
 
 export interface IChildren {

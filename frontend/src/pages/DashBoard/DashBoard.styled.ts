@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { colors } from "styles/colors";
 
 export const StyledContainer = styled.div`
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 `;
 
 export const StyledTopWrapper = styled.div`
@@ -13,6 +17,13 @@ export const StyledTopWrapper = styled.div`
   height: 80px;
   width: 100%;
   padding: 10px;
+`;
+
+export const StyledBottomWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: ${colors.background.gray};
 `;
 
 export const StyledTitle = styled.span`

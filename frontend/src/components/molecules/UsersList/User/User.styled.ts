@@ -10,10 +10,11 @@ const buttonAnimation = keyframes`
     opacity: 1;
   }
 `;
-export const StyledListItem = styled.li`
+export const StyledUser = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 60px;
   background-color: white;
   padding: 10px;
   transition: 0.3s ease-in;

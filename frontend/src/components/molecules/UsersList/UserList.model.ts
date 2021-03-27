@@ -1,5 +1,5 @@
-import { User } from 'Types/interfaces';
+import { IUser } from 'Types/interfaces';
 
-export interface IUserList {
-    users: User[]
+export interface IUsers {
+    users: IUser[]
 };

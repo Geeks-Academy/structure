@@ -1,6 +1,4 @@
-import { User } from "./interfaces";
-
-export const Users: User[] = [
+export const Users = [
   {
     id: "dsad32d32dd23d23",
     email: "Maciek@gmail.com",
@@ -38,7 +36,23 @@ export const Users: User[] = [
         social: {
           active: true,
           image: "cos.jpg",
+          name: "Linkedin",
+        },
+      },
+      {
+        link: "link",
+        social: {
+          active: true,
+          image: "cos.jpg",
           name: "Facebook",
+        },
+      },
+      {
+        link: "link",
+        social: {
+          active: true,
+          image: "cos.jpg",
+          name: "Github",
         },
       },
     ],

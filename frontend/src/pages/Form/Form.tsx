@@ -14,16 +14,18 @@ import {
 } from "./Form.styled";
 import { useHistory } from "react-router";
 import { IForm } from "./Form.model";
+import SocialList from "components/molecules/SocialList";
 
 const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
+  // const [initialValues, setInitialValues] = useState();
   const onSubmit = () => {};
   const onCancel = () => history.replace("/admin");
-  
+
   return (
     <StyledContainer>
       <StyledTopWrapper>
-        <StyledTitle> AddPanel </StyledTitle>
+        <StyledTitle> {edit ? "EditPanel" : "AddPanel"} </StyledTitle>
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <Formik
@@ -38,14 +40,16 @@ const Form = ({ edit }: IForm): JSX.Element => {
             manager: false,
             active: true,
             image: "",
-            boss: false,
+            boss: {
+              
+            },
             socials: [
               {
-                link: "",
+                link: "dasdsa",
                 social: {
                   active: true,
-                  image: "",
-                  name: "",
+                  image: "image",
+                  name: "Facebook",
                 },
               },
             ],
@@ -111,8 +115,25 @@ const Form = ({ edit }: IForm): JSX.Element => {
                 onBlur={handleBlur}
                 onChange={handleChange}
               />
+              <label>
+                Manager:{" "}
+                <input type="checkbox" defaultChecked={values.manager} />
+              </label>
+              <label>
+              OpenToWork:{" "}
+                <input type="checkbox" defaultChecked={values.openToWork} />
+              </label>
+              <label>
+                Active:{" "}
+                <input type="checkbox" defaultChecked={values.active} />
+              </label>
+              <SocialList 
+                socials={values.socials}
+              />
               <StyledButtonWrapper>
-                <StyledCancelButton onClick={onCancel} type="button">Cancel</StyledCancelButton>
+                <StyledCancelButton onClick={onCancel} type="button">
+                  Cancel
+                </StyledCancelButton>
                 <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
               </StyledButtonWrapper>
             </StyledForm>
