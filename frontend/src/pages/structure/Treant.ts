@@ -4,7 +4,7 @@ import JSONconfig from './JSONconfig'
 class Treant {
 	constructor(jsonConfig: any){
 		if (jsonConfig instanceof Array) {
-			jsonConfig = JSONconfig.make(jsonConfig);
+			jsonConfig = JSONconfig.make(jsonConfig.filter(Boolean));
 		}
 		
 		const newTree = TreeStore.createTree(jsonConfig);
