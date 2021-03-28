@@ -27,7 +27,7 @@ name: Deploy Frontend to Amazon ECS
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
     inputs:
       home:
