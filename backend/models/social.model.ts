@@ -1,9 +1,15 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
-const socialModel = new Schema({
+export interface ISocial extends Document {
+  name: string;
+  image: string;
+  active: boolean;
+}
+
+const socialSchema = new Schema({
   name: String,
   image: String,
   active: Boolean
 });
 
-export default model('Social', socialModel);
+export default model<ISocial>('Social', socialSchema);

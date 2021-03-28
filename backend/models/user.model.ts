@@ -1,4 +1,16 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
+import { ISocial } from './social.model';
+
+export interface IUser extends Document {
+  name: string;
+  title: string;
+  openToWork: boolean;
+  manager: boolean;
+  boss: IUser['_id'] | null;
+  image: string;
+  socials?: { link: string; social: ISocial['_id'] };
+  active: boolean;
+}
 
 const userSchema = new Schema({
   name: String,
@@ -11,4 +23,4 @@ const userSchema = new Schema({
   active: { type: Boolean, default: true }
 })
 
-export default model('User', userSchema);
+export default model<IUser>('User', userSchema);
