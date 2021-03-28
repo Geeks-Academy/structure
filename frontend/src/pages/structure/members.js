@@ -256,19 +256,6 @@ key[20] = {
     }
 }
 
-key[21] = { 
-    "key": 21, 
-    parent: key[14], 
-    stackChildren: true,
-    name: "Wojciech Czarnocki", 
-    title: "Frontend Developer",
-    image: "https://ca.slack-edge.com/T017TS5J06T-U01HGML3J68-de2a92692f4f-512",
-    socials: {
-        email: "czarnocki.w@wp.pl",
-        github: "https://github.com/caren1",
-    }
-}
-
 key[22] = { 
     "key": 22, 
     parent: key[4], 
