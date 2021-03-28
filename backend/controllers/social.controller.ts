@@ -11,7 +11,7 @@ export const getAll = async (_req: Request, res: Response) => {
     res.json(socials);
   } catch (error) {
     console.log(error);
-    res.status(error.code || StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
 
@@ -25,7 +25,7 @@ export const getOne = async (req: Request, res: Response) => {
     res.json(social);
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
 
@@ -36,7 +36,7 @@ export const create = async (req: Request, res: Response) => {
     res.status(StatusCode.CREATED).json(result);
   } catch (error) {
     console.log(error)
-    res.send(error);
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
 
@@ -48,6 +48,6 @@ export const update = async (req: Request, res: Response) => {
     res.json({ ok: true, message: 'Social updated successfully' });
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
