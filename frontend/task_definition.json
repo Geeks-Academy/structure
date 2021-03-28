@@ -1,0 +1,18 @@
+{
+    "family": "structure_frontend",
+    "containerDefinitions": [
+        {
+            "name": "structure_frontend",
+            "image": "",
+            "cpu": 10,
+            "memoryReservation": 128,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 0,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    ]
+}
