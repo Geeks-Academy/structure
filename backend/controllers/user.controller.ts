@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import HttpError from '../utils/error';
 import User, { IUser } from '../models/user.model';
 
 export const getAll = async (_req: Request, res: Response) => {
   try {
     const users = await User.find();
     if (users.length === 0) {
-      throw new HttpError('Not found any users', 404);
+      return res.status(403).json({ message: 'Not found any users' });
     }
     res.json(users);
   } catch (error) {
@@ -18,6 +17,9 @@ export const getOne = async (req: Request, res: Response) => {
   const userId = req.params.id;
   try {
     const user = await User.findOne({ _id: userId });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
     res.json(user);
   } catch (error) {
     console.log(error);

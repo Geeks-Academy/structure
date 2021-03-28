@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import HttpError from '../utils/error';
 import Social, { ISocial } from '../models/social.model';
 
 export const getAll = async (_req: Request, res: Response) => {
   try {
     const socials = await Social.find();
     if (socials.length === 0) {
-      throw new HttpError('Not found any socials', 404);
+      return res.status(403).json({ message: 'Not found any socials' });
     }
     res.json(socials);
   } catch (error) {
@@ -19,6 +18,9 @@ export const getOne = async (req: Request, res: Response) => {
   const socialId = req.params.id;
   try {
     const social = await Social.findOne({ _id: socialId });
+    if (!social) {
+      return res.status(404).json({ message: 'Social not found' });
+    }
     res.json(social);
   } catch (error) {
     console.log(error);
