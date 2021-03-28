@@ -1,14 +1,18 @@
-import React from "react";
-import {
-  StyledContainer
-} from "./Structure.styled";
+import { useEffect } from "react";
+import Raphael from "raphael";
+import { members } from './members'
+import './style.css'
+import Treant from './Treant'
 
-const Structure = (): JSX.Element => {
-  return (
-    <StyledContainer>
-      <h1>Structure</h1>
-    </StyledContainer>
-  );
-};
+const Structure = () => {
+    useEffect(() => {
+        window.Raphael = Raphael
+        new Treant(members)
+    }, [])
 
-export default Structure;
+    return (
+        <div id="basic-example" style={{height:"100vh", width:"100vw"}} />
+    );
+}
+
+export default Structure
