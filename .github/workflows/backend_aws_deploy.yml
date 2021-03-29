@@ -28,6 +28,8 @@ name: Deploy backend to Amazon ECS
 on:
   push:
     branches: [main]
+    paths:
+      - backend/**
   workflow_dispatch:
     inputs:
       home:
