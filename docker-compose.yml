@@ -10,7 +10,7 @@ services:
       - 4000:4000
     environment:
       - PORT=4000
-      - MONGO_CONNECTION_STRING=mongodb+srv://admin123:admin123@cluster0.yvk2v.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      - MONGO_CONNECTION_STRING=mongodb+srv://admin123:admin123@cluster0.yvk2v.mongodb.net/structure?retryWrites=true&w=majority
 
   frontend:
     container_name: structure-frontend
