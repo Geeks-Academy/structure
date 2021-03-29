@@ -4,6 +4,7 @@ dotenv.config();
 import routes from './routes';
 import connectDb from './services/database.service';
 
+
 const main = async () => {
   await connectDb();
   const app = express();
