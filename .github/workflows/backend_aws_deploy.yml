@@ -23,7 +23,7 @@
 #    See the documentation for each action used below for the recommended IAM policies for this IAM user,
 #    and best practices on handling the access key credentials.
 
-name: Deploy backend to Amazon ECS
+name: Deploy Backend to Amazon ECS
 
 on:
   push:
@@ -70,6 +70,13 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+    - name: Update task_definition.json execution role arn
+      uses: jossef/action-set-json-field@v1
+      with:
+        file: ./backend/task_definition.json
+        field: executionRoleArn
+        value: ${{ secrets.EXECUTION_ROLE_ARN }}
         
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def

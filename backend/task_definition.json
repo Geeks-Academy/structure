@@ -1,5 +1,6 @@
 {
     "family": "structure_backend",
+    "executionRoleArn": "",
     "containerDefinitions": [
         {
             "name": "structure_backend",
@@ -11,6 +12,12 @@
                     "containerPort": 4000,
                     "hostPort": 0,
                     "protocol": "tcp"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "MONGO_CONNECTION_STRING",
+                    "valueFrom": "/geeksacademy/mongodb/MONGO_CONNECTION_STRING"
                 }
             ]
         }
