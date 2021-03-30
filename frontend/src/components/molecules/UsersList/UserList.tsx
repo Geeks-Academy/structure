@@ -6,11 +6,11 @@ import { StyledList } from "./UserList.styled";
 const UserList = ({ users }: IUsers): JSX.Element => {
   return (
     <StyledList>
-      {users.map(({id, name, image}) => {
+      {users.map(({_id, name, image}) => {
         return (
-          <li>
+          <li key={_id}>
             <User 
-              id={id}
+              _id={_id}
               name={name}
               image={image}
             />

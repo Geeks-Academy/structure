@@ -8,9 +8,9 @@ import {
 } from "./User.styled";
 
 import { useHistory } from "react-router";
-import { IUser } from "Types/interfaces";
+import { IUser } from "types/interfaces";
 
-const User = ({ id, name, image }: IUser): JSX.Element => {
+const User = ({ _id, name, image }: IUser): JSX.Element => {
   const history = useHistory();
   // const [edition, setEdition] = useState(false);
   // const [buttonVisibility, setButtonVisibility] = useState(false);
@@ -35,7 +35,7 @@ const User = ({ id, name, image }: IUser): JSX.Element => {
   };
 
   return (
-    <StyledUser onClick={() => editUser(id)}>
+    <StyledUser onClick={() => editUser(_id)}>
       {image ? (
         <StyledImageWrapper>
           <StyledImage src={image} />

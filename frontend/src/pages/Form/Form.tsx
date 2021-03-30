@@ -40,19 +40,8 @@ const Form = ({ edit }: IForm): JSX.Element => {
             manager: false,
             active: true,
             image: "",
-            boss: {
-              
-            },
-            socials: [
-              {
-                link: "dasdsa",
-                social: {
-                  active: true,
-                  image: "image",
-                  name: "Facebook",
-                },
-              },
-            ],
+            boss: null,
+            socials: [],
           }}
           onSubmit={() => {
             onSubmit();

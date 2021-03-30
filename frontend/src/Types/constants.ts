@@ -8,7 +8,7 @@ export const Users = [
     manager: false,
     active: true,
     image: "",
-    boss: false,
+    boss: null,
     socials: [
       {
         link: "link",
@@ -29,7 +29,7 @@ export const Users = [
     manager: false,
     active: true,
     image: "Maciek.jpg",
-    boss: false,
+    boss: null,
     socials: [
       {
         link: "link",
@@ -66,7 +66,7 @@ export const Users = [
     manager: false,
     active: true,
     image: "Maciek.jpg",
-    boss: false,
+    boss: null,
     socials: [
       {
         link: "link",

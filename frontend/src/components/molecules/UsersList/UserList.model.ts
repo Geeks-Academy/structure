@@ -1,4 +1,4 @@
-import { IUser } from 'Types/interfaces';
+import { IUser } from 'types/interfaces';
 
 export interface IUsers {
     users: IUser[]

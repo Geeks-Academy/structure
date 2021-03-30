@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UsersList from "components/molecules/UsersList";
 import {
   StyledBottomWrapper,
@@ -7,12 +7,20 @@ import {
   StyledButton,
   StyledTitle,
 } from "./DashBoard.styled";
-import { Users } from "Types/constants";
 import { useHistory } from "react-router-dom";
+import { getAllUsers } from "Services/requests";
 
 const DashBoard = (): JSX.Element => {
   const history = useHistory();
+  const [users, setUsers] = useState([])
+  
   const goToAddPanel = () => history.replace("/admin/add");
+  
+  useEffect(() => {
+    getAllUsers().then(({data}) => {
+      setUsers(data)
+    })
+  }, [setUsers])
 
   return (
     <StyledContainer>
@@ -21,7 +29,7 @@ const DashBoard = (): JSX.Element => {
         <StyledButton onClick={goToAddPanel}> Add new </StyledButton>
       </StyledTopWrapper>
       <StyledBottomWrapper>
-        <UsersList users={Users} />
+        <UsersList users={users} />
       </StyledBottomWrapper>
     </StyledContainer>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { ISocial } from "Types/interfaces";
+import { ISocial } from "types/interfaces";
 import {
 } from "./Social.styled";
 

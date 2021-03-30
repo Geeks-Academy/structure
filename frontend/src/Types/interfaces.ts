@@ -4,13 +4,17 @@ export interface ISocialPart {
   active: boolean;
 }
 
+export interface IBoss {
+  _id: string;
+}
+
 export interface ISocial {
   link: string;
   social: ISocialPart;
 }
 
 export interface IUser {
-  id: string;
+  _id: string;
   name: string;
   image: string;
   email?: string;
@@ -18,7 +22,7 @@ export interface IUser {
   openToWork?: boolean;
   manager?: boolean;
   active?: boolean;
-  boss?: boolean;
+  boss?: IBoss[] | null;
   socials?: ISocial[];
 }
 
