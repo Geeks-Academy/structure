@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import routes from "./routes";
 import connectDb from "./services/database.service";
-const cors = require("cors");
+import cors from 'cors'
+
 
 const main = async () => {
   await connectDb();
