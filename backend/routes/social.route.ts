@@ -1,6 +1,7 @@
 import express from 'express';
 import * as socialController from '../controllers/social.controller';
-import { schema, validateBody, validateParameter } from '../validators/social.validator';
+import { validateBody, validateParameter } from '../validators';
+import schema from '../validators/social.validator';
 
 const router = express.Router();
 
