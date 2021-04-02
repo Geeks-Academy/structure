@@ -5,14 +5,12 @@ const schema = {
   post: Joi.object({
     name: Joi.string().min(4).required(),
     title: Joi.string().required(),
-    boss: Joi.string().default(null),
     image: Joi.string().allow(""),
     socials: Joi.array().items(socialSchema.post).allow().empty(),
   }),
   put: Joi.object({
     name: Joi.string().min(4),
     title: Joi.string(),
-    boss: Joi.string().default(null),
     image: Joi.string().allow(""),
   }),
   id: Joi.object().keys({
