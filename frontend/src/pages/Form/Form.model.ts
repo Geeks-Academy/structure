@@ -1,3 +1,3 @@
-export interface IForm {
+export interface IForm  {
     edit?: boolean;
 };

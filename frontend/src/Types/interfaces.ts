@@ -17,7 +17,6 @@ export interface IUser {
   _id: string;
   name: string;
   image: string;
-  email?: string;
   title?: string;
   openToWork?: boolean;
   manager?: boolean;

@@ -8,7 +8,7 @@ import {
 } from "./User.styled";
 
 import { useHistory } from "react-router";
-import { IUser } from "types/interfaces";
+import { IUser } from "Types/interfaces";
 
 const User = ({ _id, name, image }: IUser): JSX.Element => {
   const history = useHistory();
