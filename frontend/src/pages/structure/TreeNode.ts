@@ -170,7 +170,7 @@ class TreeNode {
 		// IMAGE
 		if(this.image) {
 			const container = document.createElement('div')
-			container.className = 'avatar'
+			container.className = this.member.manager ? 'manager-avatar' : 'avatar' 
 			image = document.createElement('img');
 			image.src = this.image;
 			container.appendChild(image)

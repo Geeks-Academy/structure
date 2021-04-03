@@ -50,6 +50,13 @@ body { background: #fff; }
     height:75px; 
     padding:20px;
 }
+.manager-avatar img{
+    border: none; 
+    float: left; 
+    width:100px;
+    height:100px; 
+    padding:20px;
+}
 
 .socials {
     display: flex;
