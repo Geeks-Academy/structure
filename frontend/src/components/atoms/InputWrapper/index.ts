@@ -1,2 +1,2 @@
-import Input from './InputWrapper';
+import Input from './Input';
 export default Input;

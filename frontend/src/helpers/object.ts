@@ -12,7 +12,7 @@ export const getUserObject = (
   openToWork?: boolean,
   manager?: boolean,
   active?: boolean,
-  boss?: IBoss[] | null,
+  boss?: string | null,
   socials?: ISocial[]
 ) => ({
   _id,

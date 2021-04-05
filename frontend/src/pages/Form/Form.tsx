@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import InputWrapper from "components/atoms/InputWrapper";
 import { useFormik } from "formik";
 import { validation } from "./validation";
 import {
@@ -14,15 +13,18 @@ import {
 } from "./Form.styled";
 import { IForm } from "./Form.model";
 import { useRouteMatch, useHistory } from "react-router-dom";
+import { getUserObject, isObjectEmpty } from "helpers";
+import { IUser } from "Types/interfaces";
+import Input from "components/atoms/InputWrapper";
+import Checkbox from "components/atoms/Checkbox";
 import SocialList from "components/molecules/SocialList";
+
 import {
   createUser,
   getAllUsers,
   getUser,
   updateUser,
 } from "Services/requests";
-import { getUserObject, isObjectEmpty } from "helpers";
-import { IUser } from "Types/interfaces";
 
 const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
@@ -52,6 +54,10 @@ const Form = ({ edit }: IForm): JSX.Element => {
       setUsers(data);
     });
   }, [setUsers]);
+
+  useEffect(() => {
+   console.log(values)
+  }, [values]);
 
   const onCancel = () => history.replace("/admin");
   const handleOnSubmit = (data: IUser, edit: boolean) => {
@@ -124,36 +130,37 @@ const Form = ({ edit }: IForm): JSX.Element => {
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <StyledForm onSubmit={handleSubmit} noValidate>
-          <InputWrapper
+          <Input
+            inputId="name"
             label="Name"
             type="text"
             name="name"
             touched={touched}
-            isRequired={true}
+            required={true}
             errorId="err_name"
             value={values.name}
             error={errors.name}
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          <InputWrapper
+          <Input
+            inputId="image"
             label="Image"
             type="text"
             name="image"
             touched={touched}
-            isRequired={true}
             errorId="err_image"
             value={values.image}
             error={errors.image}
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          <InputWrapper
+          <Input
+            inputId="title"
             label="Title"
             type="text"
             name="title"
             touched={touched}
-            isRequired={true}
             errorId="err_title"
             value={values.title}
             error={errors.title}
@@ -161,49 +168,53 @@ const Form = ({ edit }: IForm): JSX.Element => {
             onChange={handleChange}
           />
 
-          <label>
-            Manager:
-            <input
-              type="checkbox"
-              name="manager"
-              checked={values.manager}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </label>
-          <label className="block">
-            <span className="text-gray-700 -ml-12">Name</span>
-            <input type="email" className="form-input px-4 py-3 rounded-full" />
-          </label>
-
-          <label>
-            OpenToWork:
-            <input
-              type="checkbox"
-              name="openToWork"
-              checked={values.openToWork}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Active:
-            <input
-              type="checkbox"
-              name="active"
-              checked={values.active}
-              onBlur={handleBlur}
-              onChange={handleChange}
-            />
-          </label>
-
           <div>
-            <label  htmlFor="boss">Boss</label>
-            <select id="boss" className="form-select mt-1 block w-full">
+            <label
+              className="block text-gray-500 font-bold mb-2 text-xl"
+              htmlFor="boss"
+            >
+              Boss
+            </label>
+            <select
+              id="boss"
+              className="form-select mt-1 block w-full h-16 rounded-lg border-2 border-gray-200 text-2xl mb-10"
+              value={`${values.boss}`}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="boss"
+            >
               {users.map((user) => {
-                return <option value={user.name}>{user.name}</option>;
+                return (
+                  <option className="text-2xl" key={user._id} value={user._id}>
+                    {user.name}
+                  </option>
+                );
               })}
             </select>
+          </div>
+
+          <div className="flex flex-col">
+            <Checkbox
+              name="openToWork"
+              label="Open to work"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              checked={!!values.openToWork}
+            />
+            <Checkbox
+              name="active"
+              label="Active"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              checked={!!values.active}
+            />
+            <Checkbox
+              name="manager"
+              label="Manager"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              checked={!!values.manager}
+            />
           </div>
 
           <SocialList socials={values.socials || []} />

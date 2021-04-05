@@ -4,6 +4,6 @@ export interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string;
     error?: any;
     touched?: any;
-    isRequired?: boolean;
+    required?: boolean;
     ariaInvalid?: boolean;
 };

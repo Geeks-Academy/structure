@@ -1,7 +1,5 @@
 import { UserIcon } from "assets";
 import styled from "styled-components";
-import { colors } from "styles/colors";
-
 
 export const StyledListItem = styled.li`
   display: flex;
