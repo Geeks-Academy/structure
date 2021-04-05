@@ -5,5 +5,8 @@ export const validation = () =>
     name: yup.string().required('Name is required'),
     title: yup.string(),
     image: yup.string(), 
-    boss: yup.string()
+    boss: yup.string(),
+    openToWork: yup.boolean().default(true),
+    manager: yup.boolean().default(true),
+    active: yup.boolean().default(false),
   });

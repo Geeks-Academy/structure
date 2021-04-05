@@ -15,7 +15,7 @@ import { IForm } from "./Form.model";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { getUserObject, isObjectEmpty } from "helpers";
 import { IUser } from "Types/interfaces";
-import Input from "components/atoms/InputWrapper";
+import Input from "components/atoms/Input";
 import Checkbox from "components/atoms/Checkbox";
 import SocialList from "components/molecules/SocialList";
 
@@ -55,10 +55,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
     });
   }, [setUsers]);
 
-  useEffect(() => {
-   console.log(values)
-  }, [values]);
-
   const onCancel = () => history.replace("/admin");
   const handleOnSubmit = (data: IUser, edit: boolean) => {
     const {
@@ -71,6 +67,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
       manager,
       openToWork,
     } = data;
+    
     edit && updateUser(data);
     !edit &&
       createUser({
@@ -142,6 +139,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
             error={errors.name}
             onBlur={handleBlur}
             onChange={handleChange}
+            placeholder="type name"
           />
           <Input
             inputId="image"
@@ -154,6 +152,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
             error={errors.image}
             onBlur={handleBlur}
             onChange={handleChange}
+            placeholder="type image"
           />
           <Input
             inputId="title"
@@ -166,6 +165,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
             error={errors.title}
             onBlur={handleBlur}
             onChange={handleChange}
+            placeholder="type title"
           />
 
           <div>
@@ -199,21 +199,21 @@ const Form = ({ edit }: IForm): JSX.Element => {
               label="Open to work"
               onBlur={handleBlur}
               onChange={handleChange}
-              checked={!!values.openToWork}
+              isChecked={!!values.openToWork}
             />
             <Checkbox
               name="active"
               label="Active"
               onBlur={handleBlur}
               onChange={handleChange}
-              checked={!!values.active}
+              isChecked={!!values.active}
             />
             <Checkbox
               name="manager"
               label="Manager"
               onBlur={handleBlur}
               onChange={handleChange}
-              checked={!!values.manager}
+              isChecked={!!values.manager}
             />
           </div>
 

@@ -28,7 +28,7 @@ const Input = ({
       </label>
       <input
         className={clsx(
-          "appearance-none border-2 border-gray-200 rounded-lg w-full h-16 py-2 px-3 text-gray-700 mb-3 text-2xl leading-tight focus:outline-none focus:shadow-outline",
+          "appearance-none border-2 border-gray-200 rounded-lg w-full h-16 py-2 px-3 text-gray-700 mb-3 text-2xl leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400",
           !!error && "border-red-500"
         )}
         aria-describedby={errorId}

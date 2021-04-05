@@ -1,4 +1,4 @@
-import { IBoss, ISocial } from "Types/interfaces";
+import { ISocial } from "Types/interfaces";
 
 export const isObjectEmpty = (obj: Object) => {
   return Object.keys(obj).length === 0;
@@ -8,10 +8,10 @@ export const getUserObject = (
   _id: string = "",
   name: string = "",
   image: string = "",
-  title?: string,
-  openToWork?: boolean,
-  manager?: boolean,
-  active?: boolean,
+  title: string = "",
+  openToWork: boolean = false,
+  manager: boolean = false,
+  active: boolean = true,
   boss?: string | null,
   socials?: ISocial[]
 ) => ({

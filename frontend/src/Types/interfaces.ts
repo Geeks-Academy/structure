@@ -3,16 +3,10 @@ export interface ISocialPart {
   image: string;
   active: boolean;
 }
-
-export interface IBoss {
-  _id: string;
-}
-
 export interface ISocial {
   link: string;
   social: ISocialPart;
 }
-
 export interface IUser {
   _id?: string;
   name?: string;

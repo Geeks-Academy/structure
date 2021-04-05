@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 export interface ICheckBox {
-    checked: boolean;
+    isChecked: boolean;
     label: string;
     name: string;
     onBlur: (e: ChangeEvent) => void;
