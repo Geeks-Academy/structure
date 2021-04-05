@@ -35,7 +35,7 @@ const User = ({ _id, name, image }: IUser): JSX.Element => {
   };
 
   return (
-    <StyledUser onClick={() => editUser(_id)}>
+    <StyledUser onClick={() => editUser(`${_id}`)}>
       {image ? (
         <StyledImageWrapper>
           <StyledImage src={image} />

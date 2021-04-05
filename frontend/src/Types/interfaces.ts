@@ -14,9 +14,9 @@ export interface ISocial {
 }
 
 export interface IUser {
-  _id: string;
-  name: string;
-  image: string;
+  _id?: string;
+  name?: string;
+  image?: string;
   title?: string;
   openToWork?: boolean;
   manager?: boolean;

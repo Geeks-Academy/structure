@@ -15,7 +15,12 @@ import {
 import { IForm } from "./Form.model";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import SocialList from "components/molecules/SocialList";
-import { getUser } from "Services/requests";
+import {
+  createUser,
+  getAllUsers,
+  getUser,
+  updateUser,
+} from "Services/requests";
 import { getUserObject, isObjectEmpty } from "helpers";
 import { IUser } from "Types/interfaces";
 
@@ -23,20 +28,58 @@ const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
   const { params } = useRouteMatch<{ id: string }>();
   const [initialValues, setInitialValues] = useState(getUserObject());
+  const [users, setUsers] = useState<IUser[]>([]);
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues,
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
     validationSchema: validation(),
-    validateOnChange: true,
     enableReinitialize: true,
+    validateOnChange: true,
+    initialValues,
     onSubmit: (values) => {
-      handleOnSubmit(values);
+      handleOnSubmit(values, !!edit);
     },
   });
 
+  useEffect(() => {
+    getAllUsers().then(({ data }) => {
+      setUsers(data);
+    });
+  }, [setUsers]);
+
   const onCancel = () => history.replace("/admin");
-  const handleOnSubmit = (data: IUser) => {
-    
+  const handleOnSubmit = (data: IUser, edit: boolean) => {
+    const {
+      name,
+      boss,
+      image,
+      title,
+      active,
+      socials,
+      manager,
+      openToWork,
+    } = data;
+    edit && updateUser(data);
+    !edit &&
+      createUser({
+        name,
+        boss,
+        image,
+        title,
+        active,
+        socials,
+        manager,
+        openToWork,
+      });
+    setTimeout(() => {
+      onCancel();
+    }, 100);
   };
 
   useEffect(() => {
@@ -74,10 +117,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
     }
   }, [params]);
 
-  useEffect(() => {
-    // console.log("Initial", initialValues);
-  }, [initialValues]);
-
   return (
     <StyledContainer>
       <StyledTopWrapper>
@@ -86,41 +125,42 @@ const Form = ({ edit }: IForm): JSX.Element => {
       <StyledBottomWrapper>
         <StyledForm onSubmit={handleSubmit} noValidate>
           <InputWrapper
-                label="Name"
-                type="text"
-                name="name"
-                touched={touched}
-                isRequired={true}
-                errorId="err_name"
-                value={values.name}
-                error={errors.name}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              <InputWrapper
-                label="Image"
-                type="text"
-                name="image"
-                touched={touched}
-                isRequired={true}
-                errorId="err_image"
-                value={values.image}
-                error={errors.image}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
-              <InputWrapper
-                label="Title"
-                type="text"
-                name="title"
-                touched={touched}
-                isRequired={true}
-                errorId="err_title"
-                value={values.title}
-                error={errors.title}
-                onBlur={handleBlur}
-                onChange={handleChange}
-              />
+            label="Name"
+            type="text"
+            name="name"
+            touched={touched}
+            isRequired={true}
+            errorId="err_name"
+            value={values.name}
+            error={errors.name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <InputWrapper
+            label="Image"
+            type="text"
+            name="image"
+            touched={touched}
+            isRequired={true}
+            errorId="err_image"
+            value={values.image}
+            error={errors.image}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <InputWrapper
+            label="Title"
+            type="text"
+            name="title"
+            touched={touched}
+            isRequired={true}
+            errorId="err_title"
+            value={values.title}
+            error={errors.title}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+
           <label>
             Manager:
             <input
@@ -131,6 +171,11 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onChange={handleChange}
             />
           </label>
+          <label className="block">
+            <span className="text-gray-700 -ml-12">Name</span>
+            <input type="email" className="form-input px-4 py-3 rounded-full" />
+          </label>
+
           <label>
             OpenToWork:
             <input
@@ -151,7 +196,15 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onChange={handleChange}
             />
           </label>
-          <pre>{JSON.stringify(values, null, 2)}</pre>
+
+          <div>
+            <label  htmlFor="boss">Boss</label>
+            <select id="boss" className="form-select mt-1 block w-full">
+              {users.map((user) => {
+                return <option value={user.name}>{user.name}</option>;
+              })}
+            </select>
+          </div>
 
           <SocialList socials={values.socials || []} />
           <StyledButtonWrapper>
