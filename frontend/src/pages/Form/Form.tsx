@@ -45,7 +45,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
     validateOnChange: true,
     initialValues,
     onSubmit: (values) => {
-      handleOnSubmit(values, !!edit);
+      onSubmit(values, !!edit);
     },
   });
 
@@ -55,8 +55,13 @@ const Form = ({ edit }: IForm): JSX.Element => {
     });
   }, [setUsers]);
 
+  
+  useEffect(() => {
+    console.log(values)
+  }, [errors, values]);
+
   const onCancel = () => history.replace("/admin");
-  const handleOnSubmit = (data: IUser, edit: boolean) => {
+  const onSubmit = (data: IUser, edit: boolean) => {
     const {
       name,
       boss,

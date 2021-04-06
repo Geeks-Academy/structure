@@ -13,6 +13,7 @@ const Input = ({
   errorId,
   touched,
   required,
+  ariaLabel,
   onChange,
   placeholder,
   ariaInvalid,
@@ -21,17 +22,21 @@ const Input = ({
   return (
     <div className="mb-6" {...props}>
       <label
-        className="block text-gray-500 font-bold mb-2 text-xl"
+        className={clsx(
+          !label && 'invisible absolute',
+          "block text-gray-500 font-bold mb-2 text-xl "
+        )}
         htmlFor={inputId}
       >
         {label}
       </label>
       <input
         className={clsx(
-          "appearance-none border-2 border-gray-200 rounded-lg w-full h-16 py-2 px-3 text-gray-700 mb-3 text-2xl leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400",
+          "appearance-none border-2 border-gray-200 rounded-lg w-full h-16 py-2 px-3 text-gray-700 text-2xl leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400",
           !!error && "border-red-500"
         )}
         aria-describedby={errorId}
+        aria-label={ariaLabel}
         placeholder={placeholder}
         required={required}
         onChange={onChange}
