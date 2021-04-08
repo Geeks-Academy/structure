@@ -1,4 +1,3 @@
-import socialSchema from './social.validator';
 import Joi from 'joi';
 
 const schema = {
@@ -22,6 +21,10 @@ const schema = {
     manager: Joi.boolean(),
     boss: Joi.string(),
     image: Joi.string().allow(""),
+    socials: Joi.array().items({ 
+      link: Joi.string(),
+      social: Joi.string().length(24)
+    }).empty(),
     active: Joi.boolean()
   }),
   id: Joi.object().keys({
