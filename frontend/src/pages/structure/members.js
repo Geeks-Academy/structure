@@ -345,10 +345,6 @@ key[27] = {
         github: "https://github.com/MarW5",
         instagram: "https://www.instagram.com/marta.wiese_official/",
         linkedin:"https://www.linkedin.com/in/marta-wiese/",
-        email1: "marta.wiese5@gmail.com",
-        facebook2:"https://www.facebook.com/marta.wiese",
-        github3: "https://github.com/MarW5",
-        instagram4: "https://www.instagram.com/marta.wiese_official/"
     }
 }
 
