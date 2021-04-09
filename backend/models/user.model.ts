@@ -12,6 +12,7 @@ export interface IUser extends Document {
   active: boolean;
 }
 
+
 const userSchema = new Schema({
   name: String,
   title: String,

@@ -14,23 +14,25 @@ import {
 import { IForm } from "./Form.model";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { getUserObject, isObjectEmpty } from "helpers";
-import { IUser } from "Types/interfaces";
+import { ISocial, IUser } from "Types/interfaces";
 import Input from "components/atoms/Input";
 import Checkbox from "components/atoms/Checkbox";
 import SocialList from "components/molecules/SocialList";
 
 import {
   createUser,
+  getAllSocials,
   getAllUsers,
   getUser,
   updateUser,
-} from "Services/requests";
+} from "Services";
 
 const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
   const { params } = useRouteMatch<{ id: string }>();
   const [initialValues, setInitialValues] = useState(getUserObject());
   const [users, setUsers] = useState<IUser[]>([]);
+  const [socials, setSocials] = useState<ISocial[]>([]);
 
   const {
     values,
@@ -55,10 +57,15 @@ const Form = ({ edit }: IForm): JSX.Element => {
     });
   }, [setUsers]);
 
-  
   useEffect(() => {
-    console.log(values)
-  }, [errors, values]);
+    getAllSocials().then(({ data }) => {
+      setSocials(data);
+    });
+  }, [setSocials]);
+
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
 
   const onCancel = () => history.replace("/admin");
   const onSubmit = (data: IUser, edit: boolean) => {
@@ -72,8 +79,8 @@ const Form = ({ edit }: IForm): JSX.Element => {
       manager,
       openToWork,
     } = data;
-    
-    edit && updateUser(data);
+
+    edit && updateUser(data).then(console.log);
     !edit &&
       createUser({
         name,
@@ -188,6 +195,9 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onBlur={handleBlur}
               name="boss"
             >
+              <option className="text-2xl" value={}>
+                {'-- none --'}
+              </option>
               {users.map((user) => {
                 return (
                   <option className="text-2xl" key={user._id} value={user._id}>
@@ -198,7 +208,9 @@ const Form = ({ edit }: IForm): JSX.Element => {
             </select>
           </div>
 
-          <div className="flex flex-col">
+          <SocialList socials={socials} />
+
+          <div className="flex flex-col mb-10">
             <Checkbox
               name="openToWork"
               label="Open to work"
@@ -221,8 +233,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
               isChecked={!!values.manager}
             />
           </div>
-
-          <SocialList socials={values.socials || []} />
           <StyledButtonWrapper>
             <StyledCancelButton onClick={onCancel} type="button">
               Cancel

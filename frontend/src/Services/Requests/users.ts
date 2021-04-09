@@ -1,5 +1,5 @@
 import { IUser } from "Types/interfaces";
-import { axiosInstance } from "./api";
+import { axiosInstance } from "Services";
 
 export const getAllUsers = async () => {
   return await axiosInstance.get("users");

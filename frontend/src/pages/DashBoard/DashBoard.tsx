@@ -8,7 +8,7 @@ import {
 } from "./DashBoard.styled";
 
 import { useHistory } from "react-router-dom";
-import { getAllUsers } from "Services/requests";
+import { getAllUsers } from "Services";
 import { IUser } from "Types/interfaces";
 import { isInputTextMatch } from "helpers";
 
