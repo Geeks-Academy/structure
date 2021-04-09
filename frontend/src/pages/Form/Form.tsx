@@ -47,6 +47,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
     validateOnChange: true,
     initialValues,
     onSubmit: (values) => {
+      console.log(values)
       onSubmit(values, !!edit);
     },
   });
@@ -64,8 +65,8 @@ const Form = ({ edit }: IForm): JSX.Element => {
   }, [setSocials]);
 
   useEffect(() => {
-    console.log(values);
-  }, [values]);
+   console.log(errors, values)
+  }, [errors, values]);
 
   const onCancel = () => history.replace("/admin");
   const onSubmit = (data: IUser, edit: boolean) => {
@@ -195,8 +196,8 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onBlur={handleBlur}
               name="boss"
             >
-              <option className="text-2xl" value={}>
-                {'-- none --'}
+              <option value="">
+                {"-- none --"}
               </option>
               {users.map((user) => {
                 return (
