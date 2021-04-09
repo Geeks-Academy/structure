@@ -1,5 +1,8 @@
 /* required LIB STYLES */
 /* .Treant se automatski dodaje na svaki chart conatiner */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&display=swap');
+
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
 table { border-collapse:collapse; border-spacing:0; }
 fieldset,img { border:0; }
@@ -21,10 +24,12 @@ body { background: #fff; }
     -moz-border-radius: 3px;
     border-radius: 3px;
     background-color: #ffffff;
-    border: 1px solid #000;
     width: 200px;
-    font-family: Tahoma;
+    font-family: Tahoma, sans-serif;
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .Treant.chart {width:100vw;height:100vh;}
@@ -43,19 +48,41 @@ body { background: #fff; }
     padding-right: 10px;
 }
 
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95px;
+}
+
+.manager-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+}
+
 .avatar img {
     border: none; 
-    float: left; 
     width:75px;
-    height:75px; 
-    padding:20px;
+    height:75px;
+    border-radius: 8px;
+    padding: 5px;
+}
+.manager-avatar img{
+    border: none;
+    width:100px;
+    height:100px;
+    border-radius: 10px;
+    padding: 5px;
+    object-fit: cover;
 }
 
 .socials {
     display: flex;
-    margin-top: 5px;
+    margin-top: 8px;
     row-gap: 5px;
-    width: 145px; 
+    width: 145px;
     flex-flow: row wrap;
 }
 
@@ -66,4 +93,19 @@ body { background: #fff; }
 .social img {
     width:20px;
     height:20px; 
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.node-name {
+    font-size: 1rem;
+}
+.node-title {
+    font-size: .85rem;
+    color: #666;
 }

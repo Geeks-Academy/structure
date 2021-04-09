@@ -170,7 +170,7 @@ class TreeNode {
 		// IMAGE
 		if(this.image) {
 			const container = document.createElement('div')
-			container.className = 'avatar'
+			container.className = this.member.manager ? 'manager-avatar' : 'avatar' 
 			image = document.createElement('img');
 			image.src = this.image;
 			container.appendChild(image)
@@ -180,6 +180,7 @@ class TreeNode {
 		// TEXT
 		// TODO Refactor
 		const container = document.createElement('div')
+		container.className = 'content';
 		
 		if(this.member.name) {
 			const text = document.createElement('p');

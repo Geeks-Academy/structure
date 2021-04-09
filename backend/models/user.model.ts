@@ -7,7 +7,7 @@ export interface IUser extends Document {
   openToWork: boolean;
   manager: boolean;
   boss: IUser['_id'] | null;
-  image: string;
+  image?: string;
   socials?: { link: string; social: ISocial['_id'] };
   active: boolean;
 }

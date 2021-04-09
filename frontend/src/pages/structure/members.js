@@ -344,8 +344,7 @@ key[27] = {
         facebook:"https://www.facebook.com/marta.wiese",
         github: "https://github.com/MarW5",
         instagram: "https://www.instagram.com/marta.wiese_official/",
-        linkedin:"https://www.linkedin.com/in/marta-wiese/"
-    ,
+        linkedin:"https://www.linkedin.com/in/marta-wiese/",
     }
 }
 
