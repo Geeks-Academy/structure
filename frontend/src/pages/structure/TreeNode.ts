@@ -180,6 +180,7 @@ class TreeNode {
 		// TEXT
 		// TODO Refactor
 		const container = document.createElement('div')
+		container.className = 'content';
 		
 		if(this.member.name) {
 			const text = document.createElement('p');
