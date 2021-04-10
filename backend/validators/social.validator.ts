@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from 'utils/CustomJoi';
 
 const schema = {
   post: Joi.object({
@@ -12,7 +12,7 @@ const schema = {
     active: Joi.boolean()
   }),
   id: Joi.object().keys({
-    id: Joi.string().length(24)
+    id: Joi.string().objectId()
   })
 }
 

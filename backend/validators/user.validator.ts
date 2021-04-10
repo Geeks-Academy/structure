@@ -1,5 +1,5 @@
 import socialSchema from './social.validator';
-import Joi from 'joi';
+import Joi from 'utils/CustomJoi';
 
 const schema = {
   post: Joi.object({
@@ -14,7 +14,7 @@ const schema = {
     image: Joi.string().allow(""),
   }),
   id: Joi.object().keys({
-    id: Joi.string().length(24)
+    id: Joi.string().objectId()
   })
 }
 
