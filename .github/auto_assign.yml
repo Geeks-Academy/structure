@@ -1,0 +1,11 @@
+addReviewers: true
+addAssignees: author
+numberOfReviewers: 0
+reviewers:
+  - PiotrGrobelak
+  - hendrysiak
+  - Krysik
+  - hayuna
+  - TomaszKorenberg
+  - MaciejSpalek
+  - zeglarz
