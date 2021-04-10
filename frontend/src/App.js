@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Structure from './pages/structure'
+import Structure from './pages/Structure'
 
 function App() {
   return (
