@@ -5,20 +5,17 @@ services:
     container_name: structure-backend
     build:
       context: ./backend
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     ports:
       - 4000:4000
-    volumes:
-       - ./backend:/usr/src/app
-       - /usr/src/app/node_modules
-
+    environment:
+      - PORT=4000
+      - MONGO_CONNECTION_STRING=mongodb+srv://admin123:admin123@cluster0.yvk2v.mongodb.net/structure?retryWrites=true&w=majority
+  
   frontend:
     container_name: structure-frontend
     build:
       context: ./frontend
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     ports:
       - 3000:3000
-    volumes:
-       - ./frontend:/usr/src/app
-       - /usr/src/app/node_modules
