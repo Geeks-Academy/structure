@@ -1,4 +1,4 @@
-import Joi from '../utils/CustomJoi';
+import Joi from './Joi';
 
 const schema = {
   post: Joi.object({

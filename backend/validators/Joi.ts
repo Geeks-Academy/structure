@@ -9,7 +9,7 @@ interface ExtendedJoi extends Joi.Root {
   string(): ExtendedStringSchema;
 }
 
-const stringObjectExtension: Joi.Extension = {
+const objectId: Joi.Extension = {
   base: Joi.string(),
   type: "string",
   messages: {
@@ -27,6 +27,6 @@ const stringObjectExtension: Joi.Extension = {
   }
 };
 
-const CustomJoi: ExtendedJoi = Joi.extend(stringObjectExtension);
+const CustomJoi: ExtendedJoi = Joi.extend(objectId);
 
 export default CustomJoi;
