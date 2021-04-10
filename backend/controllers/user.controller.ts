@@ -59,7 +59,6 @@ export const update = async (req: Request, res: Response) => {
   try {
     await User.updateOne({ _id: userId }, user);
     res.json({ ok: true, message: 'User updated successfully' });
-
   } catch (error) {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
