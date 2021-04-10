@@ -20,7 +20,7 @@ const userSchema = new Schema({
   manager: { type: Boolean, default: false },
   boss: { type: Schema.Types.ObjectId, ref: 'User', default: null },
   image: String,
-  socials: [ { link: String, social: { type: Schema.Types.ObjectId, ref: 'Social' } } ],
+  socials: [{ _id: false, link: String, social: { type: Schema.Types.ObjectId, ref: 'Social' } }],
   active: { type: Boolean, default: true }
 })
 
