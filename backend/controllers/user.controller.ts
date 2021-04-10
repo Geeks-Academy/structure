@@ -4,7 +4,14 @@ import User, { IUser } from '../models/user.model';
 
 export const getAll = async (_req: Request, res: Response) => {
   try {
-    const users = await User.find();
+    const users = await User.find()
+      .populate({ 
+        path: 'socials',
+        populate: {
+          path: 'social',
+          model: 'Social'
+        } 
+      });
     if (users.length === 0) {
       return res.status(StatusCode.NO_CONTENT).json({ message: 'Not found any users' });
     }
@@ -17,7 +24,14 @@ export const getAll = async (_req: Request, res: Response) => {
 export const getOne = async (req: Request, res: Response) => {
   const userId = req.params.id;
   try {
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId })
+      .populate({ 
+        path: 'socials',
+        populate: {
+          path: 'social',
+          model: 'Social'
+        } 
+      });
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ message: 'User not found' });
     }

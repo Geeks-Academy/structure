@@ -1,17 +1,31 @@
-import socialSchema from './social.validator';
-import Joi from 'utils/CustomJoi';
+import Joi from '../utils/CustomJoi';
 
 const schema = {
   post: Joi.object({
     name: Joi.string().min(4).required(),
     title: Joi.string().required(),
+    openToWork: Joi.boolean(),
+    manager: Joi.boolean(),
+    boss: Joi.string().objectId(),
     image: Joi.string().allow(""),
-    socials: Joi.array().items(socialSchema.post).allow().empty(),
+    socials: Joi.array().items({ 
+      link: Joi.string(),
+      social: Joi.string().objectId()
+    }).empty(),
+    active: Joi.boolean()
   }),
   put: Joi.object({
     name: Joi.string().min(4),
     title: Joi.string(),
+    openToWork: Joi.boolean(),
+    manager: Joi.boolean(),
+    boss: Joi.string().objectId(),
     image: Joi.string().allow(""),
+    socials: Joi.array().items({ 
+      link: Joi.string(),
+      social: Joi.string().objectId()
+    }).empty(),
+    active: Joi.boolean()
   }),
   id: Joi.object().keys({
     id: Joi.string().objectId()

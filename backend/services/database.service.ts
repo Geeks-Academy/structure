@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_CONNECTION_STRING = (process.env.NODE_ENV === 'production' ?
-  process.env.MONGO_CONNECTION_STRING : process.env.DEV_MONGO_CONNECTION_STRING) as string;
+const MONGO_CONNECTION_STRING = (process.env.MONGO_CONNECTION_STRING) as string;
 
 const connectDb = async () => {
   try {
