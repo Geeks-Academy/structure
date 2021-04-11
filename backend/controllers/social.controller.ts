@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Social, { ISocial } from '../models/social.model';
+import User, { IUser } from '../models/user.model';
 import StatusCode from '../utils/StatusCode';
 
 export const getAll = async (_req: Request, res: Response) => {
@@ -51,3 +52,24 @@ export const update = async (req: Request, res: Response) => {
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
+
+
+export const setDeactivationOne = async (req: Request, res: Response) => {
+  const socialId = { _id: req.params.id};
+  const update = {active: false}
+
+   try{
+
+    await Social.findOneAndUpdate(socialId, update);
+
+    // i have problems with '$pull' parameter and TS
+    //@ts-ignore
+    await User.update({}, { '$pull' : { 'socials': { 'social': socialId} } }, {multi: true})
+
+    res.json({ok: true, message: "Social deactivated successfully"})
+   } catch (error) {
+    console.log(error);
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+   }
+}
+
