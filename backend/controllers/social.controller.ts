@@ -54,7 +54,7 @@ export const update = async (req: Request, res: Response) => {
 }
 
 
-export const setDeactivationOne = async (req: Request, res: Response) => {
+export const deactivate = async (req: Request, res: Response) => {
   const socialId = { _id: req.params.id};
   const update = {active: false}
 
