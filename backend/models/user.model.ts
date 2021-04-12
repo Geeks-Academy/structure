@@ -8,7 +8,7 @@ export interface IUser extends Document {
   manager: boolean;
   boss: IUser['_id'] | null;
   image?: string;
-  socials?: { link: string; social: ISocial['_id'] };
+  socials?: [{ link: string; social: ISocial['_id'] }];
   active: boolean;
 }
 
