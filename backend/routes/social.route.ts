@@ -14,7 +14,7 @@ router
     validateBody(schema.put),
     socialController.update
   )
-  .patch('/deactivation/:id', validateParameter(schema.id), socialController.setDeactivationOne)
+  .patch('/deactivate/:id', validateParameter(schema.id), socialController.deactivate)
 
 
 export default router;
