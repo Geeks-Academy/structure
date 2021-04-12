@@ -62,8 +62,6 @@ export const setDeactivationOne = async (req: Request, res: Response) => {
 
     await Social.findOneAndUpdate(socialId, update);
 
-    // i have problems with '$pull' parameter and TS
-    //@ts-ignore
     await User.updateMany({}, { '$pull' : { 'socials': { 'social': socialId} } }, {multi: true})
 
     res.json({ok: true, message: "Social deactivated successfully"})
