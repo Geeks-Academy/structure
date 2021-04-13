@@ -9,8 +9,8 @@ const schema = {
     boss: Joi.string().objectId(),
     image: Joi.string().allow(""),
     socials: Joi.array().items({
-      link: Joi.string(),
-      social: Joi.string().objectId()
+      link: Joi.string().required(),
+      social: Joi.string().objectId().required()
     }).empty(),
     active: Joi.boolean()
   }),
@@ -23,7 +23,7 @@ const schema = {
     image: Joi.string().allow(""),
     socials: Joi.array().items({
       link: Joi.string().required(),
-      social: Joi.string().objectId()
+      social: Joi.string().objectId().required()
     }).empty(),
     active: Joi.boolean()
   }),
