@@ -227,7 +227,7 @@ key[18] = {
     stackChildren: true,
     name: "Marcin Krysiński", 
     title: "Frontend Developer",
-    active: false,
+    active: true,
     image: "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-1/p480x480/40620370_1110096179144760_3079358664943861760_o.jpg?_nc_cat=111&ccb=1-3&_nc_sid=7206a8&_nc_ohc=NS-aWEpXM1cAX-NASMM&_nc_ht=scontent-cdg2-1.xx&tp=6&oh=1c634935914477738d5f0a145417d020&oe=607E6839",
     socials: {
         email: "marcin_krysinski@outlook.com",
@@ -242,7 +242,7 @@ key[19] = {
     stackChildren: true,
     name: "Konrad Rudnicki", 
     title: "Frontend Developer",
-    active: false,
+    active: true,
     image: "https://media-exp1.licdn.com/dms/image/C4E03AQGcsSpIFL40cw/profile-displayphoto-shrink_800_800/0/1615387688837?e=1622073600&v=beta&t=UndKE7CxTLEgWSWhPLoXoPpd8naVCN-y_TBjwHNROwc",
     socials: {
         email: "konrad.rudnicki@gmail.com",
@@ -258,7 +258,7 @@ key[20] = {
     stackChildren: true,
     name: "Łukasz Hendrysiak", 
     title: "Frontend Developer",
-    active: false,
+    active: true,
     image: "https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/67714378_3003054743100154_1822985803496685568_o.jpg?_nc_cat=104&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=2cmzTHAdU1EAX8v2DaM&_nc_ht=scontent-cdg2-1.xx&oh=4a454d7a4e731f76ab7d3ddbda34d8ed&oe=607B2E80",
     socials: {
         email: "lukasz.hendrysiak@gmail.com",
@@ -356,7 +356,7 @@ key[27] = {
     stackChildren: true,
     name: "Marta Wiese", 
     title: "Trainee Frontend Developer",
-    active: false,
+    active: true,
     image: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/15621771_1185001804887725_4784570161683151699_n.jpg?_nc_cat=101&ccb=3&_nc_sid=09cbfe&_nc_ohc=uSF1XFwnouIAX8Ji3m0&_nc_ht=scontent-waw1-1.xx&oh=ff193a111cfb5736d50d772c26f10f50&oe=60603EFC",
     socials: {
         email: "marta.wiese5@gmail.com",
