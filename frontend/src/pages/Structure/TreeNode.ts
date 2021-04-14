@@ -212,10 +212,8 @@ class TreeNode {
 		}
 		if(this.member.active){
 			node.classList.add("active-member")
-		}
-		if(this.member.active === false){
+		} else {
 			node.classList.add("inactive-member")
-
 		}
 		
 		node.appendChild(container)
