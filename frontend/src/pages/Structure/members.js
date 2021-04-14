@@ -391,6 +391,34 @@ key[31] = {
     }
 }
 
+key[32] = { 
+    "key": 32, 
+    parent: key[9], 
+    stackChildren: true,
+    name: "Olga Matysek", 
+    title: "UI/UX Designer", 
+    image: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/135480651_2159324897531675_602912579982248870_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=kVmIPz5cfnQAX94xkCH&_nc_ht=scontent-waw1-1.xx&oh=50ff6831e9edd468af4b849c628d3b06&oe=609CAAE2",
+    socials: {
+        email: "olga.matysek.o@gmail.com",
+        facebook:"https://www.facebook.com/olga.m0",
+        linkedin: "https://www.linkedin.com/in/olga-m-32632b1a7/"
+    }
+}
+
+key[33] = { 
+    "key": 33, 
+    parent: key[9], 
+    stackChildren: true,
+    name: "Emilia Świątek", 
+    title: "UI/UX Designer", 
+    image: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/cp0/e15/q65/s851x315/45375391_2023645807692619_131211929497632768_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=85a577&efg=eyJpIjoidCJ9&_nc_ohc=4qYoEVlaH00AX89OOrZ&_nc_ht=scontent-waw1-1.xx&tp=9&oh=28f7cdbe8a7a1d724277c938e159172c&oe=609D0683",
+    socials: {
+        email: "emiliajulia.swiatek@gmail.com",
+        facebook:"https://m.facebook.com/emilia.swiatek.3",
+        linkedin: "https://www.linkedin.com/in/emilia-%C5%9Bwi%C4%85tek-0bb21ba2/"
+    }
+}
+
 export const members = [
     ...key
 ];
