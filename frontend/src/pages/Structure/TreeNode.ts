@@ -210,6 +210,11 @@ class TreeNode {
 			}
 			container.appendChild(socials);
 		}
+		if(this.member.active){
+			node.classList.add("active-member")
+		} else {
+			node.classList.add("inactive-member")
+		}
 		
 		node.appendChild(container)
 

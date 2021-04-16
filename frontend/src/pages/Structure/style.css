@@ -109,3 +109,11 @@ body { background: #fff; }
     font-size: .85rem;
     color: #666;
 }
+
+.active-member{
+    border: 3px solid #2cd92c;
+}
+
+.inactive-member{
+    border: 3px solid #e90f58;
+}
