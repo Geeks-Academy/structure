@@ -110,6 +110,18 @@ body { background: #fff; }
     color: #666;
 }
 
+.node-status{
+    font-size: .85rem;
+    display: flex;
+    align-items: center;
+}
+
+.node-status img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
 .active-member{
     border: 3px solid #2cd92c;
 }
