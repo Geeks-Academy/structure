@@ -7,9 +7,10 @@ class TreeNode {
 	
 		textClass: {
 			name:	'node-name',
-			title:	'node-title',
+			title: 'node-title',
 			desc:	'node-desc',
-			contact: 'node-contact'
+			contact: 'node-contact',
+			status: 'node-status'
 		}
 	}
 	id: any;
@@ -194,7 +195,15 @@ class TreeNode {
 			text.appendChild(document.createTextNode(this.member.title));
 			container.appendChild(text);
 		}
-
+		if(this.member.openToWork){
+			const status = document.createElement('div');
+			status.className = TreeNode.CONFIG.textClass.status;
+			const statusText = document.createElement('p')
+			statusText.innerText = "Open to work";
+			status.innerHTML = `<img src="./assets/Check.svg" />`
+			container.appendChild(status);
+			status.appendChild(statusText);
+		}
 		if(this.member.socials){
 			const socials = document.createElement('div');
 			socials.className = 'socials'
