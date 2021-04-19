@@ -9,8 +9,7 @@
     "husky": "^6.0.0"
   },
   "scripts": {
-    "prepare": "husky install",
-    "test:coverage:frontend": "cd frontend && npm install && npm run test:coverage"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
