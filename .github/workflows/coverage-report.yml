@@ -22,6 +22,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: cd frontend
       - run: yarn install --frozen-lockfile
+      - run: "cd frontend"
       - run: "pwd && ls"
       - uses: hayuna/jest-reporter-action@v0.1.4
         with:
