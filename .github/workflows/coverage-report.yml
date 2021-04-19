@@ -20,10 +20,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g yarn
       - run: yarn install
-      - run: cd frontend
-      - run: yarn install
-      - run: "ls -la frontend/node_modules"
       - uses: hayuna/jest-reporter-action@v0.1.4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          test-command: "cd frontend && npm run test:coverage"
+          test-command: "npm run test:coverage:frontend"
