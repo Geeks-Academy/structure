@@ -474,7 +474,7 @@ key[34] = {
     image: "https://media-exp1.licdn.com/dms/image/C4E03AQEBjocnyYoSZQ/profile-displayphoto-shrink_800_800/0/1600175131182?e=1624492800&v=beta&t=CAgmN_dQtD5clnMn0qfrMFi0IHJeonVcaAiU8GdHCl4",
     socials: {
         email: "ac.gacek@gmail.com",
-        behance: "https://www.behance.net/aleksandragacek"
+        behance: "https://www.behance.net/aleksandragacek",
         facebook:"https://www.facebook.com/gacekalexandra",
         linkedin: "https://www.linkedin.com/in/alexandragacek/"
     }
