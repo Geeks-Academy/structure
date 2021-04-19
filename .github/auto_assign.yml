@@ -1,0 +1,13 @@
+addReviewers: true
+addAssignees: author
+numberOfReviewers: 0
+reviewers:
+  - hayuna
+  - TomaszKorenberg
+  - PiotrGrobelak
+  - MaciejSpalek
+  - Krysik
+  - zeglarz
+  - hendrysiak
+  - MarW5
+  - Tubka

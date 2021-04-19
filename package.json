@@ -1,0 +1,19 @@
+{
+  "name": "structure",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Geeks-Academy/structure",
+  "author": "Hayuna <marek.kowalonek@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^6.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --config .prettierrc --write"
+    ]
+  }
+}
