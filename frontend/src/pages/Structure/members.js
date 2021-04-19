@@ -465,7 +465,7 @@ key[33] = {
 }
 
 key[34] = {
-    "key": 33, 
+    "key": 34, 
     parent: key[9], 
     stackChildren: true,
     name: "Aleksandra Gacek", 
@@ -479,6 +479,24 @@ key[34] = {
         linkedin: "https://www.linkedin.com/in/alexandragacek/"
     }
 }
+
+
+key[35] = {
+    "key": 35, 
+    parent: key[9], 
+    stackChildren: true,
+    name: "Aneta Pawłowska", 
+    title: "UI/UX Designer", 
+    openToWork: true,
+    image: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/176021854_10223399269803301_4458953189188792938_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=rd3LipDRuswAX8-pfP0&_nc_ht=scontent-waw1-1.xx&oh=a7be9aa835b3c4a084cd9b006d6d77e1&oe=60A3D7F8",
+    socials: {
+        email: "anetakarolinapawlowska@gmail.com",
+        facebook:"https://www.facebook.com/aneta.pe21",
+        linkedin: "https://www.linkedin.com/in/aneta-paw%C5%82owska-b02ab94b/"
+    }
+}
+
+
 
 export const members = [
     ...key
