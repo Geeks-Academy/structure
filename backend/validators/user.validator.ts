@@ -6,7 +6,7 @@ const schema = {
     title: Joi.string().required(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().objectId(),
+    boss: Joi.string().objectId().allow(null),
     image: Joi.string().allow(""),
     socials: Joi.array().items({
       link: Joi.string(),
@@ -19,7 +19,7 @@ const schema = {
     title: Joi.string(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().objectId(),
+    boss: Joi.string().objectId().allow(null),
     image: Joi.string().allow(""),
     socials: Joi.array().items({
       link: Joi.string().required(),

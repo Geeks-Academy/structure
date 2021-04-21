@@ -13,7 +13,9 @@ router
     validateBody(schema.put),
     validateParameter(schema.id),
     userController.update
-  );
+  )
+  .patch('/deactivate/:id', validateParameter(schema.id), userController.deactivate)
+  .delete('/:id', validateParameter(schema.id), userController.deleteOne)
 
 
 export default router;

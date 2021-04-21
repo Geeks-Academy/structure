@@ -65,4 +65,21 @@ export const update = async (req: Request, res: Response) => {
   }
 }
 
+export const deactivate = async(req: Request, res: Response) => {
+  const userId = { _id: req.params.id};
+  const update = {active: false}
+  try {
+    await User.findOneAndUpdate(userId, update);
+
+    res.json({ok: true, message: "User deactivated successfully"})
+  } catch(error) {
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+}
+
+
+export const deleteOne = async(req: Request, res: Response) => {
+
+
+}
 
