@@ -13,7 +13,8 @@ router
     validateParameter(schema.id),
     validateBody(schema.put),
     socialController.update
-  );
+  )
+  .patch('/deactivate/:id', validateParameter(schema.id), socialController.deactivate)
 
 
 export default router;
