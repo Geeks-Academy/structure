@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { json, Request, Response } from 'express';
 import StatusCode from '../utils/StatusCode'
 import User, { IUser } from '../models/user.model';
 
@@ -65,21 +65,47 @@ export const update = async (req: Request, res: Response) => {
   }
 }
 
-export const deactivate = async(req: Request, res: Response) => {
-  const userId = { _id: req.params.id};
-  const update = {active: false}
+export const deactivate = async (req: Request, res: Response) => {
+  const userId = { _id: req.params.id };
+  const update = { active: false }
   try {
     await User.findOneAndUpdate(userId, update);
 
-    res.json({ok: true, message: "User deactivated successfully"})
-  } catch(error) {
+    res.json({ ok: true, message: "User deactivated successfully" })
+  } catch (error) {
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
 
 
-export const deleteOne = async(req: Request, res: Response) => {
+export const deleteOne = async (req: Request, res: Response) => {
+  const userId = { _id: req.params.id }
+
+  try {
+    const user = await User.findOne(userId)
+    if (!user) {
+      return res.status(StatusCode.NOT_FOUND).json({ message: 'User not found' });
+    }
 
 
+    const userBoss = user.boss;
+
+    if (user.boss === null) {
+      await User.updateMany({ 'boss': userId }, { 'boss': null })
+
+      await User.deleteOne(userId)
+
+      return res.json({ok: true, message: "Boss delete successfully. Children now don't have the Boss." });
+    }
+
+    await User.updateMany({ 'boss': userId }, { 'boss': userBoss });
+
+    await User.deleteOne(userId);
+
+    res.json({ ok: true, message: "Boss delete successfully. Children now have the new Boss from their Boss."})
+
+  } catch (error) {
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
 }
 
