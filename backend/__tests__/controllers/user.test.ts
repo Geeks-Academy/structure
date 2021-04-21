@@ -1,31 +1,9 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import app from '../../app';
-import mongoose from 'mongoose';
 import supertest from 'supertest';
 import User from '../../models/user.model';
 
-beforeEach((done) => {
-  mongoose.connect(process.env.MONGO_CONNECTION_STRING as string,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => done()
-  )
-})
-
-afterEach((done) => {
-  mongoose.connection.collection('users').deleteMany({})
-    .then(() => done())
-    .then(() => {
-      mongoose.connection.db.dropDatabase(() => {
-        mongoose.connection.close(() => done())
-      });
-    })
-
-});
-
-
 describe('User controller', () => {
-  test('GET /api/users', async () => {
+  test('GET /api/users', async (done) => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
@@ -39,5 +17,7 @@ describe('User controller', () => {
         expect(response.body[0].title).toBe(user.title)
         expect(response.body[0].boss).toBeNull();
       })
+    done()
   })
+  
 })
