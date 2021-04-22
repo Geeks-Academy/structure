@@ -12,9 +12,13 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "./backend/*.{js,jsx,ts,tsx}": [
       "prettier --config .prettierrc --write",
-      "eslint --fix"
+      "eslint --config ./backend/.eslintrc --fix"
+    ],
+    "./frontend/*.{js,jsx,ts,tsx}": [
+      "prettier --config .prettierrc --write",
+      "eslint --config ./frontend/.eslintrc --fix"
     ],
     "frontend/*.css": [
       "npm run lint:css"
