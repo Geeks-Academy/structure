@@ -14,12 +14,12 @@
   },
   "lint-staged": {
     "backend/**/*.ts": [
-      "npx prettier --write backend/**/*.ts",
-      "npx eslint --config backend/.eslintrc --fix"
+      "npx prettier --write --config ./backend/.prettierrc backend/**/*.ts",
+      "npx eslint --config backend/.eslintrc.js --fix"
     ],
     "frontend/**/*.{js,ts,tsx}": [
-      "npx prettier --write frontend/**/*.{js,ts,tsx}",
-      "npx eslint --config frontend/.eslintrc --fix"
+      "npx prettier --write --config ./frontend/.prettierrc frontend/**/*.{js,ts,tsx}",
+      "npx eslint --config frontend/.eslintrc.js --fix"
     ],
     "frontend/**/*.styled.ts": [
       "npx stylelint frontend/**/*.styled.ts"
