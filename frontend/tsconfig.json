@@ -19,9 +19,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./frontend/src"
+    "baseUrl": "./src"
   },
   "include": [
-    "frontend/src"
+    "src"
   ]
 }
