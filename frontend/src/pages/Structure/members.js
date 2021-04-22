@@ -347,6 +347,9 @@ key[25] = {
         github: "https://github.com/PiotrWachulec",
         instagram: "https://www.instagram.com/piotr_wachulec/",
         linkedin:"https://www.linkedin.com/in/piotrwachulec/",
+        devto: "https://dev.to/piotrwachulec",
+        youtube: "https://www.youtube.com/channel/UC6L70fSSgyXBscFTgCnBLWg",
+        twitter: "https://twitter.com/piotrwachulec"
     }
 }
 
