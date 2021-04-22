@@ -9,11 +9,6 @@ router
   .get('/', userController.getAll)
   .post('/', validateBody(schema.post), userController.create)
   .get('/:id', validateParameter(schema.id), userController.getOne)
-  .put('/:id',
-    validateBody(schema.put),
-    validateParameter(schema.id),
-    userController.update
-  );
-
+  .put('/:id', validateBody(schema.put), validateParameter(schema.id), userController.update);
 
 export default router;

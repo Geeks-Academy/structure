@@ -3,7 +3,6 @@
     "airbnb-typescript/base",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended",
     "prettier",
     "plugin:prettier/recommended"
   ],
@@ -35,11 +34,7 @@
         "memberSyntaxSortOrder": ["none", "single", "multiple", "all"]
       }
     ],
-    "jsx-a11y/label-has-associated-control": [ "error", {
-        "required": {
-          "some": [ "nesting", "id"  ]
-        }
-    }],
+    "jsx-a11y/label-has-associated-control": "off",
     "no-unused-vars": 0,
     "@typescript-eslint/no-unused-vars": ["error"],
     "import/no-unresolved": 0,
@@ -53,5 +48,6 @@
     "react/prop-types": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "@typescript-eslint/no-var-requires": 0
-  }
+  },
+  "ignorePatterns": "src/pages/Structure/**/*.ts"
 }

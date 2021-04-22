@@ -9,7 +9,7 @@ export interface ISocial extends Document {
 const socialSchema = new Schema({
   name: String,
   image: String,
-  active: { type: Boolean, default: true }
+  active: { type: Boolean, default: true },
 });
 
 export default model<ISocial>('Social', socialSchema);
