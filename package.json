@@ -6,14 +6,26 @@
   "author": "Hayuna <marek.kowalonek@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "husky": "^6.0.0"
+    "@commitlint/cli": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1"
+  },
+  "lint-staged": {
+    "backend/**/*.ts": [
+      "npx prettier --write backend/**/*.ts",
+      "npx eslint --config backend/.eslintrc --fix"
+    ],
+    "frontend/**/*.{ts,tsx}": [
+      "npx prettier --write frontend/**/*.ts",
+      "npx eslint --config frontend/.eslintrc --fix"
+    ],
+    "frontend/**/*.styled.ts": [
+      "npx stylelint frontend/**/*.styled.ts"
+    ]
   },
   "scripts": {
     "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --config .prettierrc --write"
-    ]
   }
 }
