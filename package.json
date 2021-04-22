@@ -16,7 +16,7 @@
       "prettier --config .prettierrc --write",
       "eslint --fix"
     ],
-    "*.css": [
+    "frontend/*.css": [
       "npm run lint:css"
     ]
   },
