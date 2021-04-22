@@ -17,8 +17,8 @@
       "npx prettier --write backend/**/*.ts",
       "npx eslint --config backend/.eslintrc --fix"
     ],
-    "frontend/**/*.{ts,tsx}": [
-      "npx prettier --write frontend/**/*.ts",
+    "frontend/**/*.{js,ts,tsx}": [
+      "npx prettier --write frontend/**/*.{js,ts,tsx}",
       "npx eslint --config frontend/.eslintrc --fix"
     ],
     "frontend/**/*.styled.ts": [

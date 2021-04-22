@@ -24,7 +24,7 @@
     },
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./frontend/tsconfig.json"
   },
   "rules": {
     "sort-imports": [
@@ -47,7 +47,9 @@
     "react/react-in-jsx-scope": 0,
     "react/prop-types": 0,
     "jsx-a11y/anchor-is-valid": 0,
-    "@typescript-eslint/no-var-requires": 0
+    "@typescript-eslint/no-var-requires": 0,
+    "import/extensions": 0,
+    "no-new": 0
   },
   "ignorePatterns": "src/pages/Structure/**/*.ts"
 }
