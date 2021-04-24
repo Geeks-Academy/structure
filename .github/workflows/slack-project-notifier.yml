@@ -11,6 +11,6 @@ jobs:
       - name: Magical Slack Notifier
         uses: goodroot/github-action-slack-project-notifier@1.2
         with:
-          SLACK_WEBHOOK_URL: ${{ secrets.DEVOPS_SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           PROJECT: Structure
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
