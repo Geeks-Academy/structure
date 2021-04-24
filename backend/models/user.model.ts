@@ -18,7 +18,7 @@ const userSchema = new Schema({
   openToWork: { type: Boolean, default: true },
   manager: { type: Boolean, default: false },
   boss: { type: Schema.Types.ObjectId, ref: 'User', default: null },
-  image: String,
+  image: { type: String, default: '' },
   socials: [{ _id: false, link: { type: String, required: true }, social: { type: Schema.Types.ObjectId, ref: 'Social', required: true } }],
   active: { type: Boolean, default: true }
 })
