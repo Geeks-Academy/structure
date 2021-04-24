@@ -12,5 +12,5 @@ jobs:
         uses: goodroot/github-action-slack-project-notifier@1.2
         with:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          PROJECT: Structure
+          PROJECT: ${{ secrets.PROJECT_NAME }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
