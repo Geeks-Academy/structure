@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import Joi from "joi";
-import StatusCode from "../utils/StatusCode";
+import { Request, Response, NextFunction } from 'express';
+import Joi from 'joi';
+import StatusCode from '../utils/StatusCode';
 
 const validateBody = (schema: Joi.ObjectSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -9,8 +9,8 @@ const validateBody = (schema: Joi.ObjectSchema) => {
       return res.status(StatusCode.BAD_REQUEST).json(result.error.details);
     }
     next();
-  }
-}
+  };
+};
 
 const validateParameter = (schema: Joi.ObjectSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -19,10 +19,7 @@ const validateParameter = (schema: Joi.ObjectSchema) => {
       return res.status(StatusCode.BAD_REQUEST).json(result.error.details);
     }
     next();
-  }
-}
+  };
+};
 
-export {
-  validateBody,
-  validateParameter
-}
+export { validateBody, validateParameter };

@@ -1,12 +1,8 @@
-import React from "react";
-import Social from "./Social";
-import { StyledImage } from "./Social/Social.styled";
-import { ISocialList } from "./SocialList.model";
-import {
-  StyledAllSocialList,
-  StyledName,
-  StyledUserSocialList,
-} from "./SocialList.styled";
+import React from 'react';
+import Social from './Social';
+import { StyledImage } from './Social/Social.styled';
+import { ISocialList } from './SocialList.model';
+import { StyledAllSocialList, StyledName, StyledUserSocialList } from './SocialList.styled';
 
 const SocialList = ({ userSocials, allSocials }: ISocialList): JSX.Element => {
   return (

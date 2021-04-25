@@ -1,8 +1,8 @@
-import React from "react";
-import GlobalStyle from "styles/GlobalStyle";
-import Routes from "Routes";
+import React from 'react';
+import GlobalStyle from 'styles/GlobalStyle';
+import Routes from 'Routes';
 
-function App() {
+function App(): JSX.Element {
   return (
     <div>
       <GlobalStyle />

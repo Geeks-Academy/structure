@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import { useOutsideClick } from "hooks";
-import { colors } from "styles/colors";
-import { BUTTON_TITLE } from "Types/enums";
-import { IModalWindow } from "./ModalWindow.model";
+import { useRef } from 'react';
+import { useOutsideClick } from 'hooks';
+import { colors } from 'styles/colors';
+import { BUTTON_TITLE } from 'Types/enums';
+import { IModalWindow } from './ModalWindow.model';
 import {
   StyledCancelButton,
   StyledContainer,
@@ -11,7 +11,7 @@ import {
   StyledWindow,
   StyledButton,
   StyledTitle,
-} from "./ModalWindow.styled";
+} from './ModalWindow.styled';
 
 const ModalWindow = ({
   title,
@@ -42,10 +42,7 @@ const ModalWindow = ({
         </StyledWrapper>
         <StyledWrapper>
           <StyledCancelButton onClick={handleCancel}>Cancel</StyledCancelButton>
-          <StyledButton
-            bgColor={handleButtonColor(title)}
-            onClick={handleConfirm}
-          >
+          <StyledButton bgColor={handleButtonColor(title)} onClick={handleConfirm}>
             {title}
           </StyledButton>
         </StyledWrapper>

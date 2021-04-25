@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colors } from "styles/colors";
+import styled from 'styled-components';
+import { colors } from 'styles/colors';
 
 export const StyledWrapper = styled.div``;
 export const StyledLabel = styled.label`

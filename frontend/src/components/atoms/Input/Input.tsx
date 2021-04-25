@@ -1,11 +1,6 @@
-import React from "react";
-import { IInput } from "./Input.model";
-import {
-  StyledLabel,
-  StyledInput,
-  StyledError,
-  StyledWrapper,
-} from "./Input.styled";
+import React from 'react';
+import { IInput } from './Input.model';
+import { StyledLabel, StyledInput, StyledError, StyledWrapper } from './Input.styled';
 
 const Input = ({
   id,

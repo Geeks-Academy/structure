@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Social, { ISocial } from '../models/social.model';
+import User, { IUser } from '../models/user.model';
 import StatusCode from '../utils/StatusCode';
 
 export const getAll = async (_req: Request, res: Response) => {
@@ -13,7 +14,7 @@ export const getAll = async (_req: Request, res: Response) => {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
-}
+};
 
 export const getOne = async (req: Request, res: Response) => {
   const socialId = req.params.id;
@@ -27,7 +28,7 @@ export const getOne = async (req: Request, res: Response) => {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
-}
+};
 
 export const create = async (req: Request, res: Response) => {
   const social = req.body;
@@ -35,14 +36,14 @@ export const create = async (req: Request, res: Response) => {
     const result = await Social.create(social);
     res.status(StatusCode.CREATED).json(result);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
-}
+};
 
 export const update = async (req: Request, res: Response) => {
-  const socialId = req.params.id
-  const social = req.body as Partial<ISocial>
+  const socialId = req.params.id;
+  const social = req.body as Partial<ISocial>;
   try {
     await Social.updateOne({ _id: socialId }, social);
     res.json({ ok: true, message: 'Social updated successfully' });
@@ -50,4 +51,20 @@ export const update = async (req: Request, res: Response) => {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
-}
+};
+
+export const deactivate = async (req: Request, res: Response) => {
+  const socialId = { _id: req.params.id };
+  const update = { active: false };
+
+  try {
+    await Social.findOneAndUpdate(socialId, update);
+
+    await User.updateMany({}, { $pull: { socials: { social: socialId } } }, { multi: true });
+
+    res.json({ ok: true, message: 'Social deactivated successfully' });
+  } catch (error) {
+    console.log(error);
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};

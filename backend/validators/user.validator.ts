@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from './Joi';
 
 const schema = {
   post: Joi.object({
@@ -6,13 +6,15 @@ const schema = {
     title: Joi.string().required(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string(),
-    image: Joi.string().allow(""),
-    socials: Joi.array().items({ 
-      link: Joi.string(),
-      social: Joi.string().length(24)
-    }).empty(),
-    active: Joi.boolean()
+    boss: Joi.string().objectId(),
+    image: Joi.string().allow(''),
+    socials: Joi.array()
+      .items({
+        link: Joi.string().required(),
+        social: Joi.string().objectId().required(),
+      })
+      .empty(),
+    active: Joi.boolean(),
   }),
   put: Joi.object({
     _id: Joi.string(),
@@ -20,19 +22,19 @@ const schema = {
     title: Joi.string(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().allow(null),
-    image: Joi.string().allow(""),
-    socials: Joi.array().items({ 
-      link: Joi.string(),
-      social: Joi.string().length(24)
-    }).empty(),
-    active: Joi.boolean()
+    boss: Joi.string().objectId(),
+    image: Joi.string().allow(''),
+    socials: Joi.array()
+      .items({
+        link: Joi.string().required(),
+        social: Joi.string().objectId().required(),
+      })
+      .empty(),
+    active: Joi.boolean(),
   }),
   id: Joi.object().keys({
-    id: Joi.string().length(24)
-  })
-}
+    id: Joi.string().objectId(),
+  }),
+};
 
-export default schema
-
-
+export default schema;

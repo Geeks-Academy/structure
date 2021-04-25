@@ -1,13 +1,13 @@
 import {
-  StyledImageWrapper,
-  StyledUserIcon,
   StyledImage,
+  StyledImageWrapper,
   StyledUser,
+  StyledUserIcon,
   StyledName,
-} from "./User.styled";
+} from './User.styled';
 
-import { useHistory } from "react-router";
-import { IUser } from "Types/interfaces";
+import { useHistory } from 'react-router';
+import { IUser } from 'Types/interfaces';
 
 const User = ({ _id, name, image }: IUser): JSX.Element => {
   const history = useHistory();

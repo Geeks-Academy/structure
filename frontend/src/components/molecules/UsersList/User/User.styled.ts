@@ -1,6 +1,6 @@
-import { UserIcon } from "assets";
-import styled from "styled-components";
-import { colors } from "styles/colors";
+import { UserIcon } from 'assets';
+import { colors } from 'styles/colors';
+import styled from 'styled-components';
 
 export const StyledUser = styled.div`
   display: flex;

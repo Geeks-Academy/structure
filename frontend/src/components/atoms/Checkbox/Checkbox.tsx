@@ -1,6 +1,6 @@
-import React from "react";
-import { ICheckBox } from "./Checkbox.model";
-import { StyledLabel, StyledInput, StyledWrapper } from "./Checkbox.styled";
+import React from 'react';
+import { ICheckBox } from './Checkbox.model';
+import { StyledLabel, StyledInput, StyledWrapper } from './Checkbox.styled';
 
 const Checkbox = ({
   isChecked,

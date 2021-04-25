@@ -1,6 +1,6 @@
-import Button from "components/atoms/Button";
-import styled from "styled-components";
-import { increaseOpacity } from "styles/animations";
+import Button from 'components/atoms/Button';
+import styled from 'styled-components';
+import { increaseOpacity } from 'styles/animations';
 
 export const StyledContainer = styled.div`
   display: flex;
