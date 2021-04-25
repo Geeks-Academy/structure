@@ -1,13 +1,6 @@
 import Button from "components/atoms/Button";
-import styled, { keyframes } from "styled-components";
-
-const fadeInAnimation = keyframes`
-    from {
-        opacity: 0;
-    } to {
-        opacity: 1;
-    }
-`;
+import styled from "styled-components";
+import { increaseOpacity } from "styles/animations";
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -20,7 +13,7 @@ export const StyledContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  animation: ${fadeInAnimation} 0.3s ease-in both;
+  animation: ${increaseOpacity} 0.3s ease-in both;
   z-index: 99999;
 `;
 
@@ -62,7 +55,7 @@ export const StyledWrapper = styled.div`
   }
 `;
 
-export const StyledButton = styled(Button)<{bgColor: string }>`
+export const StyledButton = styled(Button)<{ bgColor: string }>`
   background-color: ${({ bgColor }) => bgColor};
 `;
 

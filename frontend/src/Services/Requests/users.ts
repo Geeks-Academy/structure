@@ -1,18 +1,20 @@
 import { IUser } from "Types/interfaces";
-import { axiosInstance } from "Services";
+import { Fetcher } from "../Fetcher";
 
-export const getAllUsers = async () => {
-  return await axiosInstance.get("users");
-};
+export class UserRequests {
+  static getAllUsers = async () => {
+    return Fetcher.get("users");
+  };
 
-export const getUser = async (id: string) => {
-  return await axiosInstance.get(`users/${id}`);
-};
+  static getUser = async (id: string) => {
+    return Fetcher.get(`users/${id}`);
+  };
 
-export const updateUser = async (data: IUser) => {
-  return await axiosInstance.put(`users/${data._id}`, data);
-};
+  static updateUser = async (data: IUser) => {
+    return Fetcher.put(`users/${data._id}`, data);
+  };
 
-export const createUser = async (data: IUser) => {
-  return await axiosInstance.post(`users`, data);
-};
+  static createUser = async (data: IUser) => {
+    return Fetcher.post(`users`, data);
+  };
+}

@@ -8,9 +8,7 @@ import {
 } from "./DashBoard.styled";
 
 import { useHistory } from "react-router-dom";
-import { getAllUsers } from "Services";
-import { IUser } from "Types/interfaces";
-import { isInputTextMatch } from "helpers";
+import { UserRequests } from "Services";
 
 import Input from "components/atoms/Input";
 import UsersList from "components/molecules/UsersList";
@@ -18,27 +16,16 @@ import UsersList from "components/molecules/UsersList";
 const DashBoard = (): JSX.Element => {
   const history = useHistory();
   const [users, setUsers] = useState([]);
-  const [mutableUsers, setMutableUsers] = useState<IUser[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+  const { getAllUsers } = UserRequests;
 
   const goToAddPanel = () => history.replace("/admin/add");
 
   useEffect(() => {
     getAllUsers().then(({ data }) => {
       setUsers(data);
-      setMutableUsers(data);
     });
-  }, [setUsers]);
-
-  const filteredUsers = (
-    users: IUser[],
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const inputValue = e.target.value;
-    const filteredUsers = users.filter((item) =>
-      isInputTextMatch(inputValue, `${item.name}`)
-    );
-    inputValue ? setMutableUsers(filteredUsers) : setMutableUsers(users);
-  };
+  }, [setUsers, getAllUsers]);
 
   return (
     <StyledContainer>
@@ -50,13 +37,13 @@ const DashBoard = (): JSX.Element => {
             type="search"
             placeholder="Find user"
             className="m-0 mr-4 w-1/3 h-auto"
-            onChange={(e) => filteredUsers(users, e)}
+            onChange={(e) => setSearchValue(e.target.value)}
           />
           <StyledButton onClick={goToAddPanel}> Add new </StyledButton>
         </div>
       </StyledTopWrapper>
       <StyledBottomWrapper>
-        <UsersList users={mutableUsers} />
+        <UsersList users={users} searchValue={searchValue} />
       </StyledBottomWrapper>
     </StyledContainer>
   );

@@ -19,13 +19,9 @@ import Input from "components/atoms/Input";
 import Checkbox from "components/atoms/Checkbox";
 import SocialList from "components/molecules/SocialList";
 
-import {
-  createUser,
-  getAllSocials,
-  getAllUsers,
-  getUser,
-  updateUser,
-} from "Services";
+import { SocialRequests, UserRequests } from "Services";
+
+import { FORM_TITLE } from "./helpers";
 
 const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
@@ -33,21 +29,15 @@ const Form = ({ edit }: IForm): JSX.Element => {
   const [initialValues, setInitialValues] = useState(getUserObject());
   const [users, setUsers] = useState<IUser[]>([]);
   const [socials, setSocials] = useState<ISocial[]>([]);
+  const { getAllSocials } = SocialRequests;
+  const { createUser, getAllUsers, getUser, updateUser } = UserRequests;
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
+  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     validationSchema: validation(),
     enableReinitialize: true,
     validateOnChange: true,
     initialValues,
     onSubmit: (values) => {
-      console.log(values)
       onSubmit(values, !!edit);
     },
   });
@@ -56,17 +46,13 @@ const Form = ({ edit }: IForm): JSX.Element => {
     getAllUsers().then(({ data }) => {
       setUsers(data);
     });
-  }, [setUsers]);
+  }, [setUsers, getAllUsers]);
 
   useEffect(() => {
     getAllSocials().then(({ data }) => {
       setSocials(data);
     });
-  }, [setSocials]);
-
-  useEffect(() => {
-   console.log(errors, values)
-  }, [errors, values]);
+  }, [setSocials, getAllSocials]);
 
   const onCancel = () => history.replace("/admin");
   const onSubmit = (data: IUser, edit: boolean) => {
@@ -81,8 +67,9 @@ const Form = ({ edit }: IForm): JSX.Element => {
       openToWork,
     } = data;
 
-    edit && updateUser(data).then(console.log);
-    !edit &&
+    if (edit) {
+      updateUser(data);
+    } else {
       createUser({
         name,
         boss,
@@ -93,6 +80,8 @@ const Form = ({ edit }: IForm): JSX.Element => {
         manager,
         openToWork,
       });
+    }
+
     setTimeout(() => {
       onCancel();
     }, 100);
@@ -131,12 +120,15 @@ const Form = ({ edit }: IForm): JSX.Element => {
           )
       );
     }
-  }, [params]);
+  }, [params, getUser]);
 
   return (
     <StyledContainer>
       <StyledTopWrapper>
-        <StyledTitle> {edit ? "EditPanel" : "AddPanel"} </StyledTitle>
+        <StyledTitle>
+          {" "}
+          {edit ? FORM_TITLE.EDIT_PANEL : FORM_TITLE.ADD_PANEL}{" "}
+        </StyledTitle>
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <StyledForm onSubmit={handleSubmit} noValidate>
@@ -145,8 +137,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
             label="Name"
             type="text"
             name="name"
-            touched={touched}
-            required={true}
+            required
             errorId="err_name"
             value={values.name}
             error={errors.name}
@@ -159,7 +150,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
             label="Image"
             type="text"
             name="image"
-            touched={touched}
             errorId="err_image"
             value={values.image}
             error={errors.image}
@@ -172,7 +162,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
             label="Title"
             type="text"
             name="title"
-            touched={touched}
             errorId="err_title"
             value={values.title}
             error={errors.title}
@@ -196,9 +185,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onBlur={handleBlur}
               name="boss"
             >
-              <option value="">
-                {"-- none --"}
-              </option>
+              <option value="">{"-- none --"}</option>
               {users.map((user) => {
                 return (
                   <option className="text-2xl" key={user._id} value={user._id}>

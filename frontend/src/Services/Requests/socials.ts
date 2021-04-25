@@ -1,5 +1,7 @@
-import { axiosInstance } from "Services";
+import { Fetcher } from "../Fetcher";
 
-export const getAllSocials = async () => {
-  return await axiosInstance.get("socials");
-};
+export class SocialRequests {
+  static getAllSocials = async () => {
+    return Fetcher.get("socials");
+  };
+}

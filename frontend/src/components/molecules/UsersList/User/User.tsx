@@ -1,4 +1,3 @@
-import React from "react";
 import {
   StyledImageWrapper,
   StyledUserIcon,
@@ -12,23 +11,6 @@ import { IUser } from "Types/interfaces";
 
 const User = ({ _id, name, image }: IUser): JSX.Element => {
   const history = useHistory();
-  // const [edition, setEdition] = useState(false);
-  // const [buttonVisibility, setButtonVisibility] = useState(false);
-  // const [isActive, setActive] = useState(false);
-  // const [modalDescription, setModalDescription] = useState("");
-  // const [modalTitle, setModalTitle] = useState<TButton>("Delete");
-
-  // const handleButton = (title: TButton, description: string) => {
-  //   setActive(true);
-  //   setModalTitle(title);
-  //   setModalDescription(description);
-  // };
-
-  // const handleCancel = () => {
-  //   setActive(false);
-  // };
-
-  // const handleConfirm = () => {};
 
   const editUser = (id: string) => {
     history.push(`/admin/edit/${id}`);
@@ -36,15 +18,9 @@ const User = ({ _id, name, image }: IUser): JSX.Element => {
 
   return (
     <StyledUser onClick={() => editUser(`${_id}`)}>
-      {image ? (
-        <StyledImageWrapper>
-          <StyledImage src={image} />
-        </StyledImageWrapper>
-      ) : (
-        <StyledImageWrapper>
-          <StyledUserIcon />
-        </StyledImageWrapper>
-      )}
+      <StyledImageWrapper>
+        {image ? <StyledImage src={image} /> : <StyledUserIcon />}
+      </StyledImageWrapper>
       <StyledName> {name} </StyledName>
     </StyledUser>
   );

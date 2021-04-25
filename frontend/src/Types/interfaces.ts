@@ -11,7 +11,7 @@ export interface ISocial {
 }
 export interface IUser {
   _id?: string;
-  name?: string;
+  name: string;
   image?: string;
   title?: string;
   openToWork?: boolean;

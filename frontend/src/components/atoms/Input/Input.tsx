@@ -11,7 +11,6 @@ const Input = ({
   onBlur,
   inputId,
   errorId,
-  touched,
   required,
   ariaLabel,
   onChange,
@@ -23,7 +22,7 @@ const Input = ({
     <div className="mb-6" {...props}>
       <label
         className={clsx(
-          !label && 'invisible absolute',
+          !label && "invisible absolute",
           "block text-gray-500 font-bold mb-2 text-xl "
         )}
         htmlFor={inputId}

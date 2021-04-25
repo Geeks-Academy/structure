@@ -7,10 +7,11 @@ const SocialList = ({ socials }: ISocialList): JSX.Element => {
     <div>
       <span className="text-3xl font-bold"> Socials </span>
       <ul className="mt-10">
-        {socials.map(({_id, social}) => {
+        {socials.map(({_id, ...social}) => {
+          console.log(_id, social)
           return (
             <li key={_id}>
-              <Social link={"tempString"} social={social} />
+              <Social link={"tempString"} social={social.social} />
             </li>
           );
         })}
