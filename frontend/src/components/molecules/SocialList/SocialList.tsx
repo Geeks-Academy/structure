@@ -1,21 +1,35 @@
 import React from "react";
 import Social from "./Social";
+import { StyledImage } from "./Social/Social.styled";
 import { ISocialList } from "./SocialList.model";
+import {
+  StyledAllSocialList,
+  StyledName,
+  StyledUserSocialList,
+} from "./SocialList.styled";
 
-const SocialList = ({ socials }: ISocialList): JSX.Element => {
+const SocialList = ({ userSocials, allSocials }: ISocialList): JSX.Element => {
   return (
     <div>
-      <span className="text-3xl font-bold"> Socials </span>
-      <ul className="mt-10">
-        {socials.map(({_id, ...social}) => {
-          console.log(_id, social)
+      <StyledName> Socials </StyledName>
+      <StyledAllSocialList>
+        {allSocials.map(({ _id, image }) => {
           return (
             <li key={_id}>
-              <Social link={"tempString"} social={social.social} />
+              <StyledImage src={image} />
             </li>
           );
         })}
-      </ul>
+      </StyledAllSocialList>
+      <StyledUserSocialList>
+        {userSocials.map(({ link, social }) => {
+          return (
+            <li key={social._id}>
+              <Social link={link} social={social} />
+            </li>
+          );
+        })}
+      </StyledUserSocialList>
     </div>
   );
 };

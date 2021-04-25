@@ -1,5 +1,5 @@
+import { useRef } from "react";
 import { useOutsideClick } from "hooks";
-import React, { useRef } from "react";
 import { colors } from "styles/colors";
 import { BUTTON_TITLE } from "Types/enums";
 import { IModalWindow } from "./ModalWindow.model";

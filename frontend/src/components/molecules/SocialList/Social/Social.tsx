@@ -1,25 +1,13 @@
-import Input from "components/atoms/Input";
-import { ISocial, ISocialPart } from "Types/interfaces";
+import { ISocial } from "Types/interfaces";
+import { StyledImage, StyledContainer, StyledInput } from "./Social.styled";
 
-const Social = (social: any): JSX.Element => {
-  // const {
-  //   link,
-  //   social: { image, name },
-  // } = social;
+const Social = ({ link, social }: ISocial): JSX.Element => {
+  const { image } = social;
   return (
-    <div className="flex">
-      <img
-        className="w-32 h-32 border-gray-700 rounded-full"
-        src={social.image}
-        alt={social.name}
-      />
-      <Input
-        placeholder={"link"}
-        label=""
-        ariaLabel="type link"
-        className="w-full ml-10"
-      />
-    </div>
+    <StyledContainer className="flex">
+      <StyledImage src={image} />
+      <StyledInput placeholder={"link"} label="" defaultValue={link} />
+    </StyledContainer>
   );
 };
 

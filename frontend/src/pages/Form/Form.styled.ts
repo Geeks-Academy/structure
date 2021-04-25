@@ -58,3 +58,29 @@ export const StyledTitle = styled.span`
   color: black;
   font-size: 18px;
 `;
+
+export const StyledLabel = styled.label`
+  font-size: 20px;
+  color: ${colors.background.darkGray};
+`;
+export const StyledSelect = styled.select`
+  width: 100%;
+  border: 2px solid ${colors.background.gray};
+  border-radius: 5px;
+  height: 40px;
+  color: ${colors.background.darkGray};
+  font-size: 20px;
+
+
+`;
+export const StyledOption = styled.option`
+  font-size: 20px;
+  color: ${colors.background.darkGray};
+
+`;
+
+export const StyledSelectWrapper = styled.div`
+margin-bottom: 10px;
+
+`;
+

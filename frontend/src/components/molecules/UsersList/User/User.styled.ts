@@ -1,5 +1,6 @@
 import { UserIcon } from "assets";
 import styled from "styled-components";
+import { colors } from "styles/colors";
 
 export const StyledUser = styled.div`
   display: flex;
@@ -43,5 +44,5 @@ export const StyledUserIcon = styled(UserIcon)`
 
 export const StyledName = styled.span`
   font-size: 24px;
-  color: gray;
+  color: ${colors.background.darkGray};
 `;

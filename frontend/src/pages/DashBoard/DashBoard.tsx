@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   StyledBottomWrapper,
+  StyledRightWrapper,
   StyledTopWrapper,
   StyledContainer,
   StyledButton,
+  StyledInput,
   StyledTitle,
 } from "./DashBoard.styled";
 
 import { useHistory } from "react-router-dom";
 import { UserRequests } from "Services";
 
-import Input from "components/atoms/Input";
 import UsersList from "components/molecules/UsersList";
 
 const DashBoard = (): JSX.Element => {
@@ -31,16 +32,15 @@ const DashBoard = (): JSX.Element => {
     <StyledContainer>
       <StyledTopWrapper>
         <StyledTitle> User list </StyledTitle>
-        <div className="flex justify-end items-center w-5/6">
-          <Input
+        <StyledRightWrapper>
+          <StyledInput
             label=""
             type="search"
             placeholder="Find user"
-            className="m-0 mr-4 w-1/3 h-auto"
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={(e:ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
           />
           <StyledButton onClick={goToAddPanel}> Add new </StyledButton>
-        </div>
+        </StyledRightWrapper>
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <UsersList users={users} searchValue={searchValue} />

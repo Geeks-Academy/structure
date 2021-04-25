@@ -5,16 +5,20 @@ import {
   StyledBottomWrapper,
   StyledButtonWrapper,
   StyledSubmitButton,
+  StyledSelectWrapper,
   StyledCancelButton,
   StyledTopWrapper,
   StyledContainer,
   StyledTitle,
   StyledForm,
+  StyledLabel,
+  StyledSelect,
+  StyledOption,
 } from "./Form.styled";
 import { IForm } from "./Form.model";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { getUserObject, isObjectEmpty } from "helpers";
-import { ISocial, IUser } from "Types/interfaces";
+import { ISocialPart, IUser } from "Types/interfaces";
 import Input from "components/atoms/Input";
 import Checkbox from "components/atoms/Checkbox";
 import SocialList from "components/molecules/SocialList";
@@ -28,7 +32,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
   const { params } = useRouteMatch<{ id: string }>();
   const [initialValues, setInitialValues] = useState(getUserObject());
   const [users, setUsers] = useState<IUser[]>([]);
-  const [socials, setSocials] = useState<ISocial[]>([]);
+  const [socials, setSocials] = useState<ISocialPart[]>([]);
   const { getAllSocials } = SocialRequests;
   const { createUser, getAllUsers, getUser, updateUser } = UserRequests;
 
@@ -133,12 +137,10 @@ const Form = ({ edit }: IForm): JSX.Element => {
       <StyledBottomWrapper>
         <StyledForm onSubmit={handleSubmit} noValidate>
           <Input
-            inputId="name"
+            id="name"
             label="Name"
-            type="text"
             name="name"
             required
-            errorId="err_name"
             value={values.name}
             error={errors.name}
             onBlur={handleBlur}
@@ -146,11 +148,9 @@ const Form = ({ edit }: IForm): JSX.Element => {
             placeholder="type name"
           />
           <Input
-            inputId="image"
+            id="image"
             label="Image"
-            type="text"
             name="image"
-            errorId="err_image"
             value={values.image}
             error={errors.image}
             onBlur={handleBlur}
@@ -158,11 +158,9 @@ const Form = ({ edit }: IForm): JSX.Element => {
             placeholder="type image"
           />
           <Input
-            inputId="title"
+            id="title"
             label="Title"
-            type="text"
             name="title"
-            errorId="err_title"
             value={values.title}
             error={errors.title}
             onBlur={handleBlur}
@@ -170,33 +168,34 @@ const Form = ({ edit }: IForm): JSX.Element => {
             placeholder="type title"
           />
 
-          <div>
-            <label
-              className="block text-gray-500 font-bold mb-2 text-xl"
-              htmlFor="boss"
-            >
-              Boss
-            </label>
-            <select
+          <StyledSelectWrapper>
+            <StyledLabel htmlFor="boss">Boss</StyledLabel>
+            <StyledSelect
               id="boss"
-              className="form-select mt-1 block w-full h-16 rounded-lg border-2 border-gray-200 text-2xl mb-10"
               value={`${values.boss}`}
               onChange={handleChange}
               onBlur={handleBlur}
               name="boss"
             >
-              <option value="">{"-- none --"}</option>
+              <StyledOption value="">{"-- none --"}</StyledOption>
               {users.map((user) => {
                 return (
-                  <option className="text-2xl" key={user._id} value={user._id}>
+                  <StyledOption
+                    className="text-2xl"
+                    key={user._id}
+                    value={user._id}
+                  >
                     {user.name}
-                  </option>
+                  </StyledOption>
                 );
               })}
-            </select>
-          </div>
+            </StyledSelect>
+          </StyledSelectWrapper>
 
-          <SocialList socials={socials} />
+          <SocialList
+            userSocials={values.socials ? values.socials : []}
+            allSocials={socials ? socials : []}
+          />
 
           <div className="flex flex-col mb-10">
             <Checkbox
@@ -205,13 +204,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onBlur={handleBlur}
               onChange={handleChange}
               isChecked={!!values.openToWork}
-            />
-            <Checkbox
-              name="active"
-              label="Active"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              isChecked={!!values.active}
             />
             <Checkbox
               name="manager"

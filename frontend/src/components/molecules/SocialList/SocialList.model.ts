@@ -1,5 +1,6 @@
-import { ISocial } from "Types/interfaces";
+import { ISocial, ISocialPart } from "Types/interfaces";
 
 export interface ISocialList {
-  socials: ISocial[];
+  userSocials: ISocial[];
+  allSocials: ISocialPart[];
 }
