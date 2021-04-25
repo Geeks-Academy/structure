@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_CONNECTION_STRING = (process.env.MONGO_CONNECTION_STRING) as string;
+const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING as string;
 
 const connectDb = async () => {
   try {
@@ -9,10 +9,10 @@ const connectDb = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
-    })
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export default connectDb
+export default connectDb;
