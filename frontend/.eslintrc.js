@@ -28,13 +28,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
-    'sort-imports': [
-      2,
-      {
-        ignoreDeclarationSort: true,
-        memberSyntaxSortOrder: ['none', 'single', 'multiple', 'all'],
-      },
-    ],
+    'sort-imports': 0,
     'jsx-a11y/label-has-associated-control': 'off',
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': ['error'],
@@ -51,6 +45,14 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     'import/extensions': 0,
     'no-new': 0,
+    'no-underscore-dangle': [
+      2, 
+      {
+        allow: ['_id']
+      }
+    ],
+    '@typescript-eslint/no-shadow': 0,
+    
   },
   ignorePatterns: 'src/pages/Structure/**/*.ts',
 };
