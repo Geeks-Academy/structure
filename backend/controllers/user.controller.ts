@@ -45,8 +45,6 @@ export const create = async (req: Request, res: Response) => {
   try {
     const result = await User.create(user);
     res.status(StatusCode.CREATED).json(result);
-    console.log("CREATE", user)
-
   } catch (error) {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
@@ -59,9 +57,8 @@ export const update = async (req: Request, res: Response) => {
   try {
     await User.updateOne({ _id: userId }, user);
     res.json({ ok: true, message: 'User updated successfully' });
-
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
