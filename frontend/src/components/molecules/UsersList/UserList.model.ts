@@ -1,5 +1,6 @@
 import { IUser } from 'Types/interfaces';
 
 export interface IUsers {
-    users: IUser[]
-};
+  users: IUser[];
+  searchValue: string;
+}

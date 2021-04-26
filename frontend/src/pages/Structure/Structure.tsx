@@ -4,7 +4,7 @@ import { members } from './members';
 import './style.css';
 import Treant from './Treant';
 
-const Structure = (): JSX.Element => {
+const Structure = () => {
   useEffect(() => {
     window.Raphael = Raphael;
     new Treant(members);

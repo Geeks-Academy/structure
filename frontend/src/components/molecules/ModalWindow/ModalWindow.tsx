@@ -1,16 +1,17 @@
-import { useOutsideClick } from "hooks";
-import React, { useRef } from "react";
-import { colors } from "styles/colors";
-import { IModalWindow, TButton } from "./ModalWindow.model";
+import { useRef } from 'react';
+import { useOutsideClick } from 'hooks';
+import { colors } from 'styles/colors';
+import { BUTTON_TITLE } from 'Types/enums';
+import { IModalWindow } from './ModalWindow.model';
 import {
+  StyledButton,
   StyledCancelButton,
   StyledContainer,
   StyledParagraph,
-  StyledWrapper,
-  StyledWindow,
-  StyledButton,
   StyledTitle,
-} from "./ModalWindow.styled";
+  StyledWindow,
+  StyledWrapper,
+} from './ModalWindow.styled';
 
 const ModalWindow = ({
   title,
@@ -18,17 +19,16 @@ const ModalWindow = ({
   description,
   handleCancel,
   handleConfirm,
-}: IModalWindow) => {
+}: IModalWindow): JSX.Element => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, () => isActive && handleCancel());
 
-  const handleButtonColor = (buttonTitle: TButton) => {
-    if(buttonTitle === 'Delete') {
+  const handleButtonColor = (buttonTitle: string) => {
+    if (buttonTitle === BUTTON_TITLE.DELETE) {
       return colors.background.red;
-    } else {
-      return colors.background.blue;
     }
-  }
+    return colors.background.blue;
+  };
   if (!isActive) return <></>;
   return (
     <StyledContainer>
@@ -40,10 +40,8 @@ const ModalWindow = ({
           <StyledParagraph> {description} </StyledParagraph>
         </StyledWrapper>
         <StyledWrapper>
-          <StyledCancelButton type="button" onClick={handleCancel}>
-            Cancel
-          </StyledCancelButton>
-          <StyledButton bgColor={handleButtonColor(title)} type="button" onClick={handleConfirm}>
+          <StyledCancelButton onClick={handleCancel}>Cancel</StyledCancelButton>
+          <StyledButton bgColor={handleButtonColor(title)} onClick={handleConfirm}>
             {title}
           </StyledButton>
         </StyledWrapper>

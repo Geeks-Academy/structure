@@ -1,62 +1,47 @@
-import React, { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from 'react';
+import UsersList from 'components/molecules/UsersList';
+import { UserRequests } from 'Services';
+import { useHistory } from 'react-router-dom';
 import {
   StyledBottomWrapper,
-  StyledTopWrapper,
-  StyledContainer,
   StyledButton,
+  StyledContainer,
+  StyledInput,
+  StyledRightWrapper,
   StyledTitle,
-} from "./DashBoard.styled";
-
-import { useHistory } from "react-router-dom";
-import { getAllUsers } from "Services";
-import { IUser } from "Types/interfaces";
-import { isInputTextMatch } from "helpers";
-
-import Input from "components/atoms/Input";
-import UsersList from "components/molecules/UsersList";
+  StyledTopWrapper,
+} from './DashBoard.styled';
 
 const DashBoard = (): JSX.Element => {
   const history = useHistory();
   const [users, setUsers] = useState([]);
-  const [mutableUsers, setMutableUsers] = useState<IUser[]>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const { getAllUsers } = UserRequests;
 
-  const goToAddPanel = () => history.replace("/admin/add");
+  const goToAddPanel = () => history.replace('/admin/add');
 
   useEffect(() => {
     getAllUsers().then(({ data }) => {
       setUsers(data);
-      setMutableUsers(data);
     });
-  }, [setUsers]);
-
-  const filteredUsers = (
-    users: IUser[],
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const inputValue = e.target.value;
-    const filteredUsers = users.filter((item) =>
-      isInputTextMatch(inputValue, `${item.name}`)
-    );
-    inputValue ? setMutableUsers(filteredUsers) : setMutableUsers(users);
-  };
+  }, [setUsers, getAllUsers]);
 
   return (
     <StyledContainer>
       <StyledTopWrapper>
         <StyledTitle> User list </StyledTitle>
-        <div className="flex justify-end items-center w-5/6">
-          <Input
+        <StyledRightWrapper>
+          <StyledInput
             label=""
             type="search"
             placeholder="Find user"
-            className="m-0 mr-4 w-1/3 h-auto"
-            onChange={(e) => filteredUsers(users, e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
           />
           <StyledButton onClick={goToAddPanel}> Add new </StyledButton>
-        </div>
+        </StyledRightWrapper>
       </StyledTopWrapper>
       <StyledBottomWrapper>
-        <UsersList users={mutableUsers} />
+        <UsersList users={users} searchValue={searchValue} />
       </StyledBottomWrapper>
     </StyledContainer>
   );

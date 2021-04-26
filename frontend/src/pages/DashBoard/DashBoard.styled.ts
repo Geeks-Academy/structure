@@ -1,6 +1,7 @@
-import Button from "components/atoms/Button";
-import styled from "styled-components";
-import { colors } from "styles/colors";
+import Button from 'components/atoms/Button';
+import Input from 'components/atoms/Input';
+import styled from 'styled-components';
+import { colors } from 'styles/colors';
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -17,6 +18,18 @@ export const StyledTopWrapper = styled.div`
   min-height: 80px;
   width: 100%;
   padding: 10px;
+`;
+
+export const StyledRightWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: auto;
+`;
+
+export const StyledInput = styled(Input)`
+  width: 400px;
+  margin: 0 10px 0 0;
 `;
 
 export const StyledBottomWrapper = styled.div`

@@ -1,7 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const DEVELOPMENT_URL = 'http://localhost:4000/api/';
+const url =
+  process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_DEVELOPMENT_URL
+    : process.env.REACT_APP_PRODUCTION_URL;
 
 export const axiosInstance = axios.create({
-    baseURL: DEVELOPMENT_URL
+  baseURL: url,
 });
