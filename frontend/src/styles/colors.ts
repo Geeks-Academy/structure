@@ -5,5 +5,7 @@ export const colors = {
     red: '#D9534F',
     orange: '#F0AD4E',
     gray: '#f4f6f6',
+    darkGray: 'gray',
+    white: '#ffffff',
   },
 };
