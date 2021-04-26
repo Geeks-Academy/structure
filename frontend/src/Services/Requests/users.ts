@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { IUser } from 'Types/interfaces';
 import { Fetcher } from '../Fetcher';
 

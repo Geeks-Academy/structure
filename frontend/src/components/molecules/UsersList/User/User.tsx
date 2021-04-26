@@ -10,10 +10,8 @@ import {
 
 const User = ({ _id, name, image }: IUser): JSX.Element => {
   const history = useHistory();
-
   const editUser = (id: string) => history.push(`/admin/edit/${id}`);
 
-  console.log('elo');
   return (
     <StyledUser onClick={() => editUser(`${_id}`)}>
       <StyledImageWrapper>

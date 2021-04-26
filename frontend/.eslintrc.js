@@ -46,13 +46,12 @@ module.exports = {
     'import/extensions': 0,
     'no-new': 0,
     'no-underscore-dangle': [
-      2, 
+      2,
       {
-        allow: ['_id']
-      }
+        allow: ['_id'],
+      },
     ],
     '@typescript-eslint/no-shadow': 0,
-    
   },
   ignorePatterns: 'src/pages/Structure/**/*.ts',
 };

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -13,8 +12,8 @@ import { SocialRequests, UserRequests } from 'Services';
 import {
   StyledBottomWrapper,
   StyledButtonWrapper,
-  StyledCancelButton,
   StyledContainer,
+  StyledCancelButton,
   StyledForm,
   StyledLabel,
   StyledOption,
@@ -147,7 +146,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
               <StyledOption value="">{'-- none --'}</StyledOption>
               {users.map((user) => {
                 return (
-                  // eslint-disable-next-line no-underscore-dangle
                   <StyledOption className="text-2xl" key={user._id} value={user._id}>
                     {user.name}
                   </StyledOption>
