@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Button from "components/atoms/Button";
-import { colors } from "styles/colors";
+import styled from 'styled-components';
+import Button from 'components/atoms/Button';
+import { colors } from 'styles/colors';
 
 export const StyledContainer = styled.div`
   width: 100%;
@@ -70,17 +70,12 @@ export const StyledSelect = styled.select`
   height: 40px;
   color: ${colors.background.darkGray};
   font-size: 20px;
-
-
 `;
 export const StyledOption = styled.option`
   font-size: 20px;
   color: ${colors.background.darkGray};
-
 `;
 
 export const StyledSelectWrapper = styled.div`
-margin-bottom: 10px;
-
+  margin-bottom: 10px;
 `;
-

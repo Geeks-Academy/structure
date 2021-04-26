@@ -1,4 +1,4 @@
-import { keyframes } from "styled-components";
+import { keyframes } from 'styled-components';
 
 export const increaseOpacity = keyframes`
     from {
@@ -7,4 +7,3 @@ export const increaseOpacity = keyframes`
         opacity: 1;
     }
 `;
-

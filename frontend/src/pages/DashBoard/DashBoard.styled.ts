@@ -1,7 +1,7 @@
-import Button from "components/atoms/Button";
-import Input from "components/atoms/Input";
-import styled from "styled-components";
-import { colors } from "styles/colors";
+import Button from 'components/atoms/Button';
+import Input from 'components/atoms/Input';
+import styled from 'styled-components';
+import { colors } from 'styles/colors';
 
 export const StyledContainer = styled.div`
   display: flex;

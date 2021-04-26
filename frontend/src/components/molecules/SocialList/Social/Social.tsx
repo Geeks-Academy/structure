@@ -1,5 +1,5 @@
 import { ISocial } from 'Types/interfaces';
-import { StyledImage, StyledContainer, StyledInput } from './Social.styled';
+import { StyledContainer, StyledImage, StyledInput } from './Social.styled';
 
 const Social = ({ link, social }: ISocial): JSX.Element => {
   const { image } = social;

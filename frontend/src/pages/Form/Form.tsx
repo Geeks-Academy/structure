@@ -1,31 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
-import { validation } from "./validation";
+/* eslint-disable @typescript-eslint/no-shadow */
+import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { getUserObject, isObjectEmpty } from 'helpers';
+import { ISocialPart, IUser } from 'Types/interfaces';
+import Input from 'components/atoms/Input';
+import Checkbox from 'components/atoms/Checkbox';
+import SocialList from 'components/molecules/SocialList';
+
+import { SocialRequests, UserRequests } from 'Services';
 import {
   StyledBottomWrapper,
   StyledButtonWrapper,
-  StyledSubmitButton,
-  StyledSelectWrapper,
   StyledCancelButton,
-  StyledTopWrapper,
   StyledContainer,
-  StyledTitle,
   StyledForm,
   StyledLabel,
-  StyledSelect,
   StyledOption,
-} from "./Form.styled";
-import { IForm } from "./Form.model";
-import { useRouteMatch, useHistory } from "react-router-dom";
-import { getUserObject, isObjectEmpty } from "helpers";
-import { ISocialPart, IUser } from "Types/interfaces";
-import Input from "components/atoms/Input";
-import Checkbox from "components/atoms/Checkbox";
-import SocialList from "components/molecules/SocialList";
+  StyledSelect,
+  StyledSelectWrapper,
+  StyledSubmitButton,
+  StyledTitle,
+  StyledTopWrapper,
+} from './Form.styled';
+import { validation } from './validation';
+import { IForm } from './Form.model';
 
-import { SocialRequests, UserRequests } from "Services";
-
-import { FORM_TITLE } from "./helpers";
+import { FORM_TITLE } from './helpers';
 
 const Form = ({ edit }: IForm): JSX.Element => {
   const history = useHistory();
@@ -35,6 +37,30 @@ const Form = ({ edit }: IForm): JSX.Element => {
   const [socials, setSocials] = useState<ISocialPart[]>([]);
   const { getAllSocials } = SocialRequests;
   const { createUser, getAllUsers, getUser, updateUser } = UserRequests;
+
+  const onCancel = () => history.replace('/admin');
+  const onSubmit = (data: IUser, edit: boolean) => {
+    const { name, boss, image, title, active, manager, openToWork } = data;
+
+    if (edit) {
+      updateUser(data);
+    } else {
+      createUser({
+        name,
+        boss,
+        image,
+        title,
+        active,
+        socials: data.socials,
+        manager,
+        openToWork,
+      });
+    }
+
+    setTimeout(() => {
+      onCancel();
+    }, 100);
+  };
 
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     validationSchema: validation(),
@@ -58,70 +84,14 @@ const Form = ({ edit }: IForm): JSX.Element => {
     });
   }, [setSocials, getAllSocials]);
 
-  const onCancel = () => history.replace("/admin");
-  const onSubmit = (data: IUser, edit: boolean) => {
-    const {
-      name,
-      boss,
-      image,
-      title,
-      active,
-      socials,
-      manager,
-      openToWork,
-    } = data;
-
-    if (edit) {
-      updateUser(data);
-    } else {
-      createUser({
-        name,
-        boss,
-        image,
-        title,
-        active,
-        socials,
-        manager,
-        openToWork,
-      });
-    }
-
-    setTimeout(() => {
-      onCancel();
-    }, 100);
-  };
-
   useEffect(() => {
     if (!isObjectEmpty(params)) {
       getUser(
         params.id
-      ).then(
-        ({
-          data: {
-            _id,
-            name,
-            image,
-            title,
-            openToWork,
-            manager,
-            active,
-            boss,
-            socials,
-          },
-        }) =>
-          setInitialValues(
-            getUserObject(
-              _id,
-              name,
-              image,
-              title,
-              openToWork,
-              manager,
-              active,
-              boss,
-              socials
-            )
-          )
+      ).then(({ data: { _id, name, image, title, openToWork, manager, active, boss, socials } }) =>
+        setInitialValues(
+          getUserObject(_id, name, image, title, openToWork, manager, active, boss, socials)
+        )
       );
     }
   }, [params, getUser]);
@@ -129,10 +99,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
   return (
     <StyledContainer>
       <StyledTopWrapper>
-        <StyledTitle>
-          {" "}
-          {edit ? FORM_TITLE.EDIT_PANEL : FORM_TITLE.ADD_PANEL}{" "}
-        </StyledTitle>
+        <StyledTitle> {edit ? FORM_TITLE.EDIT_PANEL : FORM_TITLE.ADD_PANEL} </StyledTitle>
       </StyledTopWrapper>
       <StyledBottomWrapper>
         <StyledForm onSubmit={handleSubmit} noValidate>
@@ -177,14 +144,11 @@ const Form = ({ edit }: IForm): JSX.Element => {
               onBlur={handleBlur}
               name="boss"
             >
-              <StyledOption value="">{"-- none --"}</StyledOption>
+              <StyledOption value="">{'-- none --'}</StyledOption>
               {users.map((user) => {
                 return (
-                  <StyledOption
-                    className="text-2xl"
-                    key={user._id}
-                    value={user._id}
-                  >
+                  // eslint-disable-next-line no-underscore-dangle
+                  <StyledOption className="text-2xl" key={user._id} value={user._id}>
                     {user.name}
                   </StyledOption>
                 );
@@ -192,10 +156,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
             </StyledSelect>
           </StyledSelectWrapper>
 
-          <SocialList
-            userSocials={values.socials ? values.socials : []}
-            allSocials={socials ? socials : []}
-          />
+          <SocialList userSocials={values.socials || []} allSocials={socials || []} />
 
           <div className="flex flex-col mb-10">
             <Checkbox

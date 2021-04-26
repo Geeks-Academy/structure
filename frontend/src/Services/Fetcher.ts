@@ -11,7 +11,7 @@ export class Fetcher {
         status: err.response.status,
       }));
   };
-  
+
   static post = (url: string, data?: unknown): Promise<any> => {
     return axiosInstance
       .post(url, data)

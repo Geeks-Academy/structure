@@ -1,25 +1,25 @@
-import { ISocial } from "Types/interfaces";
+import { ISocial, IUser } from 'Types/interfaces';
 
-export const isStartsWith = (inputText: string, value: string) => {
-  const regex = new RegExp(`^${inputText}`, "i");
+export const isStartsWith = (inputText: string, value: string): boolean => {
+  const regex = new RegExp(`^${inputText}`, 'i');
   return regex.test(value);
 };
 
-export const isObjectEmpty = (obj: Object) => {
+export const isObjectEmpty = (obj: Record<string, unknown>): boolean => {
   return Object.keys(obj).length === 0;
 };
 
 export const getUserObject = (
-  _id: string = "",
-  name: string = "",
-  image: string = "",
-  title: string = "",
-  openToWork: boolean = false,
-  manager: boolean = false,
-  active: boolean = true,
+  _id = '',
+  name = '',
+  image = '',
+  title = '',
+  openToWork = false,
+  manager = false,
+  active = true,
   boss?: string | null,
   socials?: ISocial[]
-) => ({
+): IUser => ({
   _id,
   name,
   image,

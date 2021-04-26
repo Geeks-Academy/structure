@@ -1,7 +1,7 @@
-import FormPanel from "pages/Form";
-import Dashboard from "pages/DashBoard";
-import Structure from "pages/Structure";
-import { Route, Switch } from "react-router-dom";
+import FormPanel from 'pages/Form';
+import Dashboard from 'pages/DashBoard';
+import Structure from 'pages/Structure';
+import { Route, Switch } from 'react-router-dom';
 
 const Routes = (): JSX.Element => {
   return (
@@ -12,7 +12,7 @@ const Routes = (): JSX.Element => {
         <FormPanel />
       </Route>
       <Route exact path="/admin/edit/:id">
-        <FormPanel edit/>
+        <FormPanel edit />
       </Route>
     </Switch>
   );

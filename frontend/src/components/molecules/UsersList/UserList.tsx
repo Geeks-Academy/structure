@@ -1,7 +1,7 @@
-import User from './User';
 import { isStartsWith } from 'helpers';
 import { IUsers } from './UserList.model';
 import { StyledList } from './UserList.styled';
+import User from './User';
 
 const UserList = ({ users, searchValue }: IUsers): JSX.Element => {
   return (

@@ -35,11 +35,11 @@ export const StyledImage = styled.img`
 `;
 
 export const StyledUserIcon = styled(UserIcon)`
+  width: 30px;
+  height: 30px;
   path {
     fill: gray;
   }
-  width: 30px;
-  height: 30px;
 `;
 
 export const StyledName = styled.span`

@@ -1,9 +1,11 @@
-import { IUser } from "Types/interfaces";
-import { Fetcher } from "../Fetcher";
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { IUser } from 'Types/interfaces';
+import { Fetcher } from '../Fetcher';
 
 export class UserRequests {
   static getAllUsers = async () => {
-    return Fetcher.get("users");
+    return Fetcher.get('users');
   };
 
   static getUser = async (id: string) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IInput } from './Input.model';
-import { StyledLabel, StyledInput, StyledError, StyledWrapper } from './Input.styled';
+import { StyledError, StyledInput, StyledLabel, StyledWrapper } from './Input.styled';
 
 const Input = ({
   id,
@@ -16,7 +16,7 @@ const Input = ({
   placeholder,
   ariaInvalid,
   ...props
-}: IInput) => {
+}: IInput): JSX.Element => {
   return (
     <StyledWrapper {...props}>
       <StyledLabel htmlFor={id}>{label}</StyledLabel>

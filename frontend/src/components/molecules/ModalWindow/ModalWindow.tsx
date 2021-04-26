@@ -4,13 +4,13 @@ import { colors } from 'styles/colors';
 import { BUTTON_TITLE } from 'Types/enums';
 import { IModalWindow } from './ModalWindow.model';
 import {
+  StyledButton,
   StyledCancelButton,
   StyledContainer,
   StyledParagraph,
-  StyledWrapper,
-  StyledWindow,
-  StyledButton,
   StyledTitle,
+  StyledWindow,
+  StyledWrapper,
 } from './ModalWindow.styled';
 
 const ModalWindow = ({
@@ -19,16 +19,15 @@ const ModalWindow = ({
   description,
   handleCancel,
   handleConfirm,
-}: IModalWindow) => {
+}: IModalWindow): JSX.Element => {
   const modalRef = useRef(null);
   useOutsideClick(modalRef, () => isActive && handleCancel());
 
   const handleButtonColor = (buttonTitle: string) => {
     if (buttonTitle === BUTTON_TITLE.DELETE) {
       return colors.background.red;
-    } else {
-      return colors.background.blue;
     }
+    return colors.background.blue;
   };
   if (!isActive) return <></>;
   return (
