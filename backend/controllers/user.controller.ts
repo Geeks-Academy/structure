@@ -67,8 +67,10 @@ export const deactivate = async (req: Request, res: Response) => {
   const userId = { _id: req.params.id };
   const update = { active: false };
   try {
-    await User.findOneAndUpdate(userId, update);
-
+    const user = await User.findOneAndUpdate(userId, update);
+    if(!user){
+     return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
+    }
     res.json({ ok: true, message: 'User deactivated successfully' });
   } catch (error) {
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
