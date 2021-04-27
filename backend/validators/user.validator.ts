@@ -10,7 +10,7 @@ const schema = {
     image: Joi.string().allow(""),
     socials: Joi.array().items({
       link: Joi.string(),
-      social: Joi.string().objectId()
+      social: Joi.string().objectId().required(),
     }).empty(),
     active: Joi.boolean()
   }),
@@ -20,18 +20,18 @@ const schema = {
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
     boss: Joi.string().objectId().allow(null),
-    image: Joi.string().allow(""),
-    socials: Joi.array().items({
-      link: Joi.string().required(),
-      social: Joi.string().objectId()
-    }).empty(),
-    active: Joi.boolean()
+    image: Joi.string().allow(''),
+    socials: Joi.array()
+      .items({
+        link: Joi.string().required(),
+        social: Joi.string().objectId().required(),
+      })
+      .empty(),
+    active: Joi.boolean(),
   }),
   id: Joi.object().keys({
-    id: Joi.string().objectId()
-  })
-}
+    id: Joi.string().objectId(),
+  }),
+};
 
-export default schema
-
-
+export default schema;

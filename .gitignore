@@ -130,5 +130,7 @@ temp/
 
 **/package-lock.json
 **/yarn.lock
+package-lock.json
+yarn.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/node
