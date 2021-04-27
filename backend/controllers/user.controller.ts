@@ -87,13 +87,9 @@ export const deleteOne = async (req: Request, res: Response) => {
 
 
     const userBoss = user.boss;
-
+    // in the future should be discussing what should be instead null
     if (user.boss === null) {
-      await User.updateMany({ 'boss': userId }, { 'boss': null })
-
-      await User.deleteOne(userId)
-
-      return res.json({ok: true, message: "Boss delete successfully. Children now don't have the Boss." });
+      return res.status(StatusCode.FORBIDDEN).json({ message: "You can't delete this boss. This is the highest boss witch cannot be deleted." });
     }
 
     await User.updateMany({ 'boss': userId }, { 'boss': userBoss });
