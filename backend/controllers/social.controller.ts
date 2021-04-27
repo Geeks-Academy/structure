@@ -58,10 +58,13 @@ export const deactivate = async (req: Request, res: Response) => {
   const update = { active: false };
 
   try {
-    await Social.findOneAndUpdate(socialId, update);
+    const social = await Social.findOneAndUpdate(socialId, update);
+
+    if(!social){
+      return res.status(StatusCode.NOT_FOUND).json({ok: false, message: 'Social not found' });
+    }
 
     await User.updateMany({}, { $pull: { socials: { social: socialId } } }, { multi: true });
-
     res.json({ ok: true, message: 'Social deactivated successfully' });
   } catch (error) {
     console.log(error);
