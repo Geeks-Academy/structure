@@ -10,7 +10,7 @@ const schema = {
     image: Joi.string().allow(''),
     socials: Joi.array()
       .items({
-        link: Joi.string(),
+        link: Joi.string().required(),
         social: Joi.string().objectId().required(),
       })
       .empty(),
