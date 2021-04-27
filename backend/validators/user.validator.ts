@@ -7,12 +7,14 @@ const schema = {
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
     boss: Joi.string().objectId().allow(null),
-    image: Joi.string().allow(""),
-    socials: Joi.array().items({
-      link: Joi.string(),
-      social: Joi.string().objectId().required(),
-    }).empty(),
-    active: Joi.boolean()
+    image: Joi.string().allow(''),
+    socials: Joi.array()
+      .items({
+        link: Joi.string(),
+        social: Joi.string().objectId().required(),
+      })
+      .empty(),
+    active: Joi.boolean(),
   }),
   put: Joi.object({
     name: Joi.string().min(4),
