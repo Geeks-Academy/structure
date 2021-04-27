@@ -88,7 +88,7 @@ export const deleteOne = async (req: Request, res: Response) => {
 
     const userBoss = user.boss;
     // in the future should be discussing what should be instead null
-    if (user.boss === null) {
+    if (!userBoss) {
       return res.status(StatusCode.FORBIDDEN).json({ message: "You can't delete this boss. This is the highest boss witch cannot be deleted." });
     }
 
