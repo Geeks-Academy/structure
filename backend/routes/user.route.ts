@@ -17,5 +17,4 @@ router
   .patch('/deactivate/:id', validateParameter(schema.id), userController.deactivate)
   .delete('/:id', validateParameter(schema.id), userController.deleteOne)
 
-
 export default router;

@@ -102,4 +102,3 @@ export const deleteOne = async (req: Request, res: Response) => {
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 }
-
