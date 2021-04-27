@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Social, { ISocial } from '../models/social.model';
-import User, { IUser } from '../models/user.model';
+import User from '../models/user.model';
 import StatusCode from '../utils/StatusCode';
 
 export const getAll = async (_req: Request, res: Response) => {
@@ -55,19 +55,19 @@ export const update = async (req: Request, res: Response) => {
 
 
 export const deactivate = async (req: Request, res: Response) => {
-  const socialId = { _id: req.params.id};
-  const update = {active: false}
+  const socialId = { _id: req.params.id };
+  const update = { active: false }
 
-   try{
+  try {
 
     await Social.findOneAndUpdate(socialId, update);
 
-    await User.updateMany({}, { '$pull' : { 'socials': { 'social': socialId} } }, {multi: true})
+    await User.updateMany({}, { '$pull': { 'socials': { 'social': socialId } } }, { multi: true })
 
-    res.json({ok: true, message: "Social deactivated successfully"})
-   } catch (error) {
+    res.json({ ok: true, message: "Social deactivated successfully" })
+  } catch (error) {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
-   }
+  }
 }
 
