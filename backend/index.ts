@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import connectDb from "./services/database.service";
+import connectDb from './services/database.service';
 import app from './app';
 
 const main = async () => {
@@ -10,8 +10,6 @@ const main = async () => {
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
   });
-}
-
+};
 
 main();
-

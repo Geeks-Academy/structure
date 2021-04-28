@@ -21,7 +21,8 @@ module.exports = {
     sourceType: "module"
   },
   rules: {
-    "no-console": "off"
+    "no-console": "off",
+    "@typescript-eslint/no-empty-function": "warn"
   },
   settings: {}
 }
