@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Social, { ISocial } from '../models/social.model';
-import User, { IUser } from '../models/user.model';
+import User from '../models/user.model';
 import StatusCode from '../utils/StatusCode';
 
 export const getAll = async (_req: Request, res: Response) => {
@@ -60,8 +60,8 @@ export const deactivate = async (req: Request, res: Response) => {
   try {
     const social = await Social.findOneAndUpdate(socialId, update);
 
-    if(!social){
-      return res.status(StatusCode.NOT_FOUND).json({ok: false, message: 'Social not found' });
+    if (!social) {
+      return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'Social not found' });
     }
 
     await User.updateMany({}, { $pull: { socials: { social: socialId } } }, { multi: true });
