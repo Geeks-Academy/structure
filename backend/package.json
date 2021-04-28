@@ -7,7 +7,7 @@
     "start": "ts-node-dev ./index.ts",
     "build": "tsc",
     "prod": "cross-env NODE_ENV=production node dist/index.js",
-    "test": "jest",
+    "test": "jest --",
     "test:watch": "jest --watchAll"
   },
   "keywords": [],
