@@ -3,6 +3,8 @@ name: Slack Project Notifier
 on:
   project_card:
       types: [moved]
+  issues:
+    types: [opened]
 
 jobs:
   notify:
