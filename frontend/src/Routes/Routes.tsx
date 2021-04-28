@@ -1,5 +1,5 @@
 import Structure from 'pages/Structure';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 const Routes = (): JSX.Element => {
   return (

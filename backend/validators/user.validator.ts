@@ -6,32 +6,34 @@ const schema = {
     title: Joi.string().required(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().objectId(),
-    image: Joi.string().allow(""),
-    socials: Joi.array().items({
-      link: Joi.string().required(),
-      social: Joi.string().objectId().required()
-    }).empty(),
-    active: Joi.boolean()
+    boss: Joi.string().objectId().allow(null),
+    image: Joi.string().allow(''),
+    socials: Joi.array()
+      .items({
+        link: Joi.string().required(),
+        social: Joi.string().objectId().required(),
+      })
+      .empty(),
+    active: Joi.boolean(),
   }),
   put: Joi.object({
     name: Joi.string().min(4),
     title: Joi.string(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().objectId(),
-    image: Joi.string().allow(""),
-    socials: Joi.array().items({
-      link: Joi.string().required(),
-      social: Joi.string().objectId().required()
-    }).empty(),
-    active: Joi.boolean()
+    boss: Joi.string().objectId().allow(null),
+    image: Joi.string().allow(''),
+    socials: Joi.array()
+      .items({
+        link: Joi.string().required(),
+        social: Joi.string().objectId().required(),
+      })
+      .empty(),
+    active: Joi.boolean(),
   }),
   id: Joi.object().keys({
-    id: Joi.string().objectId()
-  })
-}
+    id: Joi.string().objectId(),
+  }),
+};
 
-export default schema
-
-
+export default schema;

@@ -1,246 +1,250 @@
-import TreeStore from './TreeStore'
-import Util from './Util'
+import TreeStore from './TreeStore';
+import Util from './Util';
 
 class TreeNode {
-	static CONFIG = {
-		nodeHTMLclass: 'node',
-	
-		textClass: {
-			name:	'node-name',
-			title: 'node-title',
-			desc:	'node-desc',
-			contact: 'node-contact',
-			status: 'node-status'
-		}
-	}
-	id: any;
-	parentId: any;
-	treeId: any;
-	prelim: number;
-	modifier: number;
-	stackParentId: any;
-	image: any;
-	link: {};
-	connStyle: {};
-	drawLineThrough: any;
-	collapsable: any;
-	collapsed: any;
-	text: any;
-	member: any;
-	nodeInnerHTML: any;
-	nodeHTMLclass: string;
-	nodeHTMLid: any;
-	width: any;
-	children: any;
-	leftNeighborId: any;
-	rightNeighborId: any;
-	X: any;
-	Y: any;
-	height: any;
-	nodeDOM: any;
+  static CONFIG = {
+    nodeHTMLclass: 'node',
 
-	constructor(nodeStructure: any, id: any, parentId: any, tree: any, stackParentId: any){
-		this.id			= id;
-		this.parentId	= parentId;
-		this.treeId		= tree.id;
-		this.prelim		= 0;
-		this.modifier	= 0;
+    textClass: {
+      name: 'node-name',
+      title: 'node-title',
+      desc: 'node-desc',
+      contact: 'node-contact',
+      status: 'node-status',
+    },
+  };
+  id: any;
+  parentId: any;
+  treeId: any;
+  prelim: number;
+  modifier: number;
+  stackParentId: any;
+  image: any;
+  link: {};
+  connStyle: {};
+  drawLineThrough: any;
+  collapsable: any;
+  collapsed: any;
+  text: any;
+  member: any;
+  nodeInnerHTML: any;
+  nodeHTMLclass: string;
+  nodeHTMLid: any;
+  width: any;
+  children: any;
+  leftNeighborId: any;
+  rightNeighborId: any;
+  X: any;
+  Y: any;
+  height: any;
+  nodeDOM: any;
 
-		this.stackParentId = stackParentId;
-		
-		this.image = nodeStructure.image;
+  constructor(nodeStructure: any, id: any, parentId: any, tree: any, stackParentId: any) {
+    this.id = id;
+    this.parentId = parentId;
+    this.treeId = tree.id;
+    this.prelim = 0;
+    this.modifier = 0;
 
-		this.link = Util.createMerge( tree.CONFIG.node.link,  nodeStructure.link);
+    this.stackParentId = stackParentId;
 
-		this.connStyle = Util.createMerge(tree.CONFIG.connectors, nodeStructure.connectors);
+    this.image = nodeStructure.image;
 
-		this.drawLineThrough = nodeStructure.drawLineThrough === false ? false : nodeStructure.drawLineThrough || tree.CONFIG.node.drawLineThrough;
+    this.link = Util.createMerge(tree.CONFIG.node.link, nodeStructure.link);
 
-		this.collapsable = nodeStructure.collapsable === false ? false : nodeStructure.collapsable || tree.CONFIG.node.collapsable;
-		this.collapsed = nodeStructure.collapsed;
+    this.connStyle = Util.createMerge(tree.CONFIG.connectors, nodeStructure.connectors);
 
-		this.text = nodeStructure.text;
-		this.member = nodeStructure
+    this.drawLineThrough =
+      nodeStructure.drawLineThrough === false
+        ? false
+        : nodeStructure.drawLineThrough || tree.CONFIG.node.drawLineThrough;
 
-		// '.node' DIV
-		this.nodeInnerHTML	= nodeStructure.innerHTML;
-		this.nodeHTMLclass	= (tree.CONFIG.node.HTMLclass ? tree.CONFIG.node.HTMLclass : '') + // globaly defined class for the nodex
-								(nodeStructure.HTMLclass ? (' ' + nodeStructure.HTMLclass) : '');		// + specific node class
+    this.collapsable =
+      nodeStructure.collapsable === false
+        ? false
+        : nodeStructure.collapsable || tree.CONFIG.node.collapsable;
+    this.collapsed = nodeStructure.collapsed;
 
-		this.nodeHTMLid		= nodeStructure.HTMLid;
+    this.text = nodeStructure.text;
+    this.member = nodeStructure;
 
-	}
+    // '.node' DIV
+    this.nodeInnerHTML = nodeStructure.innerHTML;
+    this.nodeHTMLclass =
+      (tree.CONFIG.node.HTMLclass ? tree.CONFIG.node.HTMLclass : '') + // globaly defined class for the nodex
+      (nodeStructure.HTMLclass ? ' ' + nodeStructure.HTMLclass : ''); // + specific node class
 
-	Tree(): any {
-		return TreeStore.get(this.treeId);
-	}
+    this.nodeHTMLid = nodeStructure.HTMLid;
+  }
 
-	dbGet(nodeId: any): any {
-		return this.Tree().nodeDB.get(nodeId);
-	}
+  Tree(): any {
+    return TreeStore.get(this.treeId);
+  }
 
-	size(): any {
-		return this.width;
-	}
+  dbGet(nodeId: any): any {
+    return this.Tree().nodeDB.get(nodeId);
+  }
 
-	childrenCount(): any {
-		return	!this.children ? 0 : this.children.length;
-	}
+  size(): any {
+    return this.width;
+  }
 
-	childAt(i: any): any {
-		return this.dbGet( this.children[i] );
-	}
+  childrenCount(): any {
+    return !this.children ? 0 : this.children.length;
+  }
 
-	firstChild(): any {
-		return this.childAt(0);
-	}
+  childAt(i: any): any {
+    return this.dbGet(this.children[i]);
+  }
 
-	lastChild(): any {
-		return this.childAt( this.children.length - 1 );
-	}
+  firstChild(): any {
+    return this.childAt(0);
+  }
 
-	parent(): any {
-		return this.dbGet( this.parentId );
-	}
+  lastChild(): any {
+    return this.childAt(this.children.length - 1);
+  }
 
-	leftNeighbor(): any {
-		if( this.leftNeighborId ) {
-			return this.dbGet( this.leftNeighborId );
-		}
-	}
+  parent(): any {
+    return this.dbGet(this.parentId);
+  }
 
-	rightNeighbor(): any {
-		if( this.rightNeighborId ) {
-			return this.dbGet( this.rightNeighborId );
-		}
-	}
+  leftNeighbor(): any {
+    if (this.leftNeighborId) {
+      return this.dbGet(this.leftNeighborId);
+    }
+  }
 
-	leftSibling (): any {
-		const leftNeighbor = this.leftNeighbor();
-		if(leftNeighbor?.parentId === this.parentId ) {
-			return leftNeighbor;
-		}
-	}
+  rightNeighbor(): any {
+    if (this.rightNeighborId) {
+      return this.dbGet(this.rightNeighborId);
+    }
+  }
 
-	rightSibling (): any {
-		const rightNeighbor = this.rightNeighbor();
-		if(rightNeighbor?.parentId === this.parentId ) {
-			return rightNeighbor;
-		}
-	}
+  leftSibling(): any {
+    const leftNeighbor = this.leftNeighbor();
+    if (leftNeighbor?.parentId === this.parentId) {
+      return leftNeighbor;
+    }
+  }
 
-	childrenCenter(): any {
-		const first = this.firstChild()
-		const last = this.lastChild();
-		return first.prelim + ((last.prelim - first.prelim) + last.size()) / 2;
-	}
+  rightSibling(): any {
+    const rightNeighbor = this.rightNeighbor();
+    if (rightNeighbor?.parentId === this.parentId) {
+      return rightNeighbor;
+    }
+  }
 
-	leftMost( level: any, depth: any ): any { 
-		if( level >= depth ) return this;
-		if( this.childrenCount() === 0 ) return;
-	}
+  childrenCenter(): any {
+    const first = this.firstChild();
+    const last = this.lastChild();
+    return first.prelim + (last.prelim - first.prelim + last.size()) / 2;
+  }
 
-	connectorPoint(startPoint: any): any {
-		let orient = this.Tree().CONFIG.rootOrientation
-		const point: { x: any; y: any } = { x: null, y: null };
-		if(this.stackParentId) { 
-			if (orient === 'NORTH') { orient = 'WEST'; }
-		}
-		if (orient === 'NORTH') {
-			point.x = this.X + this.width/2;
-			point.y = (startPoint) ? this.Y + this.height : this.Y;
-		} else if (orient === 'WEST') {
-			point.x = (startPoint) ? this.X + this.width : this.X;
-			point.y = this.Y + this.height/2;
-		}
-		return point;
-	}
+  leftMost(level: any, depth: any): any {
+    if (level >= depth) return this;
+    if (this.childrenCount() === 0) return;
+  }
 
-	createGeometry(tree: any): any {
-		const drawArea = tree.drawArea
-		let image
+  connectorPoint(startPoint: any): any {
+    let orient = this.Tree().CONFIG.rootOrientation;
+    const point: { x: any; y: any } = { x: null, y: null };
+    if (this.stackParentId) {
+      if (orient === 'NORTH') {
+        orient = 'WEST';
+      }
+    }
+    if (orient === 'NORTH') {
+      point.x = this.X + this.width / 2;
+      point.y = startPoint ? this.Y + this.height : this.Y;
+    } else if (orient === 'WEST') {
+      point.x = startPoint ? this.X + this.width : this.X;
+      point.y = this.Y + this.height / 2;
+    }
+    return point;
+  }
 
-		/////////// CREATE NODE //////////////
-		let node = document.createElement('div');
+  createGeometry(tree: any): any {
+    const drawArea = tree.drawArea;
+    let image;
 
-		node.className = TreeNode.CONFIG.nodeHTMLclass;
-		if(this.nodeHTMLclass) node.className += ' ' + this.nodeHTMLclass;
+    /////////// CREATE NODE //////////////
+    let node = document.createElement('div');
 
-		if(this.nodeHTMLid) node.id = this.nodeHTMLid;
+    node.className = TreeNode.CONFIG.nodeHTMLclass;
+    if (this.nodeHTMLclass) node.className += ' ' + this.nodeHTMLclass;
 
-		// IMAGE
-		if(this.image) {
-			const container = document.createElement('div')
-			container.className = this.member.manager ? 'manager-avatar' : 'avatar' 
-			image = document.createElement('img');
-			image.src = this.image;
-			container.appendChild(image)
-			node.appendChild(container);
-		}
+    if (this.nodeHTMLid) node.id = this.nodeHTMLid;
 
-		// TEXT
-		// TODO Refactor
-		const container = document.createElement('div')
-		container.className = 'content';
-		
-		if(this.member.name) {
-			const text = document.createElement('p');
-			text.className = TreeNode.CONFIG.textClass.name;
-			text.appendChild(document.createTextNode(this.member.name));
-			container.appendChild(text);
-		}
-		if(this.member.title) {
-			const text = document.createElement('p');
-			text.className = TreeNode.CONFIG.textClass.title;
-			text.appendChild(document.createTextNode(this.member.title));
-			container.appendChild(text);
-		}
-		if(this.member.openToWork){
-			const status = document.createElement('div');
-			status.className = TreeNode.CONFIG.textClass.status;
-			const statusText = document.createElement('p')
-			statusText.innerText = "Open to work";
-			status.innerHTML = `<img src="./assets/Check.svg" />`
-			container.appendChild(status);
-			status.appendChild(statusText);
-		}
-		if(this.member.socials){
-			const socials = document.createElement('div');
-			socials.className = 'socials'
-			for(const key in this.member.socials) {
-				const social = document.createElement('div');
-				social.className = 'social'
-				if(key === 'email'){
-					social.innerHTML = `<a href="mailto:${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`
-				} else {
-					social.innerHTML = `<a href="${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`
-				}
-				socials.appendChild(social);
-			}
-			container.appendChild(socials);
-		}
-		if(this.member.active){
-			node.classList.add("active-member")
-		} else {
-			node.classList.add("inactive-member")
-		}
-		
-		node.appendChild(container)
+    // IMAGE
+    if (this.image) {
+      const container = document.createElement('div');
+      container.className = this.member.manager ? 'manager-avatar' : 'avatar';
+      image = document.createElement('img');
+      image.src = this.image;
+      container.appendChild(image);
+      node.appendChild(container);
+    }
 
+    // TEXT
+    // TODO Refactor
+    const container = document.createElement('div');
+    container.className = 'content';
 
-		
-		
+    if (this.member.name) {
+      const text = document.createElement('p');
+      text.className = TreeNode.CONFIG.textClass.name;
+      text.appendChild(document.createTextNode(this.member.name));
+      container.appendChild(text);
+    }
+    if (this.member.title) {
+      const text = document.createElement('p');
+      text.className = TreeNode.CONFIG.textClass.title;
+      text.appendChild(document.createTextNode(this.member.title));
+      container.appendChild(text);
+    }
+    if (this.member.openToWork) {
+      const status = document.createElement('div');
+      status.className = TreeNode.CONFIG.textClass.status;
+      const statusText = document.createElement('p');
+      statusText.innerText = 'Open to work';
+      status.innerHTML = `<img src="./assets/Check.svg" />`;
+      container.appendChild(status);
+      status.appendChild(statusText);
+    }
+    if (this.member.socials) {
+      const socials = document.createElement('div');
+      socials.className = 'socials';
+      for (const key in this.member.socials) {
+        const social = document.createElement('div');
+        social.className = 'social';
+        if (key === 'email') {
+          social.innerHTML = `<a href="mailto:${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`;
+        } else {
+          social.innerHTML = `<a href="${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`;
+        }
+        socials.appendChild(social);
+      }
+      container.appendChild(socials);
+    }
+    if (this.member.active) {
+      node.classList.add('active-member');
+    } else {
+      node.classList.add('inactive-member');
+    }
 
-		/////////// APPEND all //////////////
-		drawArea.appendChild(node);
+    node.appendChild(container);
 
-		this.width = node.offsetWidth;
-		this.height = node.offsetHeight;
+    /////////// APPEND all //////////////
+    drawArea.appendChild(node);
 
-		this.nodeDOM = node;
+    this.width = node.offsetWidth;
+    this.height = node.offsetHeight;
 
-		tree.imageLoader.processNode(this);
-	};
+    this.nodeDOM = node;
+
+    tree.imageLoader.processNode(this);
+  }
 }
 
-export default TreeNode
+export default TreeNode;
