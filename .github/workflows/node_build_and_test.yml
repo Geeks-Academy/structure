@@ -8,7 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
-      working-directory: ./backend
+      run:
+        working-directory: ./backend
 
     strategy:
       matrix:
