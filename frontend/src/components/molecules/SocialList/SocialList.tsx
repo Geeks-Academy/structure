@@ -1,4 +1,3 @@
-import React from 'react';
 import Social from './Social';
 import { StyledImage } from './Social/Social.styled';
 import { ISocialList } from './SocialList.model';
@@ -20,7 +19,6 @@ const SocialList = ({ userSocials, allSocials }: ISocialList): JSX.Element => {
       <StyledUserSocialList>
         {userSocials.map(({ link, social }) => {
           return (
-            // eslint-disable-next-line no-underscore-dangle
             <li key={social._id}>
               <Social link={link} social={social} />
             </li>
