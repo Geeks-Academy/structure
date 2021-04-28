@@ -15,7 +15,7 @@ describe('User controller', () => {
       .then(({ body }) => {
         expect(Array.isArray(body)).toBeTruthy();
         expect(body.length).toEqual(1);
-        expect(body[0]._id).toBeTruthy();
+        expect(body[0]._id).toBe(user.id);
         expect(body[0].title).toBe(user.title);
         expect(body[0].boss).toBeNull();
       })
@@ -71,7 +71,7 @@ describe('User controller', () => {
       name: 'John Doe',
       title: 'Software Developer',
     });
-    await User.remove({});
+    await User.deleteMany({});
     await supertest(app)
       .get(`/api/users/${user.id}`)
       .expect(404)

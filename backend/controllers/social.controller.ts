@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Social, { ISocial } from '../models/social.model';
-import User, { IUser } from '../models/user.model';
+import User from '../models/user.model';
 import StatusCode from '../utils/StatusCode';
 
 export const getAll = async (_req: Request, res: Response) => {
