@@ -2,7 +2,7 @@ name: NodeJS Build & Test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, FRDQ-47]
 
 jobs:
   build:
