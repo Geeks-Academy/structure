@@ -2,7 +2,8 @@ name: NodeJS Build & Test
 
 on:
   pull_request:
-    branches: [main]
+    # branches: [main]
+    types: [opened]
 
 jobs:
   build:
