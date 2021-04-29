@@ -62,3 +62,45 @@ export const update = async (req: Request, res: Response) => {
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
+
+export const deactivate = async (req: Request, res: Response) => {
+  const userId = { _id: req.params.id };
+  const update = { active: false };
+  try {
+    const user = await User.findOneAndUpdate(userId, update);
+    if (!user) {
+      return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
+    }
+    res.json({ ok: true, message: 'User deactivated successfully' });
+  } catch (error) {
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};
+
+export const deleteOne = async (req: Request, res: Response) => {
+  const userId = { _id: req.params.id };
+
+  try {
+    const user = await User.findOne(userId);
+    if (!user) {
+      return res.status(StatusCode.NOT_FOUND).json({ message: 'User not found' });
+    }
+
+    const userBoss = user.boss;
+    // in the future should be discussing what should be instead null
+    if (!userBoss) {
+      return res.status(StatusCode.FORBIDDEN).json({ message: 'You cannot delete this user.' });
+    }
+
+    await User.updateMany({ boss: userId }, { boss: userBoss });
+
+    await User.deleteOne(userId);
+
+    res.json({
+      ok: true,
+      message: 'Boss delete successfully. Children now have the new Boss from their Boss.',
+    });
+  } catch (error) {
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};
