@@ -1,7 +1,5 @@
 import { useRef } from 'react';
 import { useOutsideClick } from 'hooks';
-import { colors } from 'styles/colors';
-import { BUTTON_TITLE } from 'Types/enums';
 import { IModalWindow } from './ModalWindow.model';
 import {
   StyledButton,
@@ -23,13 +21,8 @@ const ModalWindow = ({
   const modalRef = useRef(null);
   useOutsideClick(modalRef, () => isActive && handleCancel());
 
-  const handleButtonColor = (buttonTitle: string) => {
-    if (buttonTitle === BUTTON_TITLE.DELETE) {
-      return colors.background.red;
-    }
-    return colors.background.blue;
-  };
   if (!isActive) return <></>;
+
   return (
     <StyledContainer>
       <StyledWindow ref={modalRef}>
@@ -41,7 +34,7 @@ const ModalWindow = ({
         </StyledWrapper>
         <StyledWrapper>
           <StyledCancelButton onClick={handleCancel}>Cancel</StyledCancelButton>
-          <StyledButton bgColor={handleButtonColor(title)} onClick={handleConfirm}>
+          <StyledButton title={title} onClick={handleConfirm}>
             {title}
           </StyledButton>
         </StyledWrapper>

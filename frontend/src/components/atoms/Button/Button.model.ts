@@ -1,3 +1,4 @@
-export interface IButton extends React.HTMLAttributes<HTMLButtonElement> {
-  type?: 'button' | 'submit' | 'reset';
-}
+import { ButtonHTMLAttributes } from 'react';
+
+export type TButton = ButtonHTMLAttributes<HTMLButtonElement> &
+  React.RefAttributes<HTMLButtonElement>;

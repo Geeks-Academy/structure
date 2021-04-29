@@ -1,6 +1,5 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import UsersList from 'components/molecules/UsersList';
-import { UserRequests } from 'Services';
 import { useHistory } from 'react-router-dom';
 import {
   StyledBottomWrapper,
@@ -14,17 +13,9 @@ import {
 
 const DashBoard = (): JSX.Element => {
   const history = useHistory();
-  const [users, setUsers] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-  const { getAllUsers } = UserRequests;
 
   const goToAddPanel = () => history.replace('/admin/add');
-
-  useEffect(() => {
-    getAllUsers().then(({ data }) => {
-      setUsers(data);
-    });
-  }, [setUsers, getAllUsers]);
 
   return (
     <StyledContainer>
@@ -41,7 +32,7 @@ const DashBoard = (): JSX.Element => {
         </StyledRightWrapper>
       </StyledTopWrapper>
       <StyledBottomWrapper>
-        <UsersList users={users} searchValue={searchValue} />
+        <UsersList searchValue={searchValue} />
       </StyledBottomWrapper>
     </StyledContainer>
   );

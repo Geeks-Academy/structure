@@ -1,9 +1,21 @@
+import { useEffect, useState } from 'react';
 import { isStartsWith } from 'helpers';
+import { UserRequests } from 'Services';
+import { IUser } from 'Types/interfaces';
 import { IUsers } from './UserList.model';
 import { StyledList } from './UserList.styled';
 import User from './User';
 
-const UserList = ({ users, searchValue }: IUsers): JSX.Element => {
+const UserList = ({ searchValue }: IUsers): JSX.Element => {
+  const [users, setUsers] = useState<IUser[]>([]);
+  const { getAllUsers } = UserRequests;
+
+  useEffect(() => {
+    getAllUsers().then(({ data }) => {
+      setUsers(data);
+    });
+  }, [setUsers, getAllUsers]);
+
   return (
     <StyledList>
       {users

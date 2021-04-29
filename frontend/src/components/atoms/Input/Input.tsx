@@ -1,6 +1,5 @@
-import React from 'react';
 import { IInput } from './Input.model';
-import { StyledError, StyledInput, StyledLabel, StyledWrapper } from './Input.styled';
+import { StyledError, StyledInput, StyledLabel } from './Input.styled';
 
 const Input = ({
   id,
@@ -18,7 +17,7 @@ const Input = ({
   ...props
 }: IInput): JSX.Element => {
   return (
-    <StyledWrapper {...props}>
+    <div {...props}>
       <StyledLabel htmlFor={id}>{label}</StyledLabel>
       <StyledInput
         aria-describedby={errorId}
@@ -31,7 +30,7 @@ const Input = ({
         {...props}
       />
       <StyledError id={errorId}>{error}</StyledError>
-    </StyledWrapper>
+    </div>
   );
 };
 export default Input;

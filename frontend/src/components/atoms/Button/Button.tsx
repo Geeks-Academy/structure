@@ -1,10 +1,9 @@
-import React from 'react';
+import { TButton } from './Button.model';
 import { StyledButton } from './Button.styled';
-import { IButton } from './Button.model';
 
-const Button = ({ children, onClick, ...props }: IButton) => {
+const Button = ({ children, ...props }: TButton): JSX.Element => {
   return (
-    <StyledButton onClick={onClick} {...props}>
+    <StyledButton {...props}>
       <span> {children} </span>
     </StyledButton>
   );

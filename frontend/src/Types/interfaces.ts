@@ -21,6 +21,4 @@ export interface IUser {
   socials?: ISocial[];
 }
 
-export interface IChildren {
-  children: React.ReactNode;
-}
+export interface IAttributes<T> extends React.HTMLAttributes<T>, React.RefAttributes<T> {}

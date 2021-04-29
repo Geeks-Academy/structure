@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { colors } from 'styles/colors';
 
-export const StyledWrapper = styled.div``;
 export const StyledLabel = styled.label`
   font-size: 20px;
   color: ${colors.background.darkGray};
 `;
+
 export const StyledInput = styled.input`
   font-size: 20px;
   width: 100%;
@@ -19,6 +19,7 @@ export const StyledInput = styled.input`
     color: ${colors.background.darkGray};
   }
 `;
+
 export const StyledError = styled.p`
   color: ${colors.background.red};
 `;

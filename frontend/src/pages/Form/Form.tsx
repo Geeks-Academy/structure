@@ -3,12 +3,12 @@ import { useFormik } from 'formik';
 
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { getUserObject, isObjectEmpty } from 'helpers';
-import { ISocialPart, IUser } from 'Types/interfaces';
+import { IUser } from 'Types/interfaces';
 import Input from 'components/atoms/Input';
 import Checkbox from 'components/atoms/Checkbox';
 import SocialList from 'components/molecules/SocialList';
 
-import { SocialRequests, UserRequests } from 'Services';
+import { UserRequests } from 'Services';
 import {
   StyledBottomWrapper,
   StyledButtonWrapper,
@@ -33,8 +33,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
   const { params } = useRouteMatch<{ id: string }>();
   const [initialValues, setInitialValues] = useState(getUserObject());
   const [users, setUsers] = useState<IUser[]>([]);
-  const [socials, setSocials] = useState<ISocialPart[]>([]);
-  const { getAllSocials } = SocialRequests;
+
   const { createUser, getAllUsers, getUser, updateUser } = UserRequests;
 
   const onCancel = () => history.replace('/admin');
@@ -76,12 +75,6 @@ const Form = ({ edit }: IForm): JSX.Element => {
       setUsers(data);
     });
   }, [setUsers, getAllUsers]);
-
-  useEffect(() => {
-    getAllSocials().then(({ data }) => {
-      setSocials(data);
-    });
-  }, [setSocials, getAllSocials]);
 
   useEffect(() => {
     if (!isObjectEmpty(params)) {
@@ -154,7 +147,7 @@ const Form = ({ edit }: IForm): JSX.Element => {
             </StyledSelect>
           </StyledSelectWrapper>
 
-          <SocialList userSocials={values.socials || []} allSocials={socials || []} />
+          <SocialList userSocials={values.socials || []} />
 
           <div className="flex flex-col mb-10">
             <Checkbox

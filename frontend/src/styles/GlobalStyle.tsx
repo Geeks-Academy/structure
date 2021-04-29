@@ -20,10 +20,6 @@ const GlobalStyle = createGlobalStyle`
 
   }  
 
-  html {
-    font-size: 62.5%; 
-  }
-  
   ul {
     list-style: none; 
   }

@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export enum BUTTON_TITLE {
+export enum ButtonTitle {
   DELETE = 'delete',
   UPDATE = 'update',
 }

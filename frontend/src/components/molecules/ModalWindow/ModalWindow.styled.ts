@@ -1,6 +1,15 @@
 import Button from 'components/atoms/Button';
 import styled from 'styled-components';
 import { increaseOpacity } from 'styles/animations';
+import { colors } from 'styles/colors';
+import { ButtonTitle } from 'Types/enums';
+
+const handleButtonColor = (buttonTitle: string) => {
+  if (buttonTitle === ButtonTitle.DELETE) {
+    return colors.background.red;
+  }
+  return colors.background.blue;
+};
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -55,8 +64,8 @@ export const StyledWrapper = styled.div`
   }
 `;
 
-export const StyledButton = styled(Button)<{ bgColor: string }>`
-  background-color: ${({ bgColor }) => bgColor};
+export const StyledButton = styled(Button)<{ title: string }>`
+  background-color: ${({ title }) => handleButtonColor(title)};
 `;
 
 export const StyledCancelButton = styled(Button)`

@@ -26,14 +26,8 @@ export const StyledBottomWrapper = styled.div`
 
 export const StyledForm = styled.form`
   padding: 100px;
-  width: 100%;
+  width: 1200px;
   margin: 0;
-  @media (min-width: 768px) {
-    width: 600px;
-  }
-  @media (min-width: 1440px) {
-    width: 1200px;
-  }
 `;
 
 export const StyledButtonWrapper = styled.div`
