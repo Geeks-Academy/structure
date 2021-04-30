@@ -65,7 +65,7 @@ export const update = async (req: Request, res: Response) => {
 
 export const deactivate = async (req: Request, res: Response) => {
   const userId = { _id: req.params.id };
-  const update = { active: false };
+  const update = { active: false, openToWork: false };
   try {
     const user = await User.findOneAndUpdate(userId, update);
     if (!user) {
