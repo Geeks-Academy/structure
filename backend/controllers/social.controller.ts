@@ -7,9 +7,9 @@ export const getAll = async (_req: Request, res: Response) => {
   try {
     const socials = await Social.find();
     if (socials.length === 0) {
-      return res.status(StatusCode.NO_CONTENT).json({ message: 'Not found any socials' });
+      return res.status(StatusCode.NO_CONTENT).send();
     }
-    res.json(socials);
+    return res.json(socials);
   } catch (error) {
     console.log(error);
     res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
@@ -45,7 +45,11 @@ export const update = async (req: Request, res: Response) => {
   const socialId = req.params.id;
   const social = req.body as Partial<ISocial>;
   try {
-    await Social.updateOne({ _id: socialId }, social);
+    const result = await Social.updateOne({ _id: socialId }, social);
+    if (result.n === 0) {
+      return res.status(StatusCode.NOT_FOUND).json({ message: 'Social not found' });
+    }
+    result.nModified
     res.json({ ok: true, message: 'Social updated successfully' });
   } catch (error) {
     console.log(error);
