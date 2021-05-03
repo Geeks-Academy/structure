@@ -49,7 +49,6 @@ export const update = async (req: Request, res: Response) => {
     if (result.n === 0) {
       return res.status(StatusCode.NOT_FOUND).json({ message: 'Social not found' });
     }
-    result.nModified
     res.json({ ok: true, message: 'Social updated successfully' });
   } catch (error) {
     console.log(error);
