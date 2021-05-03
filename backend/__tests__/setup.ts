@@ -4,6 +4,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 const mongod = new MongoMemoryServer();
 
 beforeAll(async () => {
+  console.log = () => {};
   const uri = await mongod.getUri();
   const mongooseOpts = {
     useNewUrlParser: true,
