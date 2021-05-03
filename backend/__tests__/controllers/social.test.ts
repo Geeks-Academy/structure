@@ -1,9 +1,14 @@
 import app from '../../app';
+import mongoose from 'mongoose';
 import supertest from 'supertest';
 import Social from '../../models/social.model';
 import User from '../../models/user.model';
 
 describe('Social Controller', () => {
+  test('GET /api/socials empty socials', async () => {
+    await supertest(app).get('/api/socials').expect(204);
+  });
+
   test('GET /api/socials', async (done) => {
     const social = await Social.create({
       name: 'Facebook',
@@ -37,6 +42,17 @@ describe('Social Controller', () => {
       .finally(() => done());
   });
 
+  test('GET /api/socials social not found', async (done) => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app)
+      .get(`/api/socials/${mockedObjectId}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      })
+      .finally(() => done());
+  });
+
   test('POST /api/socials', async (done) => {
     const social = {
       name: 'Facebook',
@@ -54,6 +70,57 @@ describe('Social Controller', () => {
         });
       })
       .finally(() => done());
+  });
+
+  test('PUT /api/socials/:id update social', async () => {
+    const fbSocial = await Social.create({
+      name: 'Facebook',
+      image: 'fb.png',
+    });
+    const social = {
+      image: 'facebook.png',
+    };
+    await supertest(app).put(`/api/socials/${fbSocial.id}`).send(social).expect(200);
+
+    await supertest(app)
+      .get(`/api/socials/${fbSocial.id}`)
+      .then(({ body }) => {
+        expect(body.image).toBe(social.image);
+      });
+  });
+
+  test('PUT /api/socials/:id social not found', async () => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app).put(`/api/socials/${mockedObjectId}`).expect(404);
+  });
+
+  test('PUT /api/socials/:id params has incorrect form', async () => {
+    const mockedObjectId = '12491dd';
+    await supertest(app)
+      .put(`/api/socials/${mockedObjectId}`)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toEqual('id');
+        expect(body[0].context.value).toEqual(mockedObjectId);
+      });
+  });
+
+  test('PUT /api/socials/deactivate/:id id has incorrect form', async () => {
+    const mockedObjectId = '12491dd';
+    await supertest(app)
+      .put(`/api/socials/${mockedObjectId}`)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toEqual('id');
+        expect(body[0].context.value).toEqual(mockedObjectId);
+      });
+  });
+
+  test('PUT /api/socials/:id social was not found', async () => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app).put(`/api/socials/deactivate/${mockedObjectId}`).expect(404);
   });
 
   test('PUT /api/socials/deactivate/:id', async (done) => {
