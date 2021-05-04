@@ -276,7 +276,7 @@ describe('User controller', () => {
   test('PUT /api/users/deactivate/:id user not found', async () => {
     const mockedObjectId = mongoose.Types.ObjectId();
     await supertest(app)
-      .put(`/api/users/${mockedObjectId}`)
+      .put(`/api/users/deactivate/${mockedObjectId}`)
       .expect(404)
       .then(({ body }) => {
         expect(body).toHaveProperty('message');
@@ -306,7 +306,7 @@ describe('User controller', () => {
       throw new Error('Error');
     });
     await supertest(app)
-      .put(`/api/users/${mockedObjectId}`)
+      .put(`/api/users/deactivate/${mockedObjectId}`)
       .expect(500)
       .then(({ body }) => {
         expect(body).toHaveProperty('message');
