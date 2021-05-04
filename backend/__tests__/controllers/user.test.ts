@@ -1,5 +1,6 @@
 import app from '../../app';
 import supertest from 'supertest';
+import mongoose from 'mongoose';
 import User from '../../models/user.model';
 import Social from '../../models/social.model';
 
@@ -20,6 +21,10 @@ describe('User controller', () => {
         expect(body[0].boss).toBeNull();
       })
       .finally(() => done());
+  });
+
+  test('GET /api/users users are empty', async () => {
+    await supertest(app).get('/api/users').expect(204);
   });
 
   test('GET /api/users user with socials', async (done) => {
@@ -51,6 +56,18 @@ describe('User controller', () => {
       .finally(() => done());
   });
 
+  test('GET /api/users should throw exception', async () => {
+    jest.spyOn(User, 'find').mockImplementation(() => {
+      throw new Error('Error');
+    });
+    await supertest(app)
+      .get('/api/users')
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
   test('GET /api/users/:id get specific user', async (done) => {
     const user = await User.create({
       name: 'John Doe',
@@ -67,16 +84,30 @@ describe('User controller', () => {
   });
 
   test('GET /api/users/:id should return 404', async (done) => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app)
+      .get(`/api/users/${mockedObjectId}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      })
+      .finally(() => done());
+  });
+
+  test('GET /api/users/:id should throw exception', async () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
     });
-    await User.deleteMany({});
+    jest.spyOn(User, 'findOne').mockImplementation(() => {
+      throw new Error('Error');
+    });
     await supertest(app)
       .get(`/api/users/${user.id}`)
-      .expect(404)
-      .then(() => {})
-      .finally(() => done());
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
   });
 
   test('POST /api/users', async (done) => {
@@ -144,6 +175,23 @@ describe('User controller', () => {
       .finally(() => done());
   });
 
+  test('POST /api/users should throw exception', async () => {
+    const user = {
+      name: 'John Doe',
+      title: 'Software Developer',
+    };
+    jest.spyOn(User, 'create').mockImplementation(() => {
+      throw new Error('Error');
+    });
+    await supertest(app)
+      .post('/api/users')
+      .send(user)
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
   test('PUT /api/users/:id', async (done) => {
     const fbSocial = await Social.create({
       name: 'Facebook',
@@ -172,5 +220,170 @@ describe('User controller', () => {
         expect(body.name).toBe('Testing User');
       })
       .finally(() => done());
+  });
+
+  test('PUT /api/users/:id should throw exception', async () => {
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Software Developer',
+    });
+    jest.spyOn(User, 'findOneAndUpdate').mockImplementation(() => {
+      throw new Error('Error');
+    });
+    await supertest(app)
+      .put(`/api/users/${user.id}`)
+      .send({ name: 'Testing User' })
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('PUT /api/users/:id user not found', async () => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app)
+      .put(`/api/users/${mockedObjectId}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('PUT /api/users/:id id param has incorrect form', async () => {
+    const mockedObjectId = '12491dd';
+    await supertest(app)
+      .put(`/api/users/${mockedObjectId}`)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toEqual('id');
+        expect(body[0].context.value).toEqual(mockedObjectId);
+      });
+  });
+
+  test('PUT /api/users/deactivate/:id id param has incorrect form', async () => {
+    const mockedObjectId = '12491dd';
+    await supertest(app)
+      .put(`/api/users/deactivate/${mockedObjectId}`)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toEqual('id');
+        expect(body[0].context.value).toEqual(mockedObjectId);
+      });
+  });
+
+  test('PUT /api/users/deactivate/:id user not found', async () => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app)
+      .put(`/api/users/${mockedObjectId}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('PUT /api/users/deactivate/:id user is found and updated', async () => {
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Software Developer',
+      active: true,
+    });
+
+    await supertest(app).put(`/api/users/deactivate/${user.id}`).expect(200);
+
+    await supertest(app)
+      .get(`/api/users/${user.id}`)
+      .then(({ body }) => {
+        expect(body.active).toBeFalsy();
+        expect(body.openToWork).toBeFalsy();
+      });
+  });
+
+  test('PUT /api/users/deactivate/:id should throw exception', async () => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    jest.spyOn(User, 'findOneAndUpdate').mockImplementation(() => {
+      throw new Error('Error');
+    });
+    await supertest(app)
+      .put(`/api/users/${mockedObjectId}`)
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('DELETE /api/users/:id id param has incorrect format', async () => {
+    const mockedObjectId = '12491dd';
+    await supertest(app)
+      .delete(`/api/users/${mockedObjectId}`)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toEqual('id');
+        expect(body[0].context.value).toEqual(mockedObjectId);
+      });
+  });
+
+  test('DELETE /api/users/:id user not found', async () => {
+    const mockedObjectId = mongoose.Types.ObjectId();
+    await supertest(app)
+      .delete(`/api/users/${mockedObjectId}`)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('DELETE /api/users/:id user found and updated', async () => {
+    const boss = await User.create({
+      name: 'Boss',
+      title: 'Senior Developer',
+    });
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Software Developer',
+      active: true,
+      boss: boss.id,
+    });
+
+    await supertest(app)
+      .delete(`/api/users/${user.id}`)
+      .expect(200)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('DELETE /api/users/:id the user is a boss', async () => {
+    const boss = await User.create({
+      name: 'Boss',
+      title: 'Senior Developer',
+    });
+
+    await supertest(app)
+      .delete(`/api/users/${boss.id}`)
+      .expect(403)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('DELETE /api/users/:id should throw exception', async () => {
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Software Developer',
+      active: true,
+    });
+    jest.spyOn(User, 'findOne').mockImplementation(() => {
+      throw new Error('Error');
+    });
+
+    await supertest(app)
+      .delete(`/api/users/${user.id}`)
+      .expect(500)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
   });
 });
