@@ -8,7 +8,8 @@
     "build": "tsc",
     "prod": "cross-env NODE_ENV=production node dist/index.js",
     "test": "jest --",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",

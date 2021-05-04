@@ -10,7 +10,7 @@ router
   .post('/', validateBody(schema.post), userController.create)
   .get('/:id', validateParameter(schema.id), userController.getOne)
   .put('/:id', validateBody(schema.put), validateParameter(schema.id), userController.update)
-  .patch('/deactivate/:id', validateParameter(schema.id), userController.deactivate)
+  .put('/deactivate/:id', validateParameter(schema.id), userController.deactivate)
   .delete('/:id', validateParameter(schema.id), userController.deleteOne);
 
 export default router;

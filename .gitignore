@@ -133,4 +133,7 @@ temp/
 package-lock.json
 yarn.lock
 
+# Test coverage
+converage/
+
 # End of https://www.toptal.com/developers/gitignore/api/node
