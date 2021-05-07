@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import UsersList from 'components/molecules/UsersList';
+import { useHistory } from 'react-router-dom';
 import {
   StyledBottomWrapper,
   StyledButton,
@@ -11,7 +12,10 @@ import {
 } from './DashBoard.styled';
 
 const DashBoard = (): JSX.Element => {
+  const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
+
+  const goToAddPanel = () => history.replace('/admin/add');
 
   return (
     <StyledContainer>
@@ -24,7 +28,7 @@ const DashBoard = (): JSX.Element => {
             placeholder="Find user"
             onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
           />
-          <StyledButton onClick={() => {}}> Add new </StyledButton>
+          <StyledButton onClick={goToAddPanel}> Add new </StyledButton>
         </StyledRightWrapper>
       </StyledTopWrapper>
       <StyledBottomWrapper>

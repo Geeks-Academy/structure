@@ -1,4 +1,4 @@
-import Joi from './Joi';
+import Joi from 'joi';
 
 const schema = {
   post: Joi.object({
@@ -6,12 +6,16 @@ const schema = {
     title: Joi.string().required(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().objectId().allow(null),
+    boss: Joi.string()
+      .regex(/^([0-9a-fA-F]{24})?$/)
+      .allow(null),
     image: Joi.string().allow(''),
     socials: Joi.array()
       .items({
         link: Joi.string().required(),
-        social: Joi.string().objectId().required(),
+        social: Joi.string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
       })
       .empty(),
     active: Joi.boolean(),
@@ -21,18 +25,22 @@ const schema = {
     title: Joi.string(),
     openToWork: Joi.boolean(),
     manager: Joi.boolean(),
-    boss: Joi.string().objectId().allow(null),
+    boss: Joi.string()
+      .regex(/^([0-9a-fA-F]{24})?$/)
+      .allow(null),
     image: Joi.string().allow(''),
     socials: Joi.array()
       .items({
         link: Joi.string().required(),
-        social: Joi.string().objectId().required(),
+        social: Joi.string()
+          .regex(/^[0-9a-fA-F]{24}$/)
+          .required(),
       })
       .empty(),
     active: Joi.boolean(),
   }),
   id: Joi.object().keys({
-    id: Joi.string().objectId(),
+    id: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
   }),
 };
 

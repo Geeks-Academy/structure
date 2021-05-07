@@ -6,7 +6,7 @@ export interface IUser extends Document {
   title: string;
   openToWork: boolean;
   manager: boolean;
-  boss: IUser['_id'] | null;
+  boss: string;
   image?: string;
   socials?: [{ link: string; social: ISocial['_id'] }];
   active: boolean;
@@ -17,7 +17,7 @@ const userSchema = new Schema({
   title: String,
   openToWork: { type: Boolean, default: true },
   manager: { type: Boolean, default: false },
-  boss: { type: Schema.Types.ObjectId, ref: 'User', default: null },
+  boss: { type: Schema.Types.ObjectId, ref: 'User', null: true, default: null },
   image: { type: String, default: '' },
   socials: [
     {

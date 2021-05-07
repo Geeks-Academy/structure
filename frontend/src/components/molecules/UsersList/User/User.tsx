@@ -1,4 +1,4 @@
-import { IUser } from 'Types/interfaces';
+import { useHistory } from 'react-router';
 import {
   StyledImage,
   StyledImageWrapper,
@@ -7,9 +7,18 @@ import {
   StyledUserIcon,
 } from './User.styled';
 
-const User = ({ name, image }: IUser): JSX.Element => {
+interface IUser {
+  _id: string;
+  name: string;
+  image: string;
+}
+
+const User = ({ _id, name, image }: IUser): JSX.Element => {
+  const history = useHistory();
+  const editUser = (id: string) => history.push(`/admin/edit/${id}`);
+
   return (
-    <StyledUser onClick={() => {}}>
+    <StyledUser onClick={() => editUser(`${_id}`)}>
       <StyledImageWrapper>
         {image ? <StyledImage src={image} /> : <StyledUserIcon />}
       </StyledImageWrapper>
