@@ -196,7 +196,7 @@ describe('User controller', () => {
       .finally(() => done());
   });
 
-  test('POST /api/users should throw error because of duplicated email', async (done) => {
+  test('POST /api/users should throw error because of duplicated email', async () => {
     await User.create({
       name: 'John Doe',
       title: 'Frontend Developer',
@@ -213,9 +213,9 @@ describe('User controller', () => {
       .send(user2)
       .expect(400)
       .then(({ body }) => {
-        expect(body).toHaveProperty('message');
-      })
-      .finally(() => done());
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toBe('email');
+      });
   });
 
   test('POST /api/users should throw exception', async () => {

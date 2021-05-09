@@ -8,7 +8,8 @@ const validateBody = (schema: Joi.ObjectSchema) => {
       await schema.validateAsync(req.body);
       next();
     } catch (error) {
-      return res.status(StatusCode.BAD_REQUEST).json({ message: error.message });
+      console.log(error);
+      return res.status(StatusCode.BAD_REQUEST).json(error.details);
     }
   };
 };
