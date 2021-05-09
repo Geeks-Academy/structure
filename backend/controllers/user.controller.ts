@@ -55,7 +55,7 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
   const userId = req.params.id;
   const update = req.body as Partial<IUser>;
   try {
-    const user = await User.findOneAndUpdate({ _id: userId }, update);
+    const user = await User.findByIdAndUpdate(userId, update);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
     }

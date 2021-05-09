@@ -159,7 +159,7 @@ describe('Social Controller', () => {
     const social = {
       name: 'Fb',
     };
-    jest.spyOn(Social, 'updateOne').mockImplementation(() => {
+    jest.spyOn(Social, 'findByIdAndUpdate').mockImplementation(() => {
       throw new Error('Error');
     });
     await supertest(app)
@@ -198,6 +198,7 @@ describe('Social Controller', () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       socials: [
         {
           link: 'https://fb.com',

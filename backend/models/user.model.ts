@@ -4,6 +4,7 @@ import { ISocial } from './social.model';
 export interface IUser extends Document {
   name: string;
   title: string;
+  email: string;
   openToWork: boolean;
   manager: boolean;
   boss: string;
@@ -15,6 +16,7 @@ export interface IUser extends Document {
 const userSchema = new Schema({
   name: String,
   title: String,
+  email: { type: String, required: true, unique: true },
   openToWork: { type: Boolean, default: true },
   manager: { type: Boolean, default: false },
   boss: { type: Schema.Types.ObjectId, ref: 'User', null: true, default: null },
