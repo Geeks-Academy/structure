@@ -198,6 +198,7 @@ describe('Social Controller', () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       socials: [
         {
           link: 'https://fb.com',
