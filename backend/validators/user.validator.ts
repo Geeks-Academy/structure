@@ -47,7 +47,19 @@ const schema = {
       .external(async (email: string) => {
         const user = await User.findOne({ email });
         if (user) {
-          throw new ValidationError('This email already exists', '', '');
+          throw new ValidationError(
+            'This email already exists',
+            [
+              {
+                message: 'email already exists',
+                context: {
+                  label: 'email',
+                  key: 'email',
+                },
+              },
+            ],
+            ''
+          );
         }
       }),
     openToWork: Joi.boolean(),

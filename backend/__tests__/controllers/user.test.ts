@@ -285,6 +285,28 @@ describe('User controller', () => {
       });
   });
 
+  test('PUT /api/users/:id should throw an error because of duplicated email', async () => {
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Frontend Developer',
+      email: 'jdoe@test.com',
+    });
+    const user2 = {
+      name: 'John Doe',
+      title: 'Software Developer',
+      email: 'jdoe@test.com',
+    };
+
+    await supertest(app)
+      .put(`/api/users/${user.id}`)
+      .send(user2)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toBe('email');
+      });
+  });
+
   test('PUT /api/users/:id user not found', async () => {
     const mockedObjectId = mongoose.Types.ObjectId();
     await supertest(app)
