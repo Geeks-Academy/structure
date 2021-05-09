@@ -23,7 +23,7 @@ export const getAll = async (_req: Request, res: Response): Promise<Response> =>
 export const getOne = async (req: Request, res: Response): Promise<Response> => {
   const userId = req.params.id;
   try {
-    const user = await User.findOne({ _id: userId }).populate({
+    const user = await User.findById(userId).populate({
       path: 'socials',
       populate: {
         path: 'social',
@@ -55,7 +55,7 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
   const userId = req.params.id;
   const update = req.body as Partial<IUser>;
   try {
-    const user = await User.findOneAndUpdate({ _id: userId }, update);
+    const user = await User.findByIdAndUpdate(userId, update);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
     }
@@ -67,10 +67,10 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
 };
 
 export const deactivate = async (req: Request, res: Response): Promise<Response> => {
-  const userId = { _id: req.params.id };
+  const userId = req.params.id;
   const update = { active: false, openToWork: false };
   try {
-    const user = await User.findOneAndUpdate(userId, update);
+    const user = await User.findByIdAndUpdate(userId, update);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
     }
@@ -81,10 +81,10 @@ export const deactivate = async (req: Request, res: Response): Promise<Response>
 };
 
 export const deleteOne = async (req: Request, res: Response): Promise<Response> => {
-  const userId = { _id: req.params.id };
+  const userId = req.params.id;
 
   try {
-    const user = await User.findOne(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ message: 'User not found' });
     }
@@ -97,7 +97,7 @@ export const deleteOne = async (req: Request, res: Response): Promise<Response> 
 
     await User.updateMany({ boss: userId }, { boss: userBoss });
 
-    await User.deleteOne(userId);
+    await User.findByIdAndRemove(userId);
 
     return res.json({
       ok: true,
