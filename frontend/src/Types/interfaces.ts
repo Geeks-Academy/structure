@@ -20,5 +20,9 @@ export interface IUser {
   boss?: string | null;
   socials?: ISocial[];
 }
+export interface IUserOptions {
+  name: string;
+  value: string;
+}
 
 export interface IAttributes<T> extends React.HTMLAttributes<T>, React.RefAttributes<T> {}
