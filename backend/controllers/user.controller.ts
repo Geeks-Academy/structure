@@ -53,6 +53,11 @@ export const create = async (req: Request, res: Response): Promise<Response> => 
 
 export const update = async (req: Request, res: Response): Promise<Response> => {
   const userId = req.params.id;
+  if (req.body.boss === userId) {
+    return res
+      .status(StatusCode.BAD_REQUEST)
+      .json({ ok: false, message: 'It is not possible set boss to be the same as user' });
+  }
   const update = req.body as Partial<IUser>;
   try {
     const user = await User.findByIdAndUpdate(userId, update);
