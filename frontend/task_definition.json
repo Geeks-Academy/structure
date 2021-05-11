@@ -20,7 +20,7 @@
                     "awslogs-region": "eu-central-1",
                     "awslogs-stream-prefix": "structure_frontend"
                 }
-            },
+            }
         }
     ]
 }
