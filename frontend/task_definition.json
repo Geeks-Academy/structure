@@ -12,7 +12,15 @@
                     "hostPort": 0,
                     "protocol": "tcp"
                 }
-            ]
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "geeks-academy",
+                    "awslogs-region": "eu-central-1",
+                    "awslogs-stream-prefix": "structure_frontend"
+                }
+            },
         }
     ]
 }
