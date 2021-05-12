@@ -25,7 +25,7 @@
             "secrets": [
                 {
                     "name": "REACT_APP_URL_API",
-                    "valueFrom": "/geeksacademy/structure_frontend/REACT_APP_URL_API"
+                    "valueFrom": "/geeksacademy/structure_frontend/REACT_APP_API_URL"
                 }
             ]
         }
