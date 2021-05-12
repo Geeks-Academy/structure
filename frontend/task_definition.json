@@ -1,5 +1,6 @@
 {
     "family": "structure_frontend",
+    "executionRoleArn": "",
     "containerDefinitions": [
         {
             "name": "structure_frontend",
