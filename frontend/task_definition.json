@@ -20,7 +20,13 @@
                     "awslogs-region": "eu-central-1",
                     "awslogs-stream-prefix": "structure_frontend"
                 }
-            }
+            },
+            "secrets": [
+                {
+                    "name": "REACT_APP_URL_API",
+                    "valueFrom": "/geeksacademy/structure_frontend/REACT_APP_URL_API"
+                }
+            ]
         }
     ]
 }
