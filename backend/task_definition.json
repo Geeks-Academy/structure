@@ -26,6 +26,10 @@
                 {
                     "name": "MONGO_CONNECTION_STRING",
                     "valueFrom": "/geeksacademy/mongodb/MONGO_CONNECTION_STRING"
+                },
+                {
+                    "name": "CLIENT_URL",
+                    "valueFrom": "/geeksacademy/structure_backend/CLIENT_URL"
                 }
             ]
         }
