@@ -65,6 +65,17 @@ describe('Social Controller', () => {
       .finally(() => done());
   });
 
+  test('GET /api/socials/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .get('/api/socials/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
+      });
+  });
+
   test('GET /api/socials/:id should throw exception', async () => {
     const social = await Social.create({
       name: 'Facebook',
@@ -139,6 +150,17 @@ describe('Social Controller', () => {
     await supertest(app).put(`/api/socials/${mockedObjectId}`).expect(404);
   });
 
+  test('PUT /api/socials/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .put('/api/socials/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
+      });
+  });
+
   test('PUT /api/socials/:id params has incorrect form', async () => {
     const mockedObjectId = '12491dd';
     await supertest(app)
@@ -186,6 +208,17 @@ describe('Social Controller', () => {
   test('PUT /api/socials/:id social was not found', async () => {
     const mockedObjectId = mongoose.Types.ObjectId();
     await supertest(app).put(`/api/socials/deactivate/${mockedObjectId}`).expect(404);
+  });
+
+  test('PUT /api/socials/deactivate/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .put('/api/socials/deactivate/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
+      });
   });
 
   test('PUT /api/socials/deactivate/:id', async (done) => {
