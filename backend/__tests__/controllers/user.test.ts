@@ -1,8 +1,8 @@
-import app from '../../app';
+import app from '../../src/app';
 import supertest from 'supertest';
 import mongoose from 'mongoose';
-import User from '../../models/user.model';
-import Social from '../../models/social.model';
+import User from '../../src/models/user.model';
+import Social from '../../src/models/social.model';
 
 describe('User controller', () => {
   test('GET /api/users', async (done) => {
