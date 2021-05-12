@@ -114,6 +114,17 @@ describe('User controller', () => {
       });
   });
 
+  test('GET /api/users/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .get('/api/users/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
+      });
+  });
+
   test('POST /api/users', async (done) => {
     const user = {
       name: 'John Doe',
@@ -267,6 +278,17 @@ describe('User controller', () => {
       .finally(() => done());
   });
 
+  test('PUT /api/users/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .put('/api/users/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
+      });
+  });
+
   test('PUT /api/users/:id should throw exception', async () => {
     const user = await User.create({
       name: 'John Doe',
@@ -329,6 +351,24 @@ describe('User controller', () => {
       });
   });
 
+  test('PUT /api/users/:id dont allow user to set the boss as themself', async () => {
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Frontend Developer',
+      email: 'jdoe@test.com',
+    });
+    const body = {
+      boss: user.id,
+    };
+    await supertest(app)
+      .put(`/api/users/${user.id}`)
+      .send(body)
+      .expect(400)
+      .then(({ body }) => {
+        expect(body).toHaveProperty('message');
+      });
+  });
+
   test('PUT /api/users/deactivate/:id id param has incorrect form', async () => {
     const mockedObjectId = '12491dd';
     await supertest(app)
@@ -338,6 +378,17 @@ describe('User controller', () => {
         expect(Array.isArray(body)).toBeTruthy();
         expect(body[0].context.key).toEqual('id');
         expect(body[0].context.value).toEqual(mockedObjectId);
+      });
+  });
+
+  test('PUT /api/users/deactivate/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .put('/api/users/deactivate/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
       });
   });
 
@@ -438,6 +489,17 @@ describe('User controller', () => {
       .expect(403)
       .then(({ body }) => {
         expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('DELETE /api/users/:id when :id parameter is invalid', async () => {
+    await supertest(app)
+      .delete('/api/users/1234test')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body[0]).toHaveProperty('message');
+        expect(body[0].context.value).toBe('1234test');
+        expect(body[0].context.key).toBe('id');
       });
   });
 
