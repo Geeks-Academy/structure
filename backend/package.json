@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "ts-node-dev ./index.ts",
+    "start": "ts-node-dev ./src/index.ts",
     "build": "tsc",
-    "prod": "cross-env NODE_ENV=production node dist/index.js",
+    "prod": "cross-env NODE_ENV=production node dist/src/index.js",
     "test": "jest --",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"

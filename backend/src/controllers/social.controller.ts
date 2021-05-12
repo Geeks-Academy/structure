@@ -19,7 +19,7 @@ export const getAll = async (_req: Request, res: Response) => {
 export const getOne = async (req: Request, res: Response) => {
   const socialId = req.params.id;
   try {
-    const social = await Social.findOne({ _id: socialId });
+    const social = await Social.findById(socialId);
     if (!social) {
       return res.status(StatusCode.NOT_FOUND).json({ message: 'Social not found' });
     }
@@ -45,8 +45,8 @@ export const update = async (req: Request, res: Response) => {
   const socialId = req.params.id;
   const social = req.body as Partial<ISocial>;
   try {
-    const result = await Social.updateOne({ _id: socialId }, social);
-    if (result.n === 0) {
+    const result = await Social.findByIdAndUpdate(socialId, social);
+    if (!result) {
       return res.status(StatusCode.NOT_FOUND).json({ message: 'Social not found' });
     }
     res.json({ ok: true, message: 'Social updated successfully' });
@@ -57,11 +57,11 @@ export const update = async (req: Request, res: Response) => {
 };
 
 export const deactivate = async (req: Request, res: Response) => {
-  const socialId = { _id: req.params.id };
+  const socialId = req.params.id;
   const update = { active: false };
 
   try {
-    const social = await Social.findOneAndUpdate(socialId, update);
+    const social = await Social.findByIdAndUpdate(socialId, update);
 
     if (!social) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'Social not found' });

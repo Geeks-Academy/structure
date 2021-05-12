@@ -1,8 +1,8 @@
-import app from '../../app';
+import app from '../../src/app';
 import mongoose from 'mongoose';
 import supertest from 'supertest';
-import Social from '../../models/social.model';
-import User from '../../models/user.model';
+import Social from '../../src/models/social.model';
+import User from '../../src/models/user.model';
 
 describe('Social Controller', () => {
   test('GET /api/socials empty socials', async () => {
@@ -159,7 +159,7 @@ describe('Social Controller', () => {
     const social = {
       name: 'Fb',
     };
-    jest.spyOn(Social, 'updateOne').mockImplementation(() => {
+    jest.spyOn(Social, 'findByIdAndUpdate').mockImplementation(() => {
       throw new Error('Error');
     });
     await supertest(app)
@@ -198,6 +198,7 @@ describe('Social Controller', () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       socials: [
         {
           link: 'https://fb.com',

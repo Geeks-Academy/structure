@@ -1,5 +1,5 @@
 import Button from 'components/atoms/Button';
-import Input from 'components/atoms/Input';
+import SearchInput from 'components/atoms/SearchInput';
 import styled from 'styled-components';
 import { colors } from 'styles/colors';
 
@@ -27,7 +27,7 @@ export const StyledRightWrapper = styled.div`
   width: auto;
 `;
 
-export const StyledInput = styled(Input)`
+export const StyledInput = styled(SearchInput)`
   width: 400px;
   margin: 0 10px 0 0;
 `;

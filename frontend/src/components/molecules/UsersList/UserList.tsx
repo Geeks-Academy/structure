@@ -1,20 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { isStartsWith } from 'helpers';
 import { UserRequests } from 'Services';
-import { IUser } from 'Types/interfaces';
-import { IUsers } from './UserList.model';
+import { useAsyncEffect } from 'hooks';
+
 import { StyledList } from './UserList.styled';
 import User from './User';
 
-const UserList = ({ searchValue }: IUsers): JSX.Element => {
-  const [users, setUsers] = useState<IUser[]>([]);
-  const { getAllUsers } = UserRequests;
+interface IUser {
+  _id: string;
+  name: string;
+  image: string;
+}
 
-  useEffect(() => {
-    getAllUsers().then(({ data }) => {
-      setUsers(data);
-    });
-  }, [setUsers, getAllUsers]);
+interface IProps {
+  searchValue: string;
+}
+
+const UserList = ({ searchValue }: IProps): JSX.Element => {
+  const [users, setUsers] = useState<IUser[]>([]);
+
+  useAsyncEffect(async () => {
+    const users = await UserRequests.getAllUsers();
+    setUsers(users.data);
+  });
 
   return (
     <StyledList>

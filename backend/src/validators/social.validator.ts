@@ -1,4 +1,4 @@
-import Joi from './Joi';
+import Joi from 'joi';
 
 const schema = {
   post: Joi.object({
@@ -11,7 +11,7 @@ const schema = {
     active: Joi.boolean(),
   }),
   id: Joi.object().keys({
-    id: Joi.string().objectId(),
+    id: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
   }),
 };
 

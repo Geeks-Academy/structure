@@ -31,7 +31,6 @@ module.exports = {
     'sort-imports': 0,
     'jsx-a11y/label-has-associated-control': 'off',
     'no-unused-vars': 0,
-    '@typescript-eslint/no-unused-vars': ['error'],
     'import/no-unresolved': 0,
     'react/jsx-props-no-spreading': 0,
     'import/prefer-default-export': 0,
@@ -52,6 +51,10 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-shadow': 0,
+    '@typescript-eslint/ban-ts-comment': 1,
+    'prettier/prettier': 1,
+    'react-hooks/exhaustive-deps': 1,
+    '@typescript-eslint/no-unused-vars': 1,
   },
   ignorePatterns: 'src/pages/Structure/**/*.ts',
 };

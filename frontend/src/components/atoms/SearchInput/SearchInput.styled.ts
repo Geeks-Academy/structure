@@ -19,7 +19,3 @@ export const StyledInput = styled.input`
     color: ${colors.background.darkGray};
   }
 `;
-
-export const StyledError = styled.p`
-  color: ${colors.background.red};
-`;

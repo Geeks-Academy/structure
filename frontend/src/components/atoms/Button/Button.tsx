@@ -1,12 +1,10 @@
-import { TButton } from './Button.model';
+import { ButtonHTMLAttributes } from 'react';
 import { StyledButton } from './Button.styled';
 
+type TButton = ButtonHTMLAttributes<HTMLButtonElement> & React.RefAttributes<HTMLButtonElement>;
+
 const Button = ({ children, ...props }: TButton): JSX.Element => {
-  return (
-    <StyledButton {...props}>
-      <span> {children} </span>
-    </StyledButton>
-  );
+  return <StyledButton {...props}>{children}</StyledButton>;
 };
 
 export default Button;

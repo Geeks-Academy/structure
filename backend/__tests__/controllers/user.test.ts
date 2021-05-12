@@ -1,13 +1,14 @@
-import app from '../../app';
+import app from '../../src/app';
 import supertest from 'supertest';
 import mongoose from 'mongoose';
-import User from '../../models/user.model';
-import Social from '../../models/social.model';
+import User from '../../src/models/user.model';
+import Social from '../../src/models/social.model';
 
 describe('User controller', () => {
   test('GET /api/users', async (done) => {
     const user = await User.create({
       name: 'John Doe',
+      email: 'jdoe@test.com',
       title: 'Software Developer',
     });
     await supertest(app)
@@ -35,6 +36,7 @@ describe('User controller', () => {
     await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       socials: [
         {
           link: 'https://fb.com',
@@ -71,6 +73,7 @@ describe('User controller', () => {
   test('GET /api/users/:id get specific user', async (done) => {
     const user = await User.create({
       name: 'John Doe',
+      email: 'jdoe@test.com',
       title: 'Software Developer',
     });
     await supertest(app)
@@ -97,6 +100,7 @@ describe('User controller', () => {
   test('GET /api/users/:id should throw exception', async () => {
     const user = await User.create({
       name: 'John Doe',
+      email: 'jdoe@test.com',
       title: 'Software Developer',
     });
     jest.spyOn(User, 'findOne').mockImplementation(() => {
@@ -114,6 +118,7 @@ describe('User controller', () => {
     const user = {
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
     };
     await supertest(app)
       .post('/api/users')
@@ -123,6 +128,7 @@ describe('User controller', () => {
         expect(body).toMatchObject({
           name: user.name,
           title: user.title,
+          email: user.email,
           openToWork: true,
           manager: false,
           boss: null,
@@ -135,7 +141,7 @@ describe('User controller', () => {
       .finally(() => done());
   });
 
-  test('POST /api/users if data is not valid', async (done) => {
+  test('POST /api/users if data is not valid', async () => {
     const user = {
       title: 'Software Developer',
     };
@@ -146,8 +152,22 @@ describe('User controller', () => {
       .then(({ body }) => {
         expect(Array.isArray(body)).toBeTruthy();
         expect(body[0].context.key).toEqual('name');
-      })
-      .finally(() => done());
+      });
+  });
+
+  test('POST /api/users if email does not exists', async () => {
+    const user = {
+      name: 'John Doe',
+      title: 'Software Developer',
+    };
+    await supertest(app)
+      .post('/api/users')
+      .send(user)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toEqual('email');
+      });
   });
 
   test('POST /api/users with socials', async (done) => {
@@ -158,6 +178,7 @@ describe('User controller', () => {
     const user = {
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       socials: [
         {
           link: 'https://fb.com',
@@ -175,10 +196,33 @@ describe('User controller', () => {
       .finally(() => done());
   });
 
+  test('POST /api/users should throw error because of duplicated email', async () => {
+    await User.create({
+      name: 'John Doe',
+      title: 'Frontend Developer',
+      email: 'jdoe@test.com',
+    });
+    const user2 = {
+      name: 'John Doe',
+      title: 'Software Developer',
+      email: 'jdoe@test.com',
+    };
+
+    await supertest(app)
+      .post('/api/users')
+      .send(user2)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toBe('email');
+      });
+  });
+
   test('POST /api/users should throw exception', async () => {
     const user = {
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
     };
     jest.spyOn(User, 'create').mockImplementation(() => {
       throw new Error('Error');
@@ -200,6 +244,7 @@ describe('User controller', () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       socials: [
         {
           link: 'https://fb.com',
@@ -226,6 +271,7 @@ describe('User controller', () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
     });
     jest.spyOn(User, 'findOneAndUpdate').mockImplementation(() => {
       throw new Error('Error');
@@ -236,6 +282,28 @@ describe('User controller', () => {
       .expect(500)
       .then(({ body }) => {
         expect(body).toHaveProperty('message');
+      });
+  });
+
+  test('PUT /api/users/:id should throw an error because of duplicated email', async () => {
+    const user = await User.create({
+      name: 'John Doe',
+      title: 'Frontend Developer',
+      email: 'jdoe@test.com',
+    });
+    const user2 = {
+      name: 'John Doe',
+      title: 'Software Developer',
+      email: 'jdoe@test.com',
+    };
+
+    await supertest(app)
+      .put(`/api/users/${user.id}`)
+      .send(user2)
+      .expect(400)
+      .then(({ body }) => {
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].context.key).toBe('email');
       });
   });
 
@@ -287,6 +355,7 @@ describe('User controller', () => {
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe@test.com',
       active: true,
     });
 
@@ -339,10 +408,12 @@ describe('User controller', () => {
     const boss = await User.create({
       name: 'Boss',
       title: 'Senior Developer',
+      email: 'jdoe@test.com',
     });
     const user = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe2@test.com',
       active: true,
       boss: boss.id,
     });
@@ -359,6 +430,7 @@ describe('User controller', () => {
     const boss = await User.create({
       name: 'Boss',
       title: 'Senior Developer',
+      email: 'jdoe@test.com',
     });
 
     await supertest(app)
@@ -374,6 +446,7 @@ describe('User controller', () => {
       name: 'John Doe',
       title: 'Software Developer',
       active: true,
+      email: 'jdoe@test.com',
     });
     jest.spyOn(User, 'findOne').mockImplementation(() => {
       throw new Error('Error');
