@@ -35,6 +35,7 @@ const { getAllUsers, updateUser, getUser } = UserRequests;
 const defaultValues = {
   name: '',
   boss: '',
+  email: '',
   image: '',
   title: '',
   openToWork: true,
@@ -80,6 +81,7 @@ const EditForm = (): JSX.Element => {
       <StyledBottomWrapper>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <CustomInput label="Name" name="name" control={control} error={errors.name} />
+          <CustomInput label="Email" name="email" control={control} error={errors.email} />
           <CustomInput label="Image" name="image" control={control} error={errors.image} />
           <CustomInput label="Title" name="title" control={control} error={errors.title} />
           <CustomSelect
