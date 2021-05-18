@@ -52,8 +52,8 @@ const AddForm = (): JSX.Element => {
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = (values: any) => {
-    createUser(values);
+  const onSubmit = async (values: any) => {
+    await createUser(values);
     onCancel();
   };
 
