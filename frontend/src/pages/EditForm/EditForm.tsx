@@ -68,8 +68,8 @@ const EditForm = (): JSX.Element => {
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = (values: Partial<IUser>) => {
-    updateUser(values);
+  const onSubmit = async (values: Partial<IUser>) => {
+    await updateUser(values);
     onCancel();
   };
 
