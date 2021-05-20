@@ -13,13 +13,13 @@ export class UserRequests {
   };
 
   static getUser = async (id: string): Promise<any> => {
-    if (data.boss?.length === 0) {
-      data.boss = null;
-    }
     return Fetcher.get(`/users/${id}`);
   };
 
   static updateUser = async ({ _id, __v, ...data }: any): Promise<any> => {
+    if (data.boss?.length === 0) {
+      data.boss = null;
+    }
     return Fetcher.put(`/users/${_id}`, data);
   };
 }
