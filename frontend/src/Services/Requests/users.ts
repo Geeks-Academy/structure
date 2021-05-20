@@ -13,6 +13,9 @@ export class UserRequests {
   };
 
   static getUser = async (id: string): Promise<any> => {
+    if (data.boss?.length === 0) {
+      data.boss = null;
+    }
     return Fetcher.get(`/users/${id}`);
   };
 
