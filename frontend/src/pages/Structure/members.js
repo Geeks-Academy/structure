@@ -130,7 +130,7 @@ key[11] = {
 
 key[12] = {
   key: 12,
-  parent: key[11],
+  parent: key[9],
   stackChildren: true,
   name: 'Monika Fularska',
   title: 'UX Designer',
@@ -148,7 +148,7 @@ key[12] = {
 
 key[13] = {
   key: 13,
-  parent: key[11],
+  parent: key[9],
   stackChildren: true,
   name: 'Agata Kuza',
   title: 'UX Designer',
@@ -418,7 +418,7 @@ key[28] = {
 
 key[29] = {
   key: 30,
-  parent: key[11],
+  parent: key[9],
   stackChildren: true,
   name: 'Monika Maksimowicz',
   title: 'UX Designer',
@@ -514,6 +514,22 @@ key[35] = {
     email: 'anetakarolinapawlowska@gmail.com',
     facebook: 'https://www.facebook.com/aneta.pe21',
     linkedin: 'https://www.linkedin.com/in/aneta-paw%C5%82owska-b02ab94b/',
+  },
+};
+
+key[36] = {
+  key: 36,
+  parent: key[9],
+  stackChildren: true,
+  name: 'Kinga Sochacz',
+  title: 'UI/UX Designer',
+  openToWork: true,
+  image:
+    'https://scontent-ams4-1.xx.fbcdn.net/v/t1.6435-1/p480x480/84068257_3298497756846142_7079146718549245952_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=7206a8&_nc_ohc=r1WRDICyRzEAX_PV6Xv&_nc_ht=scontent-ams4-1.xx&tp=6&oh=98193fa3bf19a6e0eeec7ed4a1affde3&oe=60CD3399',
+  socials: {
+    email: 'kinga846@gmail.com',
+    facebook: 'https://www.facebook.com/singa.kocha',
+    instagram: 'https://www.instagram.com/kingasochacz_'
   },
 };
 
