@@ -1,0 +1,18 @@
+# https://github.com/smartinspereira/auto-create-pr-action
+
+name: Create PR on push to new feature branch
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  auto-create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: auto-create-pr-action
+        uses: smartinspereira/auto-create-pr-action@master
+        env:
+          BRANCH_PREFIX: "FRDQ-"
+          BASE_BRANCH: main
+          PULL_REQUEST_DRAFT: false
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
