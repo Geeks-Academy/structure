@@ -125,7 +125,9 @@ dist/
 .vscode-test
 
 # Webstom .idea files
-.idea
+.idea/
+**/.idea/
+**/.idea/
 
 # Temporary folders
 tmp/
