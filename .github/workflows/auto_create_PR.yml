@@ -12,7 +12,6 @@ jobs:
       - name: auto-create-pr-action
         uses: smartinspereira/auto-create-pr-action@master
         env:
-          BRANCH_PREFIX: "FRDQ-"
           BASE_BRANCH: main
-          PULL_REQUEST_DRAFT: false
+          PULL_REQUEST_DRAFT: "false"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
