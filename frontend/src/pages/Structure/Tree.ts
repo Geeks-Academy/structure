@@ -61,7 +61,15 @@ class Tree {
   constructor(jsonConfig: any, treeId: number) {
     this.id = treeId;
     this.imageLoader = new ImageLoader();
-    this.CONFIG = Util.createMerge(Tree.CONFIG, jsonConfig.chart);
+    this.CONFIG = Util.createMerge(Tree.CONFIG, {
+      connectors: {
+        type: 'step',
+      },
+      container: '#basic-example',
+      node: {
+        HTMLclass: 'nodeExample1',
+      },
+    });
     this.drawArea = document.getElementById(this.CONFIG.container.substring(1));
     this.drawArea!.classList.add('Treant');
     this.nodeDB = new NodeDB(jsonConfig.nodeStructure, this);

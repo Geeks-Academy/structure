@@ -1,15 +1,5 @@
 const key = [];
 
-key[0] = {
-  container: '#basic-example',
-  connectors: {
-    type: 'step',
-  },
-  node: {
-    HTMLclass: 'nodeExample1',
-  },
-};
-
 key[1] = {
   key: 1,
   stackChildren: true,
@@ -529,7 +519,7 @@ key[36] = {
   socials: {
     email: 'kinga846@gmail.com',
     facebook: 'https://www.facebook.com/singa.kocha',
-    instagram: 'https://www.instagram.com/kingasochacz_'
+    instagram: 'https://www.instagram.com/kingasochacz_',
   },
 };
 
