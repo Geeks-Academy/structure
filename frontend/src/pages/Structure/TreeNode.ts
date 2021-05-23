@@ -212,17 +212,20 @@ class TreeNode {
       container.appendChild(status);
       status.appendChild(statusText);
     }
-    if (this.member.socials) {
+    if (this.member.socials || this.member.email) {
       const socials = document.createElement('div');
       socials.className = 'socials';
+      if (this.member.email) {
+        const social = document.createElement('div');
+        social.className = 'social';
+        social.innerHTML = `<a href="mailto:${this.member.email}"><img src="./assets/email.png" /></a>`;
+        socials.appendChild(social);
+      }
+
       for (const key in this.member.socials) {
         const social = document.createElement('div');
         social.className = 'social';
-        if (key === 'email') {
-          social.innerHTML = `<a href="mailto:${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`;
-        } else {
-          social.innerHTML = `<a href="${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`;
-        }
+        social.innerHTML = `<a href="${this.member.socials[key]}"><img src="./assets/${key}.png" /></a>`;
         socials.appendChild(social);
       }
       container.appendChild(socials);
