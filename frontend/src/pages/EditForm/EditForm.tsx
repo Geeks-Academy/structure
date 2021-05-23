@@ -8,7 +8,7 @@ import CustomSelect from 'components/atoms/FormField/Select';
 import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
-import { replaceUserInfoIntoSelectOptions } from 'helpers';
+import { replaceUserInfoIntoSelectOptions, removeCurrentUser } from 'helpers';
 import { IUserOptions } from 'Types/interfaces';
 import {
   StyledBottomWrapper,
@@ -61,10 +61,13 @@ const EditForm = (): JSX.Element => {
   };
 
   useAsyncEffect(async () => {
-    reset(await initValues());
+    const initialValues = await initValues();
+    reset(initialValues);
     const users: any = await getAllUsers();
-    const data = replaceUserInfoIntoSelectOptions(users);
-    setUsers(data);
+    const mappedUsersToOptions = replaceUserInfoIntoSelectOptions(users);
+    const usersWithoutCurrentUser = removeCurrentUser(initialValues, mappedUsersToOptions);
+
+    setUsers(usersWithoutCurrentUser);
   });
 
   const onCancel = () => history.replace('/admin');
