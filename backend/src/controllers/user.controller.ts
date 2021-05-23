@@ -44,7 +44,7 @@ export const create = async (req: Request, res: Response): Promise<Response> => 
   const body = req.body as IUser;
   try {
     if (body.email) {
-      const users = await User.findOne({ email: body.email }).count();
+      const users = await User.findOne({ email: body.email }).countDocuments();
       if (users) {
         return res
           .status(StatusCode.BAD_REQUEST)
@@ -72,7 +72,7 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
       const userDocuments = await User.find({
         _id: { $ne: userId },
         email: body.email,
-      }).count();
+      }).countDocuments();
       if (userDocuments) {
         return res
           .status(StatusCode.BAD_REQUEST)
