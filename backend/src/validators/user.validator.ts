@@ -1,5 +1,4 @@
-import Joi, { ValidationError } from 'joi';
-import User from '../models/user.model';
+import Joi from 'joi';
 
 const schema = {
   post: Joi.object({
@@ -21,6 +20,7 @@ const schema = {
       })
       .empty(),
     active: Joi.boolean(),
+    section: Joi.boolean(),
   }),
   put: Joi.object({
     name: Joi.string().min(4),
@@ -41,6 +41,7 @@ const schema = {
       })
       .empty(),
     active: Joi.boolean(),
+    section: Joi.boolean(),
   }),
   id: Joi.object().keys({
     id: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
