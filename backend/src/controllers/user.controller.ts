@@ -44,8 +44,8 @@ export const create = async (req: Request, res: Response): Promise<Response> => 
   const body = req.body as IUser;
   try {
     if (body.email) {
-      const numberOfUsers = await User.findOne({ email: body.email }).countDocuments();
-      if (numberOfUsers > 0) {
+      const users = await User.findOne({ email: body.email });
+      if (users) {
         return res
           .status(StatusCode.BAD_REQUEST)
           .json({ message: 'This email already exists', value: body.email });
@@ -66,20 +66,20 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
       .status(StatusCode.BAD_REQUEST)
       .json({ ok: false, message: 'It is not possible set boss to be the same as user' });
   }
-  const update = req.body as Partial<IUser>;
+  const body = req.body as Partial<IUser>;
   try {
-    if (update.email) {
-      const numberOfDocuments = await User.find({
+    if (body.email) {
+      const userDocuments = await User.find({
         _id: { $ne: userId },
-        email: update.email,
-      }).countDocuments();
-      if (numberOfDocuments > 0) {
+        email: body.email,
+      });
+      if (userDocuments) {
         return res
           .status(StatusCode.BAD_REQUEST)
-          .json({ message: 'This email already exists', value: update.email });
+          .json({ message: 'This email already exists', value: body.email });
       }
     }
-    const user = await User.findByIdAndUpdate(userId, update);
+    const user = await User.findByIdAndUpdate(userId, body);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
     }
