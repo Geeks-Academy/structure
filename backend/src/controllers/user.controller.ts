@@ -41,9 +41,17 @@ export const getOne = async (req: Request, res: Response): Promise<Response> => 
 };
 
 export const create = async (req: Request, res: Response): Promise<Response> => {
-  const user = req.body;
+  const body = req.body as IUser;
   try {
-    const result = await User.create(user);
+    if (body.email) {
+      const numberOfUsers = await User.findOne({ email: body.email }).countDocuments();
+      if (numberOfUsers > 0) {
+        return res
+          .status(StatusCode.BAD_REQUEST)
+          .json({ message: 'This email already exists', value: body.email });
+      }
+    }
+    const result = await User.create(body);
     return res.status(StatusCode.CREATED).json(result);
   } catch (error) {
     console.log(error);
@@ -60,6 +68,17 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
   }
   const update = req.body as Partial<IUser>;
   try {
+    if (update.email) {
+      const numberOfDocuments = await User.find({
+        _id: { $ne: userId },
+        email: update.email,
+      }).countDocuments();
+      if (numberOfDocuments > 0) {
+        return res
+          .status(StatusCode.BAD_REQUEST)
+          .json({ message: 'This email already exists', value: update.email });
+      }
+    }
     const user = await User.findByIdAndUpdate(userId, update);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
