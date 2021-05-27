@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -51,6 +51,7 @@ const EditForm = (): JSX.Element => {
     handleSubmit,
     control,
     reset,
+    setError,
     formState: { errors },
   } = useForm({ defaultValues, resolver });
 
@@ -72,7 +73,11 @@ const EditForm = (): JSX.Element => {
 
   const onCancel = () => history.replace('/admin');
   const onSubmit = async (values: Partial<IUser>) => {
-    await updateUser(values);
+    const result = await updateUser(values);
+    if (result.error) {
+      setError('email', { message: result.reason });
+      return;
+    }
     onCancel();
   };
 

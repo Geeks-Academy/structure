@@ -39,6 +39,7 @@ const AddForm = (): JSX.Element => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { errors },
   } = useForm({
     resolver,
@@ -53,7 +54,11 @@ const AddForm = (): JSX.Element => {
 
   const onCancel = () => history.replace('/admin');
   const onSubmit = async (values: any) => {
-    await createUser(values);
+    const result = await createUser(values);
+    if (result.error) {
+      setError('email', { message: result.reason });
+      return;
+    }
     onCancel();
   };
 
