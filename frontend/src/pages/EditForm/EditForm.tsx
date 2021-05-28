@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -9,7 +9,7 @@ import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions, removeCurrentUser } from 'helpers';
-import { IUserOptions } from 'Types/interfaces';
+import { IUserOptions, IUser } from 'Types/interfaces';
 import {
   StyledBottomWrapper,
   StyledContainer,
@@ -20,15 +20,6 @@ import {
   StyledSubmitButton,
   StyledCancelButton,
 } from './EditForm.styled';
-
-interface IUser {
-  name: string;
-  title: string;
-  boss: string;
-  image: string;
-  openToWork: boolean;
-  manager: boolean;
-}
 
 const { getAllUsers, updateUser, getUser } = UserRequests;
 
@@ -51,8 +42,9 @@ const EditForm = (): JSX.Element => {
     handleSubmit,
     control,
     reset,
+    setError,
     formState: { errors },
-  } = useForm({ defaultValues, resolver });
+  } = useForm<IUser>({ defaultValues, resolver });
 
   const initValues = async (): Promise<IUser> => {
     const currentUser = await getUser(params.id);
@@ -63,7 +55,7 @@ const EditForm = (): JSX.Element => {
   useAsyncEffect(async () => {
     const initialValues = await initValues();
     reset(initialValues);
-    const users: any = await getAllUsers();
+    const users = await getAllUsers();
     const mappedUsersToOptions = replaceUserInfoIntoSelectOptions(users);
     const usersWithoutCurrentUser = removeCurrentUser(initialValues, mappedUsersToOptions);
 
@@ -71,8 +63,12 @@ const EditForm = (): JSX.Element => {
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = async (values: Partial<IUser>) => {
-    await updateUser(values);
+  const onSubmit = async (values: IUser) => {
+    const result = await updateUser(values);
+    if (result.error) {
+      setError(result.field, { message: result.reason });
+      return;
+    }
     onCancel();
   };
 
