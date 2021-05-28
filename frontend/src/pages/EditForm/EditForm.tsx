@@ -74,7 +74,7 @@ const EditForm = (): JSX.Element => {
   const onCancel = () => history.replace('/admin');
   const onSubmit = async (values: Partial<IUser>) => {
     const result = await updateUser(values);
-    if (result.error) {
+    if (result.error && result.reason.toLowerCase() === 'this email already exists') {
       setError('email', { message: result.reason });
       return;
     }

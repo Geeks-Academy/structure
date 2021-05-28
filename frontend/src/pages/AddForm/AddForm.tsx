@@ -55,7 +55,7 @@ const AddForm = (): JSX.Element => {
   const onCancel = () => history.replace('/admin');
   const onSubmit = async (values: any) => {
     const result = await createUser(values);
-    if (result.error) {
+    if (result.error && result.reason.toLowerCase() === 'this email already exists') {
       setError('email', { message: result.reason });
       return;
     }
