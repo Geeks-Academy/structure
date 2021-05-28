@@ -48,7 +48,7 @@ export const create = async (req: Request, res: Response): Promise<Response> => 
       if (users) {
         return res
           .status(StatusCode.BAD_REQUEST)
-          .json({ message: 'This email already exists', value: body.email });
+          .json({ message: 'This email already exists', value: body.email, field: 'email' });
       }
     }
     const result = await User.create(body);
@@ -64,7 +64,11 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
   if (req.body.boss === userId) {
     return res
       .status(StatusCode.BAD_REQUEST)
-      .json({ ok: false, message: 'It is not possible set boss to be the same as user' });
+      .json({
+        ok: false,
+        message: 'It is not possible set boss to be the same as user',
+        field: 'boss',
+      });
   }
   const body = req.body as Partial<IUser>;
   try {
@@ -76,7 +80,7 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
       if (userDocuments) {
         return res
           .status(StatusCode.BAD_REQUEST)
-          .json({ message: 'This email already exists', value: body.email });
+          .json({ message: 'This email already exists', value: body.email, field: 'email' });
       }
     }
     const user = await User.findByIdAndUpdate(userId, body);

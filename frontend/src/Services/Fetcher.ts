@@ -16,23 +16,29 @@ export class Fetcher {
     return axiosInstance
       .post(url, data)
       .then((r) => r)
-      .catch((err) => ({
-        error: true,
-        msg: err.message,
-        status: err.response.status,
-        reason: err.response.data.message,
-      }));
+      .catch((err) => {
+        return {
+          error: true,
+          msg: err.message,
+          status: err.response.status,
+          reason: err.response.data.message,
+          field: err.response.data.field,
+        };
+      });
   };
 
   static put = (url: string, data?: unknown): Promise<any> => {
     return axiosInstance
       .put(url, data)
       .then((r) => r)
-      .catch((err) => ({
-        error: true,
-        msg: err.message,
-        status: err.response.status,
-        reason: err.response.data.message,
-      }));
+      .catch((err) => {
+        return {
+          error: true,
+          msg: err.message,
+          status: err.response.status,
+          reason: err.response.data.message,
+          field: err.response.data.field,
+        };
+      });
   };
 }

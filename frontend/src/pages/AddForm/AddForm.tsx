@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -8,7 +8,7 @@ import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions } from 'helpers';
-import { IUserOptions } from 'Types/interfaces';
+import { IUser, IUserOptions } from 'Types/interfaces';
 import {
   StyledBottomWrapper,
   StyledContainer,
@@ -41,22 +41,22 @@ const AddForm = (): JSX.Element => {
     control,
     setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUser>({
     resolver,
     defaultValues,
   });
 
   useAsyncEffect(async () => {
-    const users: any = await getAllUsers();
+    const users = await getAllUsers();
     const data = replaceUserInfoIntoSelectOptions(users);
     setUsers(data);
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: IUser) => {
     const result = await createUser(values);
-    if (result.error && result.reason.toLowerCase() === 'this email already exists') {
-      setError('email', { message: result.reason });
+    if (result.error) {
+      setError(result.field, { message: result.reason });
       return;
     }
     onCancel();
