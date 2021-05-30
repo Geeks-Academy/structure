@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -20,7 +20,7 @@ import {
   StyledCancelButton,
 } from './AddForm.styled';
 
-const { getAllUsers, createUser } = UserRequests;
+const { getAllUsers, createUser, postImage } = UserRequests;
 
 const defaultValues = {
   name: '',
@@ -62,7 +62,7 @@ const AddForm = (): JSX.Element => {
     return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result!.toString());
+      reader.onload = () => resolve(JSON.stringify(reader.result));
       reader.onerror = (error) => reject(error);
     });
   };
@@ -71,7 +71,7 @@ const AddForm = (): JSX.Element => {
     const file = e.target.files?.[0];
     if (file) {
       convertFileIntoBase64(file).then((res) => {
-        console.log(res);
+        postImage({ image: res });
       });
     }
   };
@@ -85,7 +85,6 @@ const AddForm = (): JSX.Element => {
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <CustomInput label="Name" name="name" control={control} error={errors.name} />
           <CustomInput label="Email" name="email" control={control} error={errors.email} />
-          {/* <CustomInput label="Image" name="image" control={control} error={errors.image} /> */}
           <CustomInput label="Title" name="title" control={control} error={errors.title} />
           <CustomSelect
             label="Boss"
@@ -101,7 +100,7 @@ const AddForm = (): JSX.Element => {
             control={control}
             error={errors.openToWork}
           />
-          <input type="file" {...register('image')} onChange={(e) => handleImage(e)} />
+          <input type="file" {...register('image')} onChange={handleImage} accept="image/*" />
           <StyledButtonWrapper>
             <StyledCancelButton onClick={onCancel} type="button">
               Cancel

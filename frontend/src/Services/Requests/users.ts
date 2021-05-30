@@ -19,4 +19,8 @@ export class UserRequests {
   static updateUser = async ({ _id, __v, ...data }: any): Promise<any> => {
     return Fetcher.put(`/users/${_id}`, data);
   };
+
+  static postImage = async (data: any): Promise<any> => {
+    return Fetcher.post('/users/checkImage', data);
+  };
 }
