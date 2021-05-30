@@ -18,10 +18,10 @@ import {
   StyledForm,
   StyledButtonWrapper,
   StyledSubmitButton,
-  StyledCancelButton,
+  StyledOutlineButton,
 } from './EditForm.styled';
 
-const { getAllUsers, updateUser, getUser } = UserRequests;
+const { getAllUsers, updateUser, getUser, deactivate } = UserRequests;
 
 const defaultValues = {
   name: '',
@@ -37,6 +37,7 @@ const EditForm = (): JSX.Element => {
   const history = useHistory();
   const { params } = useRouteMatch<{ id: string }>();
   const [users, setUsers] = useState<IUserOptions[]>([]);
+  const [currentUser, setCurrentUser] = useState<IUser>();
 
   const {
     handleSubmit,
@@ -54,6 +55,7 @@ const EditForm = (): JSX.Element => {
 
   useAsyncEffect(async () => {
     const initialValues = await initValues();
+    setCurrentUser(initialValues);
     reset(initialValues);
     const users = await getAllUsers();
     const mappedUsersToOptions = replaceUserInfoIntoSelectOptions(users);
@@ -63,6 +65,12 @@ const EditForm = (): JSX.Element => {
   });
 
   const onCancel = () => history.replace('/admin');
+  const deactivateTheUser = async () => {
+    const result = await deactivate(currentUser?._id as string);
+    if (result.status === 200) {
+      onCancel();
+    }
+  };
   const onSubmit = async (values: IUser) => {
     const result = await updateUser(values);
     if (result.error) {
@@ -98,9 +106,14 @@ const EditForm = (): JSX.Element => {
             error={errors.openToWork}
           />
           <StyledButtonWrapper>
-            <StyledCancelButton onClick={onCancel} type="button">
+            {currentUser && currentUser.active && (
+              <StyledOutlineButton onClick={deactivateTheUser} type="button">
+                Deactivate
+              </StyledOutlineButton>
+            )}
+            <StyledOutlineButton onClick={onCancel} type="button">
               Cancel
-            </StyledCancelButton>
+            </StyledOutlineButton>
             <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
           </StyledButtonWrapper>
         </StyledForm>

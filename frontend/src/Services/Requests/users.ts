@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { Fetcher } from '../Fetcher';
 
 export class UserRequests {
@@ -21,5 +22,11 @@ export class UserRequests {
       data.boss = null;
     }
     return Fetcher.put(`/users/${_id}`, data);
+  };
+
+  static deactivate = async (
+    id: string
+  ): Promise<AxiosResponse<{ ok: boolean; message: string }>> => {
+    return Fetcher.put(`/users/deactivate/${id}`);
   };
 }
