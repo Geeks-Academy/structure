@@ -20,6 +20,7 @@ import {
   StyledSubmitButton,
   StyledCancelButton,
 } from './EditForm.styled';
+import Socials from '../../components/atoms/FormField/Socials';
 
 const { getAllUsers, updateUser, getUser } = UserRequests;
 
@@ -29,6 +30,7 @@ const defaultValues = {
   email: '',
   image: '',
   title: '',
+  socials: [],
   openToWork: true,
   manager: false,
 };
@@ -90,6 +92,7 @@ const EditForm = (): JSX.Element => {
             options={users}
             error={errors.boss}
           />
+          <Socials label="Socials" name="socials" control={control}  />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />
           <CustomCheckbox
             label="Open to work"
