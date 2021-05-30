@@ -18,6 +18,7 @@ const CONFIG = {
     HTMLclass: 'nodeExample1',
   },
   container: '#basic-example',
+  containerId: 'basic-example',
   nodeHTMLclass: 'node',
 };
 
