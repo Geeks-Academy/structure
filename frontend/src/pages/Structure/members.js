@@ -107,7 +107,7 @@ key[11] = {
   manager: true,
   email: 'anika.kustra@gmail.com',
   active: true,
-  openToWork: false,
+  openToWork: true,
   image: 'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967087/members/90617470_206343937316896_5809877092514398208_n.jpg',
   socials: {
     facebook: 'https://www.facebook.com/AniQCat',
