@@ -102,7 +102,7 @@ key[11] = {
   key: 11,
   parent: key[9],
   name: 'Anika Kustra',
-  title: 'Project Manager, UX',
+  title: 'UX',
   stackChildren: true,
   manager: true,
   email: 'anika.kustra@gmail.com',
