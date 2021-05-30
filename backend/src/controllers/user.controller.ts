@@ -112,3 +112,13 @@ export const deleteOne = async (req: Request, res: Response): Promise<Response> 
     return res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
+
+export const setUserImage = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const image = req.body.image;
+    console.log(image);
+    return res.json('Successfully upload image');
+  } catch (error) {
+    return res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};
