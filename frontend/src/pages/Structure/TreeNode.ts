@@ -12,10 +12,8 @@ class TreeNode {
   parentId: number;
   prelim: number;
   stackParentId: number | null;
-  image: any;
   connStyle: {};
   member: any;
-  nodeHTMLclass: string;
   width: any;
   children: any;
   leftNeighborId: any;
@@ -32,11 +30,10 @@ class TreeNode {
     this.stackParentId = stackParentId;
     this.connStyle = CONFIG.connectors;
     this.member = nodeStructure;
-    this.nodeHTMLclass = CONFIG.node.HTMLclass || '';
   }
 
   dbGet(nodeId: number): TreeNode | undefined {
-    return TreeStore.get(0).nodeDB.get(nodeId);
+    return TreeStore.get().nodeDB.get(nodeId);
   }
 
   size(): number {

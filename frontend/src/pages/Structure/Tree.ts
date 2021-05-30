@@ -1,5 +1,4 @@
 import NodeDB from './NodeDB';
-import Util from './Util';
 import CONFIG from './config';
 
 declare global {
@@ -9,29 +8,6 @@ declare global {
 }
 
 class Tree {
-  static CONFIG = {
-    maxDepth: 100,
-    levelSeparation: 30,
-    siblingSeparation: 30,
-    subTeeSeparation: 30,
-
-    padding: 15,
-
-    connectors: {
-      type: 'step',
-      style: {
-        stroke: 'black',
-      },
-      stackIndent: 15,
-    },
-
-    node: {
-      link: {
-        target: '_self',
-      },
-    },
-  };
-
   id: number;
   CONFIG: any;
   drawArea: HTMLElement | null;
@@ -42,9 +18,9 @@ class Tree {
   _R: any;
   lastNodeOnLevel: any;
 
-  constructor(jsonConfig: any, treeId: number) {
-    this.id = treeId;
-    this.drawArea = document.getElementById(CONFIG.container.substring(1));
+  constructor(jsonConfig: any) {
+    this.id = 0;
+    this.drawArea = document.getElementById(CONFIG.containerId);
     this.drawArea!.classList.add('Treant');
     this.nodeDB = new NodeDB(jsonConfig.nodeStructure, this);
     this.connectionStore = {};
@@ -243,16 +219,6 @@ class Tree {
     } else {
       this._R = window.Raphael(this.drawArea, viewWidth, viewHeight);
     }
-
-    if (this.drawArea!.clientWidth < treeWidth) {
-      // is owerflow-x necessary
-      this.drawArea!.style.overflowX = 'auto';
-    }
-
-    if (this.drawArea!.clientHeight < treeHeight) {
-      // is owerflow-y necessary
-      this.drawArea!.style.overflowY = 'auto';
-    }
   }
 
   setConnectionToParent(node: any) {
@@ -263,6 +229,7 @@ class Tree {
     const pathString = this.getPathString(parent, node, stacked);
 
     const connLine = this._R.path(pathString);
+
     this.connectionStore[node.id] = connLine;
 
     connLine.attr(parent.connStyle.style);
@@ -288,12 +255,12 @@ class Tree {
     let pathString;
     if (stacked) {
       const stackPoint = `${startPoint.x},${endPoint.y}`;
-      pathString = ['M', sp, 'L', stackPoint, 'L', ep];
+      pathString = `M${sp}L${stackPoint}L${ep}`;
     } else {
-      pathString = ['M', sp, 'L', p1, 'L', p2, 'L', ep];
+      pathString = `M${sp}L${p1}L${p2}L${ep}`;
     }
 
-    return pathString.join(' ');
+    return pathString;
   }
 
   setNeighbors(node: any, level: number) {
