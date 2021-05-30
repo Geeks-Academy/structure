@@ -20,7 +20,6 @@ const schema = {
       })
       .empty(),
     active: Joi.boolean(),
-    section: Joi.boolean(),
   }),
   put: Joi.object({
     name: Joi.string().min(4),
@@ -41,7 +40,6 @@ const schema = {
       })
       .empty(),
     active: Joi.boolean(),
-    section: Joi.boolean(),
   }),
   id: Joi.object().keys({
     id: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
