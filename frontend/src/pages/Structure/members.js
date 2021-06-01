@@ -65,7 +65,7 @@ key[11] = {
 key[12] = {
   parent: key[9],
   name: 'Monika Fularska',
-  title: 'UX Designer',
+  title: 'UI/UX Designer',
   email: 'monika.fularska@onet.pl',
   active: true,
   openToWork: false,
