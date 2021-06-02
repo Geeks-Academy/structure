@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 interface Members {
   [key: string]: {
     _id: string;
@@ -18,8 +16,8 @@ interface Members {
   };
 }
 
-const tomek = (data: Array<string | number>) => {
-  const usersTemp = [
+module.exports = (data_: Array<string | number>) => {
+  const data = [
     {
       openToWork: true,
       manager: false,
@@ -38,29 +36,25 @@ const tomek = (data: Array<string | number>) => {
 
   const members: Members = {};
 
-  usersTemp.forEach((memberItem) => {
+  data.forEach((memberItem) => {
     members[memberItem._id] = { ...memberItem };
   });
 
-  console.log(members);
-
-  members['606235b66f19d569a83edfab'] = {
-    _id: '606235b66f19d569a83edfab',
-    name: 'Leonor Rico',
-    email: 'Yadira__Schaden@yahoo.com',
-    title: 'Principal Configuration Specialist',
-    image: 'https://cdn.fakercloud.com/avatars/d_kobelyatsky_128.jpg',
-    socials: {
-      email: 'example@gmail.com',
-      facebook: 'https://www.facebook.com/example',
-      linkedin: 'https://www.linkedin.com/in/example/',
-    },
-    openToWork: true,
-    manager: true,
-    active: true,
-  };
+  // members['606235b66f19d569a83edfab'] = {
+  //   _id: '606235b66f19d569a83edfab',
+  //   name: 'Leonor Rico',
+  //   email: 'Yadira__Schaden@yahoo.com',
+  //   title: 'Principal Configuration Specialist',
+  //   image: 'https://cdn.fakercloud.com/avatars/d_kobelyatsky_128.jpg',
+  //   socials: {
+  //     email: 'example@gmail.com',
+  //     facebook: 'https://www.facebook.com/example',
+  //     linkedin: 'https://www.linkedin.com/in/example/',
+  //   },
+  //   openToWork: true,
+  //   manager: true,
+  //   active: true,
+  // };
 
   return members;
 };
-
-tomek();
