@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "src/utils/StatusCode";
 
-class BaseError extends Error {
+export class BaseError extends Error {
   public readonly name: string;
   public readonly httpCode: HttpStatusCode;
   public readonly isOperational: boolean;
@@ -16,5 +16,15 @@ class BaseError extends Error {
     Error.captureStackTrace(this);
   }
  }
+
+//  class APIError extends BaseError {
+//   constructor(
+//     name: string, 
+//     httpCode = HttpStatusCode.INTERNAL_SERVER_ERROR, 
+//     isOperational = true, 
+//     description = 'internal server error') {
+//     super(name, httpCode, isOperational, description);
+//   }
+//  }
 
  // https://www.toptal.com/nodejs/node-js-error-handling

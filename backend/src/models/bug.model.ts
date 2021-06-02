@@ -1,8 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
-
-export interface IBug extends Document {
+export interface IBug  {
   errorMsg: string;
-  stackTrace: string;
+  stackTrace?: string;
   file: string;
   method: string;
 }
@@ -11,6 +10,8 @@ export interface IBugAttached extends IBug {
   _id: string;
 }
 
+type IBugDocument = Document & IBugAttached;
+
 const bugSchema = new Schema({
   errorMsg: String,
   stackTrace: String,
@@ -18,4 +19,4 @@ const bugSchema = new Schema({
   method: String,
 });
 
-export default model<IBug>('Bug', bugSchema);
+export default model<IBugDocument>('Bug', bugSchema);

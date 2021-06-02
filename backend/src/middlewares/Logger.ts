@@ -26,9 +26,10 @@ const customLevels = {
   winston.format.printf((info) => {
     const { timestamp, level, message, ...meta } = info;
   
-    return `${timestamp} [${level}]: ${message} ${
-      Object.keys(meta).length ? JSON.stringify(meta, null, 2) : ''
-    }`;
+    // return `${timestamp} [${level}]: ${message} ${
+    //   Object.keys(meta).length ? JSON.stringify(meta, null, 2) : ''
+    // }`;
+    return `${timestamp} [${level}]: ${message}`;
   }),
  );
   
@@ -44,41 +45,41 @@ const customLevels = {
       format: formatter,
     });
     this.logger = winston.createLogger({
-      level: isDevEnvironment() ? 'trace' : 'error',
+      level: this.isDevEnvironment() ? 'trace' : 'error',
       levels: customLevels.levels,
-      transports: [isDevEnvironment() ? transport : prodTransport],
+      transports: [this.isDevEnvironment() ? transport : prodTransport],
     });
     winston.addColors(customLevels.colors);
   }
+
+  isDevEnvironment() {
+    return process.env.NODE_ENV === 'development' ? true : false
+  }
   
-  trace(msg: string, meta?: winston.LogCallback) {
+  trace(msg: string, meta?: any) {
     this.logger.log('trace', msg, meta);
   }
   
-  debug(msg: string, meta?: winston.LogCallback) {
+  debug(msg: string, meta?: any) {
     this.logger.debug(msg, meta);
   }
   
-  info(msg: string, meta?: winston.LogCallback) {
+  info(msg: string, meta?: any) {
     this.logger.info(msg, meta);
   }
   
-  warn(msg: string, meta?: winston.LogCallback) {
+  warn(msg: string, meta?: any) {
     this.logger.warn(msg, meta);
   }
   
-  error(msg: string, meta?: winston.LogCallback) {
+  error(msg: string, meta?: any) {
     this.logger.error(msg, meta);
   }
   
-  fatal(msg: string, meta?: winston.LogCallback) {
+  fatal(msg: string, meta?: any) {
     this.logger.log('fatal', msg, meta);
   }
  }
   
  export const logger = new Logger();
 
-function isDevEnvironment() {
-  const env = process.env.NODE_ENV as string;
-  return env === 'development';
-}
