@@ -80,6 +80,8 @@ const EditForm = (): JSX.Element => {
     onCancel();
   };
 
+  const isActive = currentUser && currentUser.active;
+
   return (
     <StyledContainer>
       <StyledTopWrapper>
@@ -105,16 +107,22 @@ const EditForm = (): JSX.Element => {
             control={control}
             error={errors.openToWork}
           />
-          <StyledButtonWrapper>
-            {currentUser && currentUser.active && (
+          <StyledButtonWrapper
+            style={{
+              justifyContent: isActive ? 'space-between' : 'flex-end',
+            }}
+          >
+            {isActive && (
               <StyledOutlineButton onClick={deactivateTheUser} type="button">
                 Deactivate
               </StyledOutlineButton>
             )}
-            <StyledOutlineButton onClick={onCancel} type="button">
-              Cancel
-            </StyledOutlineButton>
-            <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+            <div>
+              <StyledOutlineButton onClick={onCancel} type="button">
+                Cancel
+              </StyledOutlineButton>
+              <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+            </div>
           </StyledButtonWrapper>
         </StyledForm>
       </StyledBottomWrapper>
