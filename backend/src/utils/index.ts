@@ -1,0 +1,1 @@
+export const deleteQuotes = (text: string): string => text.replace(/['"]+/g, '');

@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import routes from './routes';
 import cors from 'cors';
+import handleErrors from './middleware/handleErrors'
 
 const app = express();
 app.use(express.json());
@@ -27,13 +28,15 @@ app.get('/health-check', (_req, res) => {
 
 app.use('/api', routes);
 
-app.use((_req, res, _next) => {
-  res.status(404).json({ message: 'Not found' });
-});
+// app.use((_req, res, _next) => {
+//   res.status(404).json({ message: 'Not found' });
+// });
 
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Internal server error' });
-});
+// app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+//   console.error(err.stack);
+//   res.status(500).json({ message: 'Internal server error' });
+// });
+
+app.use(handleErrors)
 
 export default app;

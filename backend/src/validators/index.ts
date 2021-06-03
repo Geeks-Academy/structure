@@ -1,24 +1,26 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import StatusCode from '../utils/StatusCode';
+import { BadRequest } from '../utils/Errors'
+import {deleteQuotes} from '../utils'
 
 const validateBody = (schema: Joi.ObjectSchema) => {
-  return async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
+  return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await schema.validateAsync(req.body);
       next();
     } catch (error) {
-      console.log(error);
-      return res.status(StatusCode.BAD_REQUEST).json(error.details);
+      const message = deleteQuotes(error.details[0].message)
+      next(new BadRequest(message))
     }
   };
 };
 
 const validateParameter = (schema: Joi.ObjectSchema) => {
-  return (req: Request, res: Response, next: NextFunction): Response | undefined => {
-    const result = schema.validate(req.params);
+  return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const result = await schema.validate(req.params);
     if (result.error) {
-      return res.status(StatusCode.BAD_REQUEST).json(result.error.details);
+      const message = deleteQuotes(result.error.details[0].message)
+      next(new BadRequest(message))
     }
     next();
   };
