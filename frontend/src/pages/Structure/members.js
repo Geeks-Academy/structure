@@ -433,19 +433,4 @@ key[36] = {
   },
 };
 
-key[37] = {
-  parent: key[1],
-  name: 'Kinga Sochacz',
-  email: 'kinga846@gmail.com',
-  title: 'UI/UX Designer',
-  openToWork: false,
-  active: true,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968751/members/84068257_3298497756846142_7079146718549245952_n.jpg.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/singa.kocha',
-    instagram: 'https://www.instagram.com/kingasochacz_',
-  },
-};
-
 export const members = [...key];
