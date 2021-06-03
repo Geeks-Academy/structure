@@ -18,7 +18,7 @@ export const getAll = async (_req: Request, res: Response) => {
 
 export const getAllActive = async (_req: Request, res: Response) => {
     try {
-    const socials = await Social.find({active: false});
+    const socials = await Social.find({active: true});
     if (socials.length === 0) {
       return res.status(StatusCode.NOT_FOUND).json({ message: 'Deactive Socials not found' });
     }
