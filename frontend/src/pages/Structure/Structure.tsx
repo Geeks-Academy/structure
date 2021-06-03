@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
 import Raphael from 'raphael';
-import { members } from './members';
+import { useAsyncEffect } from 'hooks';
+import { transformUsers } from './members';
 import './style.css';
 import Treant from './Treant';
 
 const Structure = (): JSX.Element => {
-  useEffect(() => {
+  useAsyncEffect(async () => {
     window.Raphael = Raphael;
-    new Treant(members);
-  }, []);
+    new Treant(await transformUsers());
+  });
 
   return <div id="basic-example" style={{ height: '100vh', width: '100vw' }} />;
 };
