@@ -16,6 +16,19 @@ export const getAll = async (_req: Request, res: Response) => {
   }
 };
 
+export const getAllActive = async (_req: Request, res: Response) => {
+    try {
+    const socials = await Social.find({active: false});
+    if (socials.length === 0) {
+      return res.status(StatusCode.NOT_FOUND).json({ message: 'Deactive Socials not found' });
+    }
+    return res.json(socials);
+  } catch (error) {
+    console.log(error);
+    res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};
+
 export const getOne = async (req: Request, res: Response) => {
   const socialId = req.params.id;
   try {
