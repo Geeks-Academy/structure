@@ -21,6 +21,6 @@ export class UserRequests {
   };
 
   static postImage = async (data: any): Promise<any> => {
-    return Fetcher.post('/users/checkImage', data);
+    return Fetcher.post('/users/uploadImage', data);
   };
 }
