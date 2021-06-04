@@ -49,7 +49,7 @@ key[10] = {
 key[11] = {
   parent: key[9],
   name: 'Anika Kustra',
-  title: 'UX Designer',
+  title: 'UX Designer <br> Project Manager',
   manager: true,
   email: 'anika.kustra@gmail.com',
   active: true,
