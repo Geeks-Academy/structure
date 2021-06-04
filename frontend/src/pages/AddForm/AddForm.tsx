@@ -17,7 +17,7 @@ import {
   StyledForm,
   StyledButtonWrapper,
   StyledSubmitButton,
-  StyledCancelButton,
+  StyledOutlineButton,
 } from './AddForm.styled';
 
 const { getAllUsers, createUser } = UserRequests;
@@ -88,9 +88,9 @@ const AddForm = (): JSX.Element => {
             error={errors.openToWork}
           />
           <StyledButtonWrapper>
-            <StyledCancelButton onClick={onCancel} type="button">
+            <StyledOutlineButton onClick={onCancel} type="button">
               Cancel
-            </StyledCancelButton>
+            </StyledOutlineButton>
             <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
           </StyledButtonWrapper>
         </StyledForm>
