@@ -11,7 +11,6 @@ export interface IUser extends Document {
   image?: string;
   socials?: [{ link: string; social: ISocial['_id'] }];
   active: boolean;
-  section: boolean;
 }
 
 const userSchema = new Schema({
@@ -30,7 +29,6 @@ const userSchema = new Schema({
     },
   ],
   active: { type: Boolean, default: true },
-  section: { type: Boolean, default: false },
 });
 
 export default model<IUser>('User', userSchema);

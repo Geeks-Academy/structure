@@ -33,7 +33,7 @@ body { background: #fff; }
 }
 
 .Treant.chart {width:100vw;height:100vh;}
-.Treant { position: relative; overflow: hidden; padding: 0 !important; }
+.Treant { position: relative; overflow: auto; padding: 0 !important; }
 
 
 
@@ -128,4 +128,8 @@ body { background: #fff; }
 
 .inactive-member{
     border: 3px solid #e90f58;
+}
+
+.absent-member{
+    border: 3px solid #e9e062;
 }

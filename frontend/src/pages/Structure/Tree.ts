@@ -1,6 +1,5 @@
-import ImageLoader from './ImageLoader';
 import NodeDB from './NodeDB';
-import Util from './Util';
+import CONFIG from './config';
 
 declare global {
   interface Window {
@@ -9,46 +8,7 @@ declare global {
 }
 
 class Tree {
-  static CONFIG = {
-    maxDepth: 100,
-    rootOrientation: 'NORTH',
-    nodeAlign: 'CENTER',
-    levelSeparation: 30,
-    siblingSeparation: 30,
-    subTeeSeparation: 30,
-
-    hideRootNode: false,
-
-    animateOnInit: false,
-    animateOnInitDelay: 500,
-
-    padding: 15,
-    scrollbar: 'native',
-
-    connectors: {
-      type: 'step',
-      style: {
-        stroke: 'black',
-      },
-      stackIndent: 15,
-    },
-
-    node: {
-      link: {
-        target: '_self',
-      },
-    },
-
-    animation: {
-      nodeSpeed: 450,
-      nodeAnimation: 'linear',
-      connectorsSpeed: 450,
-      connectorsAnimation: 'linear',
-    },
-  };
-
   id: number;
-  imageLoader: ImageLoader;
   CONFIG: any;
   drawArea: HTMLElement | null;
   nodeDB: NodeDB;
@@ -58,43 +18,20 @@ class Tree {
   _R: any;
   lastNodeOnLevel: any;
 
-  constructor(jsonConfig: any, treeId: number) {
-    this.id = treeId;
-    this.imageLoader = new ImageLoader();
-    this.CONFIG = Util.createMerge(Tree.CONFIG, {
-      connectors: {
-        type: 'step',
-      },
-      container: '#basic-example',
-      node: {
-        HTMLclass: 'nodeExample1',
-      },
-    });
-    this.drawArea = document.getElementById(this.CONFIG.container.substring(1));
+  constructor(jsonConfig: any) {
+    this.id = 0;
+    this.drawArea = document.getElementById(CONFIG.containerId);
     this.drawArea!.classList.add('Treant');
     this.nodeDB = new NodeDB(jsonConfig.nodeStructure, this);
     this.connectionStore = {};
   }
 
-  positionTree(callback?: () => void) {
-    const self = this;
-
-    if (this.imageLoader.isNotLoading()) {
-      const root = this.root();
-
-      this.resetLevelData();
-      this.firstWalk(root, 0);
-      this.secondWalk(root, 0, 0, 0);
-      this.positionNodes();
-      if (!this.loaded) {
-        this.drawArea!.classList.add('Treant-loaded');
-        this.loaded = true;
-      }
-    } else {
-      setTimeout(() => {
-        self.positionTree(callback);
-      }, 10);
-    }
+  positionTree() {
+    const root = this.root();
+    this.resetLevelData();
+    this.firstWalk(root, 0);
+    this.secondWalk(root, 0, 0, 0);
+    this.positionNodes();
   }
 
   firstWalk(node: any, level: number) {
@@ -106,9 +43,9 @@ class Tree {
 
     const leftSibling = node.leftSibling();
 
-    if (node.childrenCount() === 0 || level === this.CONFIG.maxDepth) {
+    if (node.childrenCount() === 0 || level === CONFIG.maxDepth) {
       if (leftSibling) {
-        node.prelim = leftSibling.prelim + leftSibling.size() + this.CONFIG.siblingSeparation;
+        node.prelim = leftSibling.prelim + leftSibling.size() + CONFIG.siblingSeparation;
       } else {
         node.prelim = 0;
       }
@@ -120,7 +57,7 @@ class Tree {
       const midPoint = node.childrenCenter() - node.size() / 2;
 
       if (leftSibling) {
-        node.prelim = leftSibling.prelim + leftSibling.size() + this.CONFIG.siblingSeparation;
+        node.prelim = leftSibling.prelim + leftSibling.size() + CONFIG.siblingSeparation;
         node.modifier = node.prelim - midPoint;
         this.apportion(node, level);
       } else {
@@ -139,7 +76,7 @@ class Tree {
     let firstChild = node.firstChild();
     let firstChildLeftNeighbor = firstChild.leftNeighbor();
     let compareDepth = 1;
-    const depthToStop = this.CONFIG.maxDepth - level;
+    const depthToStop = CONFIG.maxDepth - level;
 
     while (firstChild && firstChildLeftNeighbor && compareDepth <= depthToStop) {
       let modifierSumRight = 0;
@@ -161,7 +98,7 @@ class Tree {
         firstChildLeftNeighbor.prelim +
         modifierSumLeft +
         firstChildLeftNeighbor.size() +
-        this.CONFIG.subTeeSeparation -
+        CONFIG.subTeeSeparation -
         (firstChild.prelim + modifierSumRight);
 
       if (totalGap > 0) {
@@ -201,7 +138,7 @@ class Tree {
   }
 
   secondWalk(node: any, level: number, X: number, Y: number) {
-    if (level <= this.CONFIG.maxDepth) {
+    if (level <= CONFIG.maxDepth) {
       const levelHeight = this.levelMaxDim[level].height;
       const nodesizeTmp = node.height;
 
@@ -213,7 +150,7 @@ class Tree {
           node.firstChild(),
           level + 1,
           X + node.modifier,
-          Y + levelHeight + this.CONFIG.levelSeparation
+          Y + levelHeight + CONFIG.levelSeparation
         );
       }
       if (node.rightSibling()) {
@@ -255,10 +192,8 @@ class Tree {
     for (let i = 0; i < this.nodeDB.db.length; i++) {
       const node = this.nodeDB.get(i);
 
-      node.X +=
-        negOffsetX + (treeWidth < this.drawArea!.clientWidth ? deltaX : this.CONFIG.padding);
-      node.Y +=
-        negOffsetY + (treeHeight < this.drawArea!.clientHeight ? deltaY : this.CONFIG.padding);
+      node.X += negOffsetX + (treeWidth < this.drawArea!.clientWidth ? deltaX : CONFIG.padding);
+      node.Y += negOffsetY + (treeHeight < this.drawArea!.clientHeight ? deltaY : CONFIG.padding);
 
       node.nodeDOM.style.left = `${node.X}px`;
       node.nodeDOM.style.top = `${node.Y}px`;
@@ -274,25 +209,15 @@ class Tree {
     const viewWidth =
       treeWidth < this.drawArea!.clientWidth
         ? this.drawArea!.clientWidth
-        : treeWidth + this.CONFIG.padding * 2;
+        : treeWidth + CONFIG.padding * 2;
     const viewHeight =
       treeHeight < this.drawArea!.clientHeight
         ? this.drawArea!.clientHeight
-        : treeHeight + this.CONFIG.padding * 2;
+        : treeHeight + CONFIG.padding * 2;
     if (this._R) {
       this._R.setSize(viewWidth, viewHeight);
     } else {
       this._R = window.Raphael(this.drawArea, viewWidth, viewHeight);
-    }
-
-    if (this.drawArea!.clientWidth < treeWidth) {
-      // is owerflow-x necessary
-      this.drawArea!.style.overflowX = 'auto';
-    }
-
-    if (this.drawArea!.clientHeight < treeHeight) {
-      // is owerflow-y necessary
-      this.drawArea!.style.overflowY = 'auto';
     }
   }
 
@@ -304,6 +229,7 @@ class Tree {
     const pathString = this.getPathString(parent, node, stacked);
 
     const connLine = this._R.path(pathString);
+
     this.connectionStore[node.id] = connLine;
 
     connLine.attr(parent.connStyle.style);
@@ -329,12 +255,12 @@ class Tree {
     let pathString;
     if (stacked) {
       const stackPoint = `${startPoint.x},${endPoint.y}`;
-      pathString = ['M', sp, 'L', stackPoint, 'L', ep];
+      pathString = `M${sp}L${stackPoint}L${ep}`;
     } else {
-      pathString = ['M', sp, 'L', p1, 'L', p2, 'L', ep];
+      pathString = `M${sp}L${p1}L${p2}L${ep}`;
     }
 
-    return pathString.join(' ');
+    return pathString;
   }
 
   setNeighbors(node: any, level: number) {
