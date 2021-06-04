@@ -65,7 +65,7 @@ const EditForm = (): JSX.Element => {
   });
 
   const onCancel = () => history.replace('/admin');
-  const deactivateTheUser = async () => {
+  const deactivateUser = async () => {
     const result = await deactivate(currentUser?._id as string);
     if (result.status === 200) {
       onCancel();
@@ -80,7 +80,7 @@ const EditForm = (): JSX.Element => {
     onCancel();
   };
 
-  const isActive = currentUser && currentUser.active;
+  const isActive = currentUser?.active;
 
   return (
     <StyledContainer>
@@ -113,7 +113,7 @@ const EditForm = (): JSX.Element => {
             }}
           >
             {isActive && (
-              <StyledOutlineButton onClick={deactivateTheUser} type="button">
+              <StyledOutlineButton onClick={deactivateUser} type="button">
                 Deactivate
               </StyledOutlineButton>
             )}
