@@ -24,21 +24,27 @@ const Socials = ({ control, name, label, error }: IProps): JSX.Element => {
     control,
   });
 
+  const [clickedIdx, setClickedIdx] = useState(null);
+
   return (
     <StyledSelectWrapper>
       <StyledLabel>{label}</StyledLabel>
       <div>
         {console.log(value)}
-      {value.map(social => {
+      {value.map((social, idx) => {
         console.log(social.social.name);
-
-        return <img src={social.social.image} onClick={() => console.log(social.social.image)}/>
+        if (clickedIdx !== idx) {
+          return (<img src={social.social.image} onClick={() => setClickedIdx(idx)} />)
+        }
+        return null;
       })}
       </div>
       {value.map((val, idx) => {
         console.log(val.link);
-        return (<StyledInput value={val.link} {...inputProps[idx]} inputRef={ref[idx]}>
-        </StyledInput>)
+        if (clickedIdx === idx) {
+          return (<div><img src={val.social.image} /><StyledInput value={val.link} {...inputProps[idx]} inputRef={ref[idx]} /></div>)
+        }
+        return null;
       })}
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </StyledSelectWrapper>
