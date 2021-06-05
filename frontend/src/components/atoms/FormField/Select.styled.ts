@@ -33,4 +33,5 @@ export const StyledSocialIcon = styled.img`
     width: 24px;
     height: 24px;
     margin-right: 10px;
+    cursor: pointer;
 `;
