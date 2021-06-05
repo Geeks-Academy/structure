@@ -3,7 +3,7 @@ import JSONconfig from './JSONconfig';
 
 class Treant {
   constructor(jsonConfig: any) {
-    if (jsonConfig instanceof Array) {
+    if (Array.isArray(jsonConfig)) {
       jsonConfig = JSONconfig.make(jsonConfig.filter(Boolean));
     }
 

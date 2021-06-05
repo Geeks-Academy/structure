@@ -41,9 +41,17 @@ export const getOne = async (req: Request, res: Response): Promise<Response> => 
 };
 
 export const create = async (req: Request, res: Response): Promise<Response> => {
-  const user = req.body;
+  const body = req.body as IUser;
   try {
-    const result = await User.create(user);
+    if (body.email) {
+      const users = await User.findOne({ email: body.email }).countDocuments();
+      if (users) {
+        return res
+          .status(StatusCode.BAD_REQUEST)
+          .json({ message: 'This email already exists', value: body.email, field: 'email' });
+      }
+    }
+    const result = await User.create(body);
     return res.status(StatusCode.CREATED).json(result);
   } catch (error) {
     console.log(error);
@@ -56,11 +64,26 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
   if (req.body.boss === userId) {
     return res
       .status(StatusCode.BAD_REQUEST)
-      .json({ ok: false, message: 'It is not possible set boss to be the same as user' });
+      .json({
+        ok: false,
+        message: 'It is not possible set boss to be the same as user',
+        field: 'boss',
+      });
   }
-  const update = req.body as Partial<IUser>;
+  const body = req.body as Partial<IUser>;
   try {
-    const user = await User.findByIdAndUpdate(userId, update);
+    if (body.email) {
+      const userDocuments = await User.find({
+        _id: { $ne: userId },
+        email: body.email,
+      }).countDocuments();
+      if (userDocuments) {
+        return res
+          .status(StatusCode.BAD_REQUEST)
+          .json({ message: 'This email already exists', value: body.email, field: 'email' });
+      }
+    }
+    const user = await User.findByIdAndUpdate(userId, body);
     if (!user) {
       return res.status(StatusCode.NOT_FOUND).json({ ok: false, message: 'User not found' });
     }

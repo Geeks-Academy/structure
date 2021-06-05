@@ -224,8 +224,8 @@ describe('User controller', () => {
       .send(user2)
       .expect(400)
       .then(({ body }) => {
-        expect(Array.isArray(body)).toBeTruthy();
-        expect(body[0].context.key).toBe('email');
+        expect(body).toHaveProperty('message');
+        expect(body.value).toBe(user2.email);
       });
   });
 
@@ -308,24 +308,28 @@ describe('User controller', () => {
   });
 
   test('PUT /api/users/:id should throw an error because of duplicated email', async () => {
-    const user = await User.create({
+    await User.create({
       name: 'John Doe',
       title: 'Frontend Developer',
       email: 'jdoe@test.com',
     });
-    const user2 = {
+    const user2 = await User.create({
       name: 'John Doe',
       title: 'Software Developer',
+      email: 'jdoe2@test.com',
+    });
+
+    const data = {
       email: 'jdoe@test.com',
     };
 
     await supertest(app)
-      .put(`/api/users/${user.id}`)
-      .send(user2)
+      .put(`/api/users/${user2.id}`)
+      .send(data)
       .expect(400)
       .then(({ body }) => {
-        expect(Array.isArray(body)).toBeTruthy();
-        expect(body[0].context.key).toBe('email');
+        expect(body).toHaveProperty('message');
+        expect(body.value).toBe(data.email);
       });
   });
 

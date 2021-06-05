@@ -9,3 +9,7 @@ export const replaceUserInfoIntoSelectOptions = (users: any) => {
     value: user._id,
   }));
 };
+
+export const removeCurrentUser = (currentUser: any, users: any) => {
+  return users.filter((user: any) => user.value !== currentUser._id);
+};

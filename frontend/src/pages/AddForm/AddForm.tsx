@@ -10,7 +10,7 @@ import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions } from 'helpers';
-import { IUserOptions } from 'Types/interfaces';
+import { IUser, IUserOptions } from 'Types/interfaces';
 import ImageUploader from 'components/molecules/ImageUploader';
 import {
   StyledBottomWrapper,
@@ -20,7 +20,7 @@ import {
   StyledForm,
   StyledButtonWrapper,
   StyledSubmitButton,
-  StyledCancelButton,
+  StyledOutlineButton,
 } from './AddForm.styled';
 
 const { getAllUsers, createUser } = UserRequests;
@@ -43,21 +43,26 @@ const AddForm = (): JSX.Element => {
     handleSubmit,
     control,
     setValue,
+    setError,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUser>({
     resolver,
     defaultValues,
   });
 
   useAsyncEffect(async () => {
-    const users: any = await getAllUsers();
+    const users = await getAllUsers();
     const data = replaceUserInfoIntoSelectOptions(users);
     setUsers(data);
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = async (values: any) => {
-    await createUser(values);
+  const onSubmit = async (values: IUser) => {
+    const result = await createUser(values);
+    if (result.error) {
+      setError(result.field, { message: result.reason });
+      return;
+    }
     onCancel();
   };
 
@@ -87,9 +92,9 @@ const AddForm = (): JSX.Element => {
           />
           <ImageUploader name="image" setValue={setValue} control={control} />
           <StyledButtonWrapper>
-            <StyledCancelButton onClick={onCancel} type="button">
+            <StyledOutlineButton onClick={onCancel} type="button">
               Cancel
-            </StyledCancelButton>
+            </StyledOutlineButton>
             <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
           </StyledButtonWrapper>
         </StyledForm>

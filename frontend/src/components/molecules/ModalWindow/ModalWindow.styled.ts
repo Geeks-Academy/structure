@@ -68,7 +68,7 @@ export const StyledButton = styled(Button)<{ title: string }>`
   background-color: ${({ title }) => handleButtonColor(title)};
 `;
 
-export const StyledCancelButton = styled(Button)`
+export const StyledOutlineButton = styled(Button)`
   background-color: #656565;
 `;
 

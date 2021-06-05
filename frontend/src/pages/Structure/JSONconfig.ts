@@ -1,13 +1,11 @@
 const JSONconfig = {
   jsonStructure: {
-    chart: {},
     nodeStructure: {
       children: [],
     },
   },
   make(configArray: any): any {
     this.jsonStructure = {
-      chart: {},
       nodeStructure: {
         children: [],
       },
@@ -16,12 +14,7 @@ const JSONconfig = {
     let i = configArray.length;
     while (i--) {
       const node = configArray[i];
-      if (node.hasOwnProperty('container')) {
-        this.jsonStructure.chart = node;
-        continue;
-      }
-
-      if (!node.hasOwnProperty('parent') && !node.hasOwnProperty('container')) {
+      if (!node.hasOwnProperty('parent')) {
         this.jsonStructure.nodeStructure = node;
         node.myID = this.getID();
       }
