@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useController, FieldError, Control } from 'react-hook-form';
 import ErrorMessage from 'components/atoms/ErrorMessage';
-import { StyledSelectWrapper, StyledOption, StyledSelect, StyledLabel } from './Select.styled';
+import { StyledSelectWrapper, StyledOption, StyledSelect, StyledLabel, StyledSocialWrapper, StyledSocialIcon } from './Select.styled';
 import { IUser } from '../../../Types/interfaces';
 import { StyledInput } from './Input.styled';
 import { useAsyncEffect } from '../../../hooks';
@@ -34,7 +34,7 @@ const Socials = ({ control, name, label, error }: IProps): JSX.Element => {
       {value.map((social, idx) => {
         console.log(social.social.name);
         if (clickedIdx !== idx) {
-          return (<img src={social.social.image} onClick={() => setClickedIdx(idx)} />)
+          return (<StyledSocialIcon src={social.social.image} onClick={() => setClickedIdx(idx)} />)
         }
         return null;
       })}
@@ -42,7 +42,7 @@ const Socials = ({ control, name, label, error }: IProps): JSX.Element => {
       {value.map((val, idx) => {
         console.log(val.link);
         if (clickedIdx === idx) {
-          return (<div><img src={val.social.image} /><StyledInput defaultValue={val.link} {...inputProps[idx]} inputRef={ref[idx]} /></div>)
+          return (<StyledSocialWrapper><StyledSocialIcon src={val.social.image} /><StyledInput defaultValue={val.link} {...inputProps[idx]} inputRef={ref[idx]} /></StyledSocialWrapper>)
         }
         return null;
       })}
