@@ -6,18 +6,9 @@ import { UserRequests } from 'Services';
 import IconButton from '@material-ui/core/IconButton';
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
 import { StyledContainer, StyledImage, StyledInput, StyledLabel } from './ImageUploader.styled';
+import { IImageUploader, IUploadResponse } from './ImageUploader.model';
 
-interface IProps {
-  name: string;
-  setValue?: (name: string) => void;
-}
-
-interface IUploadImageResponse {
-  path?: string;
-  message?: string;
-}
-
-const ImageUploader = ({ name, setValue }: IProps): JSX.Element => {
+const ImageUploader = ({ name, setValue }: IImageUploader): JSX.Element => {
   const [image, setImage] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const { postImage } = UserRequests;
@@ -36,13 +27,12 @@ const ImageUploader = ({ name, setValue }: IProps): JSX.Element => {
     if (file) {
       convertFileIntoBase64(file).then((res) => {
         postImage({ image: res }).then((res) => {
-          const { path, message }: IUploadImageResponse = res.data.data;
-          if (path) {
-            setMessage('');
-            setImage(path);
-            setValue(name, path);
+          const { url, message }: IUploadResponse = res.data.data;
+          setMessage(message);
+          if (url) {
+            setImage(url);
+            setValue(name, url);
           } else {
-            setMessage(message);
             setImage('');
             setValue(name, '');
           }
@@ -61,7 +51,7 @@ const ImageUploader = ({ name, setValue }: IProps): JSX.Element => {
         </IconButton>
       </StyledLabel>
       {image && <StyledImage src={image} />}
-      {message && <ErrorMessage> {message} </ErrorMessage>}
+      {message && !image && <ErrorMessage> {message} </ErrorMessage>}
     </StyledContainer>
   );
 };
