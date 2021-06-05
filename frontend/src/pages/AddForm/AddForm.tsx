@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -38,14 +38,11 @@ const defaultValues = {
 const AddForm = (): JSX.Element => {
   const history = useHistory();
   const [users, setUsers] = useState<IUserOptions[]>([]);
-  // const [image, setImage] = useState<string>('');
-  // const [message, setMessage] = useState<string>('');
 
   const {
     handleSubmit,
     control,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
     resolver,
@@ -63,9 +60,6 @@ const AddForm = (): JSX.Element => {
     await createUser(values);
     onCancel();
   };
-
-  const formValues = watch('image');
-  console.log('formValues', formValues);
 
   return (
     <StyledContainer>
@@ -91,7 +85,7 @@ const AddForm = (): JSX.Element => {
             control={control}
             error={errors.openToWork}
           />
-          <ImageUploader name="image" setValue={setValue} />
+          <ImageUploader name="image" setValue={setValue} control={control} />
           <StyledButtonWrapper>
             <StyledCancelButton onClick={onCancel} type="button">
               Cancel

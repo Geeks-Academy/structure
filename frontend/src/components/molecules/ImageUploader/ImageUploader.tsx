@@ -5,13 +5,20 @@ import ErrorMessage from 'components/atoms/ErrorMessage';
 import { UserRequests } from 'Services';
 import IconButton from '@material-ui/core/IconButton';
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
-import { StyledContainer, StyledImage, StyledInput, StyledLabel } from './ImageUploader.styled';
+import { useController } from 'react-hook-form';
 import { IImageUploader, IUploadResponse } from './ImageUploader.model';
+import { StyledContainer, StyledImage, StyledInput, StyledLabel } from './ImageUploader.styled';
 
-const ImageUploader = ({ name, setValue }: IImageUploader): JSX.Element => {
-  const [image, setImage] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element => {
   const { postImage } = UserRequests;
+  const [message, setMessage] = useState<string>('');
+
+  const {
+    field: { value },
+  } = useController({
+    name,
+    control,
+  });
 
   const convertFileIntoBase64 = (file: File): any => {
     return new Promise<string>((resolve, reject) => {
@@ -29,13 +36,7 @@ const ImageUploader = ({ name, setValue }: IImageUploader): JSX.Element => {
         postImage({ image: res }).then((res) => {
           const { url, message }: IUploadResponse = res.data.data;
           setMessage(message);
-          if (url) {
-            setImage(url);
-            setValue(name, url);
-          } else {
-            setImage('');
-            setValue(name, '');
-          }
+          setValue(name, url);
         });
       });
     }
@@ -50,8 +51,8 @@ const ImageUploader = ({ name, setValue }: IImageUploader): JSX.Element => {
           <ImageRoundedIcon fontSize="large" />
         </IconButton>
       </StyledLabel>
-      {image && <StyledImage src={image} />}
-      {message && !image && <ErrorMessage> {message} </ErrorMessage>}
+      {value && <StyledImage src={value} />}
+      {message && !value && <ErrorMessage> {message} </ErrorMessage>}
     </StyledContainer>
   );
 };
