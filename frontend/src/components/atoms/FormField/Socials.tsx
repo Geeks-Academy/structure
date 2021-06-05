@@ -42,7 +42,7 @@ const Socials = ({ control, name, label, error }: IProps): JSX.Element => {
       {value.map((val, idx) => {
         console.log(val.link);
         if (clickedIdx === idx) {
-          return (<div><img src={val.social.image} /><StyledInput value={val.link} {...inputProps[idx]} inputRef={ref[idx]} /></div>)
+          return (<div><img src={val.social.image} /><StyledInput defaultValue={val.link} {...inputProps[idx]} inputRef={ref[idx]} /></div>)
         }
         return null;
       })}
