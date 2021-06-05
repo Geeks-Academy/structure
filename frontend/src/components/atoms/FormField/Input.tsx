@@ -23,7 +23,7 @@ const CustomInput = ({ control, name, label, error }: IProps) => {
   return (
     <div>
       <StyledLabel>{label}</StyledLabel>
-      <StyledInput {...inputProps} inputRef={ref} />
+      <StyledInput variant="standard" {...inputProps} inputRef={ref} />
       {error && <StyledError>{error.message}</StyledError>}
     </div>
   );

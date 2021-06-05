@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -11,6 +11,7 @@ import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions } from 'helpers';
 import { IUserOptions } from 'Types/interfaces';
+import ImageUploader from 'components/molecules/ImageUploader';
 import {
   StyledBottomWrapper,
   StyledContainer,
@@ -22,7 +23,7 @@ import {
   StyledCancelButton,
 } from './AddForm.styled';
 
-const { getAllUsers, createUser, postImage } = UserRequests;
+const { getAllUsers, createUser } = UserRequests;
 
 const defaultValues = {
   name: '',
@@ -37,11 +38,14 @@ const defaultValues = {
 const AddForm = (): JSX.Element => {
   const history = useHistory();
   const [users, setUsers] = useState<IUserOptions[]>([]);
+  // const [image, setImage] = useState<string>('');
+  // const [message, setMessage] = useState<string>('');
 
   const {
     handleSubmit,
     control,
-    register,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver,
@@ -60,23 +64,8 @@ const AddForm = (): JSX.Element => {
     onCancel();
   };
 
-  const convertFileIntoBase64 = (file: File): any => {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
-  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      convertFileIntoBase64(file).then((res) => {
-        postImage({ image: res });
-      });
-    }
-  };
+  const formValues = watch('image');
+  console.log('formValues', formValues);
 
   return (
     <StyledContainer>
@@ -102,7 +91,7 @@ const AddForm = (): JSX.Element => {
             control={control}
             error={errors.openToWork}
           />
-          <input type="file" {...register('image')} onChange={handleImage} accept="image/*" />
+          <ImageUploader name="image" setValue={setValue} />
           <StyledButtonWrapper>
             <StyledCancelButton onClick={onCancel} type="button">
               Cancel

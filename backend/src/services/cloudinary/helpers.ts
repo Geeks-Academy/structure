@@ -16,7 +16,7 @@ export const detectImage = async (photoObject: any) => {
   const { version, public_id, format } = photoObject;
   const baseUrl = 'https://res.cloudinary.com';
   const cloudName = process.env.CLOUDINARY_NAME;
-  const params = 'c_thumb,g_face,w_200,h_200';
+  const params = 'c_thumb,g_face,w_300,h_300';
   const info = 'fl_getinfo';
 
   const infoUrl = `${baseUrl}/${cloudName}/image/upload/${params}/${info}/v${version}/${public_id}.${format}`;
@@ -29,7 +29,7 @@ export const detectImage = async (photoObject: any) => {
       hasFace = !!body.landmarks[0].length;
     });
 
-  return hasFace ? { path: imageUrl } : { message: "Are you kidding me? It's not a human" };
+  return hasFace ? { path: imageUrl } : { message: "Are you kidding me? It's not a human." };
 };
 
 export const uploadImage = async (req: Request, res: Response): Promise<Response> => {
