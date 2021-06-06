@@ -51,14 +51,13 @@ const Socials = ({ control, name, label, error, register }: IProps): JSX.Element
           return (<StyledSocialWrapper>
             <StyledSocialIcon src={val.image} key={val._id}
                               onClick={() => setClickedIdx(null)}/>
-            <StyledInput onChange={e => console.log(e.target.value)}
-                         defaultValue={fields && fields.map(field => {
-                           if (field.social.name === val.name) {
-                             return field.link;
-                           }
-                           return null;
-                         }).join('')
-                         }
+            <StyledInput defaultValue={fields && fields.map(field => {
+              if (field.social.name === val.name) {
+                return field.link;
+              }
+              return null;
+            }).join('')
+            }
                          {...register(`${name}.${idx}.link`)}
             />
             <input type="hidden" value={val._id} {...register(`${name}.${idx}.social`)} />
