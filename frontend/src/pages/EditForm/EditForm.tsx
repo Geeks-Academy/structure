@@ -44,6 +44,7 @@ const EditForm = (): JSX.Element => {
     handleSubmit,
     control,
     reset,
+    register,
     setError,
     formState: { errors },
   } = useForm<IUser>({ defaultValues, resolver });
@@ -92,7 +93,7 @@ const EditForm = (): JSX.Element => {
             options={users}
             error={errors.boss}
           />
-          <Socials label="Socials" name="socials" control={control}  />
+          <Socials label="Socials" name="socials" control={control} register={register} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />
           <CustomCheckbox
             label="Open to work"
