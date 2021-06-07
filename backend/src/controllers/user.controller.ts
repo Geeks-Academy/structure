@@ -62,13 +62,11 @@ export const create = async (req: Request, res: Response): Promise<Response> => 
 export const update = async (req: Request, res: Response): Promise<Response> => {
   const userId = req.params.id;
   if (req.body.boss === userId) {
-    return res
-      .status(StatusCode.BAD_REQUEST)
-      .json({
-        ok: false,
-        message: 'It is not possible set boss to be the same as user',
-        field: 'boss',
-      });
+    return res.status(StatusCode.BAD_REQUEST).json({
+      ok: false,
+      message: 'It is not possible set boss to be the same as user',
+      field: 'boss',
+    });
   }
   const body = req.body as Partial<IUser>;
   try {
@@ -129,7 +127,7 @@ export const deleteOne = async (req: Request, res: Response): Promise<Response> 
 
     return res.json({
       ok: true,
-      message: 'Boss delete successfully. Children now have the new Boss from their Boss.',
+      message: 'User deleted successfully',
     });
   } catch (error) {
     return res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: error.message });
