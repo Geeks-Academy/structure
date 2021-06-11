@@ -14,7 +14,7 @@ const JSONconfig = {
     let i = configArray.length;
     while (i--) {
       const node = configArray[i];
-      if (!node.hasOwnProperty('parent')) {
+      if (!node.parent) {
         this.jsonStructure.nodeStructure = node;
         node.myID = this.getID();
       }
