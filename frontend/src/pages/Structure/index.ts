@@ -1,2 +1,1 @@
-import Structure from './Structure';
-export default Structure;
+export { default } from './Structure';

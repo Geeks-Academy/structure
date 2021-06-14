@@ -6,18 +6,36 @@ export const StyledContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  width: 500px;
-  height: auto;
   margin: 15px 0;
+`;
+export const StyledImageWrapper = styled.div`
+  position: relative;
+  height: 200px;
 `;
 
 export const StyledLabel = styled.label`
   font-size: 20px;
   color: ${colors.background.darkGray};
+  margin-bottom: 5px;
+`;
+
+export const StyledButtonLabel = styled.label`
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  font-size: 20px;
+  background-color: ${colors.background.white};
+  border-radius: 5px;
+  margin: 0;
+  span {
+    padding: 0;
+  }
 `;
 
 export const StyledImage = styled.img`
-  margin: 10px 0;
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
 `;
 
 export const StyledInput = styled.input`

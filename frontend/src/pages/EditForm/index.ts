@@ -1,3 +1,1 @@
-import EditForm from './EditForm';
-
-export default EditForm;
+export { default } from './EditForm';

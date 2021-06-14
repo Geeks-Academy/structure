@@ -9,7 +9,7 @@ import CustomSelect from 'components/atoms/FormField/Select';
 import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
-import { replaceUserInfoIntoSelectOptions } from 'helpers';
+import { replaceUserInfoIntoSelectOptions, userPlaceholder } from 'helpers';
 import { IUserOptions } from 'Types/interfaces';
 import ImageUploader from 'components/molecules/ImageUploader';
 import {
@@ -29,7 +29,7 @@ const defaultValues = {
   name: '',
   boss: '',
   email: '',
-  image: '',
+  image: userPlaceholder,
   title: '',
   manager: false,
   openToWork: false,
@@ -78,6 +78,7 @@ const AddForm = (): JSX.Element => {
             options={users}
             error={errors.boss}
           />
+          <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />
           <CustomCheckbox
             label="Open to work"
@@ -85,7 +86,6 @@ const AddForm = (): JSX.Element => {
             control={control}
             error={errors.openToWork}
           />
-          <ImageUploader name="image" setValue={setValue} control={control} />
           <StyledButtonWrapper>
             <StyledCancelButton onClick={onCancel} type="button">
               Cancel

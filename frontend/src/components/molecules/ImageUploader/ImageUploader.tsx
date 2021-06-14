@@ -7,7 +7,14 @@ import IconButton from '@material-ui/core/IconButton';
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
 import { useController } from 'react-hook-form';
 import { IImageUploader, IUploadResponse } from './ImageUploader.model';
-import { StyledContainer, StyledImage, StyledInput, StyledLabel } from './ImageUploader.styled';
+import {
+  StyledButtonLabel,
+  StyledContainer,
+  StyledImage,
+  StyledImageWrapper,
+  StyledInput,
+  StyledLabel,
+} from './ImageUploader.styled';
 
 const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element => {
   const { postImage } = UserRequests;
@@ -45,13 +52,15 @@ const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element
   return (
     <StyledContainer>
       <StyledInput id={name} name={name} type="file" accept="image/*" onChange={handleImage} />
-      <StyledLabel htmlFor={name}>
-        Image:
-        <IconButton color="primary" component="span">
-          <ImageRoundedIcon fontSize="large" />
-        </IconButton>
-      </StyledLabel>
-      {value && <StyledImage src={value} />}
+      <StyledLabel> Image </StyledLabel>
+      <StyledImageWrapper>
+        <StyledButtonLabel htmlFor={name}>
+          <IconButton color="primary" component="span">
+            <ImageRoundedIcon fontSize="large" />
+          </IconButton>
+        </StyledButtonLabel>
+        <StyledImage src={value} />
+      </StyledImageWrapper>
       {message && !value && <ErrorMessage> {message} </ErrorMessage>}
     </StyledContainer>
   );

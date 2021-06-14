@@ -1,8 +1,5 @@
-import Dashboard from 'pages/DashBoard';
-import Structure from 'pages/Structure';
-import AddForm from 'pages/AddForm';
+import { AddForm, Dashboard, EditForm, Structure } from 'pages';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import EditForm from 'pages/EditForm';
 
 const Routes = (): JSX.Element => {
   return (
