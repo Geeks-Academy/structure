@@ -44,10 +44,7 @@ const AddForm = (): JSX.Element => {
     control,
     setValue,
     formState: { errors },
-  } = useForm({
-    resolver,
-    defaultValues,
-  });
+  } = useForm({ resolver, defaultValues });
 
   useAsyncEffect(async () => {
     const users: any = await getAllUsers();
@@ -56,7 +53,7 @@ const AddForm = (): JSX.Element => {
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: Partial<IUser>) => {
     await createUser(values);
     onCancel();
   };

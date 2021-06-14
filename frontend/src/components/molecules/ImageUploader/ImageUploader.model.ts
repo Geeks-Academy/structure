@@ -1,6 +1,7 @@
 export interface IImageUploader {
   name: string;
-  setValue?: (name: string) => void;
+  setValue?: any;
+  control: any;
 }
 
 export interface IUploadResponse {
