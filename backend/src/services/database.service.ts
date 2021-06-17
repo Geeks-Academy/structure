@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING as string;
 
-const connectDb = async () => {
+const connectDb = () => {
   try {
-    await mongoose.connect(MONGO_CONNECTION_STRING, {
+    mongoose.connect(MONGO_CONNECTION_STRING, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
