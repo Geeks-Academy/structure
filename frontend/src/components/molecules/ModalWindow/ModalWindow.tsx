@@ -3,7 +3,7 @@ import { useOutsideClick } from 'hooks';
 import { IModalWindow } from './ModalWindow.model';
 import {
   StyledButton,
-  StyledCancelButton,
+  StyledOutlineButton,
   StyledContainer,
   StyledParagraph,
   StyledTitle,
@@ -33,7 +33,7 @@ const ModalWindow = ({
           <StyledParagraph> {description} </StyledParagraph>
         </StyledWrapper>
         <StyledWrapper>
-          <StyledCancelButton onClick={handleCancel}>Cancel</StyledCancelButton>
+          <StyledOutlineButton onClick={handleCancel}>Cancel</StyledOutlineButton>
           <StyledButton title={title} onClick={handleConfirm}>
             {title}
           </StyledButton>

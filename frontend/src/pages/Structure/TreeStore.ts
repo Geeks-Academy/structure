@@ -4,12 +4,12 @@ class TreeStore {
   static store: Array<Tree> = [];
 
   static createTree(jsonConfig: any): Tree {
-    this.store.push(new Tree(jsonConfig, this.store.length));
-    return this.store[this.store.length - 1];
+    this.store.push(new Tree(jsonConfig));
+    return this.store[0];
   }
 
-  static get(treeId: number): Tree {
-    return this.store[treeId];
+  static get(): Tree {
+    return this.store[0];
   }
 }
 

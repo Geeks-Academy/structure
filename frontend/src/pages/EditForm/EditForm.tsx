@@ -19,7 +19,7 @@ import {
   StyledForm,
   StyledButtonWrapper,
   StyledSubmitButton,
-  StyledCancelButton,
+  StyledOutlineButton,
 } from './EditForm.styled';
 
 interface IUser {
@@ -84,7 +84,6 @@ const EditForm = (): JSX.Element => {
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <CustomInput label="Name" name="name" control={control} error={errors.name} />
           <CustomInput label="Email" name="email" control={control} error={errors.email} />
-          {/* <CustomInput label="Image" name="image" control={control} error={errors.image} /> */}
           <CustomInput label="Title" name="title" control={control} error={errors.title} />
           <CustomSelect
             label="Boss"
@@ -102,9 +101,9 @@ const EditForm = (): JSX.Element => {
             error={errors.openToWork}
           />
           <StyledButtonWrapper>
-            <StyledCancelButton onClick={onCancel} type="button">
+            <StyledOutlineButton onClick={onCancel} type="button">
               Cancel
-            </StyledCancelButton>
+            </StyledOutlineButton>
             <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
           </StyledButtonWrapper>
         </StyledForm>

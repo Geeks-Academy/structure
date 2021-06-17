@@ -6,6 +6,7 @@ import { UserRequests } from 'Services';
 import IconButton from '@material-ui/core/IconButton';
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded';
 import { useController } from 'react-hook-form';
+import { userPlaceholder } from 'helpers';
 import { IImageUploader, IUploadResponse } from './ImageUploader.model';
 import {
   StyledButtonLabel,
@@ -42,8 +43,9 @@ const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element
       convertFileIntoBase64(file).then((res) => {
         postImage({ image: res }).then((res) => {
           const { url, message }: IUploadResponse = res.data.data;
+          const convertedUrl = url || userPlaceholder;
           setMessage(message);
-          setValue(name, url);
+          setValue(name, convertedUrl);
         });
       });
     }
@@ -61,7 +63,7 @@ const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element
         </StyledButtonLabel>
         <StyledImage src={value} />
       </StyledImageWrapper>
-      {message && !value && <ErrorMessage> {message} </ErrorMessage>}
+      {message && <ErrorMessage> {message} </ErrorMessage>}
     </StyledContainer>
   );
 };

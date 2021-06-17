@@ -1,5 +1,4 @@
 import TreeNode from './TreeNode';
-import Util from './Util';
 
 class NodeDB {
   db: any;
@@ -9,29 +8,17 @@ class NodeDB {
     const self = this;
 
     function itterateChildren(node: any, parentId: any) {
-      let newNode = self.createNode(node, parentId, tree, null);
-
+      let newNode = self.createNode(node, parentId, null);
       if (node.children) {
         newNode.children = [];
-        if (node.childrenDropLevel && node.childrenDropLevel > 0) {
-          while (node.childrenDropLevel--) {
-            const connStyle = Util.cloneObj(newNode.connStyle);
-            newNode = self.createNode('pseudo', newNode.id, tree, null);
-            newNode.connStyle = connStyle;
-            newNode.children = [];
-          }
-        }
-
-        const stack = node.stackChildren && !self.hasGrandChildren(node) ? newNode.id : null;
-
+        const stack = !self.hasGrandChildren(node) ? newNode.id : null;
         // svildren are position on separate leves, one beneeth the other
         if (stack !== null) {
           newNode.stackChildren = [];
         }
-
         node.children.forEach((n: any, i: any, array: any) => {
           if (stack !== null) {
-            newNode = self.createNode(n, newNode.id, tree, stack);
+            newNode = self.createNode(n, newNode.id, stack);
             if (i + 1 < array.length) newNode.children = [];
           } else {
             itterateChildren(n, newNode.id);
@@ -56,8 +43,8 @@ class NodeDB {
     return this.db[nodeId];
   }
 
-  createNode(nodeStructure: any, parentId: any, tree: any, stackParentId: any): any {
-    const node = new TreeNode(nodeStructure, this.db.length, parentId, tree, stackParentId);
+  createNode(nodeStructure: any, parentId: any, stackParentId: any): any {
+    const node = new TreeNode(nodeStructure, this.db.length, parentId, stackParentId);
 
     this.db.push(node);
     if (parentId >= 0) {

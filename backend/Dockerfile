@@ -1,4 +1,4 @@
-FROM node:14.15-stretch-slim
+FROM node:16.0-buster-slim
 
 WORKDIR /opt/app
 COPY package*.json .
