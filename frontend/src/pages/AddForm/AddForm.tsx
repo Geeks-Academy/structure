@@ -43,6 +43,7 @@ const AddForm = (): JSX.Element => {
     handleSubmit,
     control,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<IUser>({ resolver, defaultValues });
 
