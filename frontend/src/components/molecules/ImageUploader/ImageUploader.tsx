@@ -40,14 +40,22 @@ const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      convertFileIntoBase64(file).then((res) => {
-        postImage({ image: res }).then((res) => {
-          const { url, message }: IUploadResponse = res.data.data;
-          const convertedUrl = url || userPlaceholder;
-          setMessage(message);
-          setValue(name, convertedUrl);
+      convertFileIntoBase64(file)
+        .then((res) => {
+          postImage({ image: res })
+            .then((res) => {
+              const { url, message }: IUploadResponse = res.data.data;
+              const convertedUrl = url || userPlaceholder;
+              setMessage(message);
+              setValue(name, convertedUrl);
+            })
+            .catch(() => {
+              setMessage('Something went wrong');
+            });
+        })
+        .catch(() => {
+          setMessage('Failed to convert the file');
         });
-      });
     }
   };
 
