@@ -1,6 +1,6 @@
 import express from 'express';
-import { uploadImage } from '../services';
 import * as userController from '../controllers/user.controller';
+import * as cloudinaryController from '../controllers/cloudinary.controller';
 import { validateBody, validateParameter } from '../validators';
 import schema from '../validators/user.validator';
 
@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .get('/', userController.getAll)
-  .post('/uploadImage', uploadImage)
+  .post('/uploadImage', cloudinaryController.upload)
   .post('/', validateBody(schema.post), userController.create)
   .get('/:id', validateParameter(schema.id), userController.getOne)
   .put('/:id', validateBody(schema.put), validateParameter(schema.id), userController.update)

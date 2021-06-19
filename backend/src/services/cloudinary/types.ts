@@ -1,4 +1,4 @@
 export interface IDetectedImageResponse {
-  message: string;
+  message: string | null;
   url: string | null;
 }
