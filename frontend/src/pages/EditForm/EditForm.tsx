@@ -8,8 +8,8 @@ import CustomSelect from 'components/atoms/FormField/Select';
 import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
-import { replaceUserInfoIntoSelectOptions } from 'helpers';
-import { IUserOptions } from 'Types/interfaces';
+import { replaceUserInfoIntoSelectOptions, removeCurrentUser } from 'helpers';
+import { IUserOptions, IUser } from 'Types/interfaces';
 import ImageUploader from 'components/molecules/ImageUploader';
 import {
   StyledBottomWrapper,
@@ -22,16 +22,7 @@ import {
   StyledOutlineButton,
 } from './EditForm.styled';
 
-interface IUser {
-  name: string;
-  title: string;
-  boss: string;
-  image: string;
-  openToWork: boolean;
-  manager: boolean;
-}
-
-const { getAllUsers, updateUser, getUser } = UserRequests;
+const { getAllUsers, updateUser, getUser, deactivate } = UserRequests;
 
 const defaultValues = {
   name: '',
@@ -47,14 +38,16 @@ const EditForm = (): JSX.Element => {
   const history = useHistory();
   const { params } = useRouteMatch<{ id: string }>();
   const [users, setUsers] = useState<IUserOptions[]>([]);
+  const [currentUser, setCurrentUser] = useState<IUser>();
 
   const {
     handleSubmit,
     control,
     reset,
     setValue,
+    setError,
     formState: { errors },
-  } = useForm({ defaultValues, resolver });
+  } = useForm<IUser>({ defaultValues, resolver });
 
   const initValues = async (): Promise<IUser> => {
     const currentUser = await getUser(params.id);
@@ -63,17 +56,33 @@ const EditForm = (): JSX.Element => {
   };
 
   useAsyncEffect(async () => {
-    reset(await initValues());
-    const users: any = await getAllUsers();
-    const data = replaceUserInfoIntoSelectOptions(users);
-    setUsers(data);
+    const initialValues = await initValues();
+    setCurrentUser(initialValues);
+    reset(initialValues);
+    const users = await getAllUsers();
+    const mappedUsersToOptions = replaceUserInfoIntoSelectOptions(users);
+    const usersWithoutCurrentUser = removeCurrentUser(initialValues, mappedUsersToOptions);
+
+    setUsers(usersWithoutCurrentUser);
   });
 
   const onCancel = () => history.replace('/admin');
-  const onSubmit = async (values: Partial<IUser>) => {
-    await updateUser(values);
+  const deactivateUser = async () => {
+    const result = await deactivate(currentUser?._id as string);
+    if (result.status === 200) {
+      onCancel();
+    }
+  };
+  const onSubmit = async (values: IUser) => {
+    const result = await updateUser(values);
+    if (result.error) {
+      setError(result.field, { message: result.reason });
+      return;
+    }
     onCancel();
   };
+
+  const isActive = currentUser?.active;
 
   return (
     <StyledContainer>
@@ -100,11 +109,22 @@ const EditForm = (): JSX.Element => {
             control={control}
             error={errors.openToWork}
           />
-          <StyledButtonWrapper>
-            <StyledOutlineButton onClick={onCancel} type="button">
-              Cancel
-            </StyledOutlineButton>
-            <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+          <StyledButtonWrapper
+            style={{
+              justifyContent: isActive ? 'space-between' : 'flex-end',
+            }}
+          >
+            {isActive && (
+              <StyledOutlineButton onClick={deactivateUser} type="button">
+                Deactivate
+              </StyledOutlineButton>
+            )}
+            <div>
+              <StyledOutlineButton onClick={onCancel} type="button">
+                Cancel
+              </StyledOutlineButton>
+              <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+            </div>
           </StyledButtonWrapper>
         </StyledForm>
       </StyledBottomWrapper>

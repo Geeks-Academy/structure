@@ -12,9 +12,9 @@ export class Fetcher {
       }));
   };
 
-  static post = (url: string, data?: unknown, config?: any): Promise<any> => {
+  static post = (url: string, data?: unknown): Promise<any> => {
     return axiosInstance
-      .post(url, data, config)
+      .post(url, data)
       .then((r) => r)
       .catch((err) => {
         return {

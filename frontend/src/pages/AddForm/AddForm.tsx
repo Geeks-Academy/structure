@@ -45,7 +45,10 @@ const AddForm = (): JSX.Element => {
     setValue,
     setError,
     formState: { errors },
-  } = useForm<IUser>({ resolver, defaultValues });
+  } = useForm<IUser>({
+    resolver,
+    defaultValues,
+  });
 
   useAsyncEffect(async () => {
     const users = await getAllUsers();
