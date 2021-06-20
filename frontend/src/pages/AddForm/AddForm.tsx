@@ -1,4 +1,6 @@
-import { useState } from 'react';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+import React, { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +9,8 @@ import CustomSelect from 'components/atoms/FormField/Select';
 import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
-import { replaceUserInfoIntoSelectOptions } from 'helpers';
+import { replaceUserInfoIntoSelectOptions, userPlaceholder } from 'helpers';
+import ImageUploader from 'components/molecules/ImageUploader';
 import { IUser, IUserOptions } from 'Types/interfaces';
 import {
   StyledBottomWrapper,
@@ -26,7 +29,7 @@ const defaultValues = {
   name: '',
   boss: '',
   email: '',
-  image: '',
+  image: userPlaceholder,
   title: '',
   manager: false,
   openToWork: false,
@@ -39,6 +42,7 @@ const AddForm = (): JSX.Element => {
   const {
     handleSubmit,
     control,
+    setValue,
     setError,
     formState: { errors },
   } = useForm<IUser>({
@@ -71,7 +75,6 @@ const AddForm = (): JSX.Element => {
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <CustomInput label="Name" name="name" control={control} error={errors.name} />
           <CustomInput label="Email" name="email" control={control} error={errors.email} />
-          <CustomInput label="Image" name="image" control={control} error={errors.image} />
           <CustomInput label="Title" name="title" control={control} error={errors.title} />
           <CustomSelect
             label="Boss"
@@ -80,6 +83,7 @@ const AddForm = (): JSX.Element => {
             options={users}
             error={errors.boss}
           />
+          <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />
           <CustomCheckbox
             label="Open to work"

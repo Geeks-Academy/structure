@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -10,6 +10,7 @@ import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions, removeCurrentUser } from 'helpers';
 import { IUserOptions, IUser } from 'Types/interfaces';
+import ImageUploader from 'components/molecules/ImageUploader';
 import {
   StyledBottomWrapper,
   StyledContainer,
@@ -43,6 +44,7 @@ const EditForm = (): JSX.Element => {
     handleSubmit,
     control,
     reset,
+    setValue,
     setError,
     formState: { errors },
   } = useForm<IUser>({ defaultValues, resolver });
@@ -91,7 +93,6 @@ const EditForm = (): JSX.Element => {
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <CustomInput label="Name" name="name" control={control} error={errors.name} />
           <CustomInput label="Email" name="email" control={control} error={errors.email} />
-          <CustomInput label="Image" name="image" control={control} error={errors.image} />
           <CustomInput label="Title" name="title" control={control} error={errors.title} />
           <CustomSelect
             label="Boss"
@@ -100,6 +101,7 @@ const EditForm = (): JSX.Element => {
             options={users}
             error={errors.boss}
           />
+          <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />
           <CustomCheckbox
             label="Open to work"

@@ -21,7 +21,21 @@ export class UserRequests {
     if (data.boss?.length === 0) {
       data.boss = null;
     }
+    if (data.socials.length !== 0) {
+      data.socials = data.socials
+        .map((social: any) => {
+          if (social.social.name) {
+            social.social = social.social._id;
+          }
+          return social;
+        })
+        .filter((social: any) => Boolean(social));
+    }
     return Fetcher.put(`/users/${_id}`, data);
+  };
+
+  static postImage = async (data: any): Promise<any> => {
+    return Fetcher.post('/users/uploadImage', data);
   };
 
   static deactivate = async (

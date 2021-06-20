@@ -58,12 +58,12 @@ describe('Social Controller', () => {
     const social1 = await Social.create({
       name: 'Facebook',
       image: 'fb.png',
-      active: true
+      active: true,
     });
     const social2 = await Social.create({
       name: 'Twitter',
       image: 'twitter.png',
-      active: true
+      active: true,
     });
     await supertest(app)
       .get('/api/socials/active')

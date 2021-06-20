@@ -17,10 +17,10 @@ export const getAll = async (_req: Request, res: Response) => {
 };
 
 export const getAllActive = async (_req: Request, res: Response) => {
-    try {
-    const socials = await Social.find({active: true});
+  try {
+    const socials = await Social.find({ active: true });
     if (socials.length === 0) {
-      return res.status(StatusCode.NO_CONTENT).send()
+      return res.status(StatusCode.NO_CONTENT).send();
     }
     return res.json(socials);
   } catch (error) {
