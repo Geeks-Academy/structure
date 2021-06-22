@@ -69,7 +69,38 @@ const data = [
     title: 'Dynamic Accounts Associate',
     image: 'https://cdn.fakercloud.com/avatars/carlosjgsousa_128.jpg',
     boss: '60687134f625016e2c0ce2f4',
-    socials: [],
+    socials: [
+      {
+        social: {
+          active: true,
+          _id: '6068924ff625016e2c0ce2f5',
+          image:
+            'https://res.cloudinary.com/mras2303/image/upload/v1621288862/social_icons/facebook.png',
+          name: 'facebook',
+        },
+        link: 'https://www.facebook.com/przemek.jozwiakowski',
+      },
+      {
+        social: {
+          active: true,
+          _id: '60a2e8fc607c338c8e59fc83',
+          name: 'github',
+          image:
+            'https://res.cloudinary.com/mras2303/image/upload/v1621288862/social_icons/github.png',
+        },
+        link: 'https://github.com/Przemocny',
+      },
+      {
+        social: {
+          active: true,
+          _id: '60a2e8e0607c338c8e59fc80',
+          name: 'linkedin',
+          image:
+            'https://res.cloudinary.com/mras2303/image/upload/v1621288862/social_icons/linkedin.png',
+        },
+        link: 'https://www.linkedin.com/in/pjozwiakowski/',
+      },
+    ],
     openToWork: false,
     manager: false,
     active: true,
@@ -86,10 +117,10 @@ const tomek = (data_: Array<string | number>) => {
       email: memberItem.email,
       title: memberItem.title,
       image: memberItem.image,
-      socials: '',
       openToWork: memberItem.openToWork,
       manager: memberItem.manager,
       active: memberItem.active,
+      socials: {},
     };
   });
 
@@ -97,7 +128,12 @@ const tomek = (data_: Array<string | number>) => {
     if (memberItem.boss) {
       members[memberItem._id].parent = { ...members[memberItem.boss] };
     }
+    memberItem.socials.forEach((memberItemSocial) => {
+      const socialName = memberItemSocial.social.name.toLowerCase();
+      members[memberItem._id].socials[socialName] = memberItemSocial.link;
+    });
   });
+  console.log(members);
   return members;
 };
 
