@@ -32,3 +32,6 @@ export const detectImage = async (photoObject: any): Promise<IDetectedImageRespo
     message: !hasFace ? errorMessage : null,
   };
 };
+
+export const deleteImage = async (publicId: string) =>
+  await cloudinary.v2.uploader.destroy(publicId);
