@@ -45,7 +45,7 @@ const ImageUploader = ({ name, setValue, control }: IImageUploader): JSX.Element
           postImage({ image: res })
             .then((res) => {
               const { url, message }: IUploadResponse = res.data.data;
-              const convertedUrl = url || userPlaceholder;
+              const convertedUrl = url || value;
               setMessage(message);
               setValue(name, convertedUrl);
             })
