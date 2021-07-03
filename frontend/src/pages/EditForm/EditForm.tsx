@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
@@ -38,7 +38,7 @@ const defaultValues = {
 
 const { getAllSocials } = SocialRequests;
 
-const mapActualSocialsToAll = (allSocials: ISocialPart[], currentUser: IUser) => {
+const mapActualSocialsToAllSocials = (allSocials: ISocialPart[], currentUser: IUser) => {
   const socialArr: ISocial[] = [];
   if (allSocials) {
     allSocials.forEach((social, idx) => {
@@ -60,8 +60,6 @@ const EditForm = (): JSX.Element => {
   const { params } = useRouteMatch<{ id: string }>();
   const [users, setUsers] = useState<IUserOptions[]>([]);
   const [currentUser, setCurrentUser] = useState<IUser>(defaultValues);
-  const [allSocials, setAllSocials] = useState<ISocialPart[]>([]);
-  const [mappedSocials, setMappedSocials] = useState<ISocial[]>([]);
 
   const {
     handleSubmit,
@@ -87,11 +85,8 @@ const EditForm = (): JSX.Element => {
 
   useAsyncEffect(async () => {
     const allSocials = await fetchAllSocials();
-    setAllSocials(allSocials);
-    console.log('allsocials', allSocials);
     const initialValues = await initValues();
-    initialValues.socials = mapActualSocialsToAll(allSocials, initialValues);
-    console.log(currentUser);
+    initialValues.socials = mapActualSocialsToAllSocials(allSocials, initialValues);
     setCurrentUser(initialValues);
     reset(initialValues);
     const users = await getAllUsers();
@@ -142,7 +137,7 @@ const EditForm = (): JSX.Element => {
             control={control}
             register={register}
             getValues={getValues}
-            currentUser={currentUser}
+            socials={currentUser.socials!}
           />
           <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />

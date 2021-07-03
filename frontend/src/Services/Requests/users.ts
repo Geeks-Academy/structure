@@ -7,9 +7,7 @@ export class UserRequests {
   };
 
   static createUser = async (data: any): Promise<any> => {
-    if (data.boss?.length === 0) {
-      data.boss = null;
-    }
+    UserRequests.cleanData(data);
     return Fetcher.post(`/users`, data);
   };
 
@@ -18,6 +16,21 @@ export class UserRequests {
   };
 
   static updateUser = async ({ _id, __v, ...data }: any): Promise<any> => {
+    UserRequests.cleanData(data);
+    return Fetcher.put(`/users/${_id}`, data);
+  };
+
+  static postImage = async (data: any): Promise<any> => {
+    return Fetcher.post('/users/uploadImage', data);
+  };
+
+  static deactivate = async (
+    id: string
+  ): Promise<AxiosResponse<{ ok: boolean; message: string }>> => {
+    return Fetcher.put(`/users/deactivate/${id}`);
+  };
+
+  private static cleanData(data: any): void {
     if (data.boss?.length === 0) {
       data.boss = null;
     }
@@ -31,16 +44,5 @@ export class UserRequests {
         })
         .filter((social: any) => Boolean(social.link));
     }
-    return Fetcher.put(`/users/${_id}`, data);
-  };
-
-  static postImage = async (data: any): Promise<any> => {
-    return Fetcher.post('/users/uploadImage', data);
-  };
-
-  static deactivate = async (
-    id: string
-  ): Promise<AxiosResponse<{ ok: boolean; message: string }>> => {
-    return Fetcher.put(`/users/deactivate/${id}`);
-  };
+  }
 }
