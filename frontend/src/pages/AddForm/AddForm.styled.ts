@@ -37,7 +37,7 @@ export const StyledButtonWrapper = styled.div`
   height: 80px;
 `;
 
-export const StyledCancelButton = styled(Button)`
+export const StyledOutlineButton = styled(Button)`
   background-color: white;
   border: 1px solid red;
   color: red;

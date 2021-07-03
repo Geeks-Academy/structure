@@ -49,7 +49,7 @@ key[10] = {
 key[11] = {
   parent: key[9],
   name: 'Anika Kustra',
-  title: 'UX Designer',
+  title: 'UX Designer <br> Project Manager',
   manager: true,
   email: 'anika.kustra@gmail.com',
   active: true,
@@ -65,7 +65,7 @@ key[11] = {
 key[12] = {
   parent: key[9],
   name: 'Monika Fularska',
-  title: 'UX Designer',
+  title: 'UI/UX Designer',
   email: 'monika.fularska@onet.pl',
   active: true,
   openToWork: false,
@@ -432,35 +432,5 @@ key[36] = {
     instagram: 'https://www.instagram.com/kingasochacz_',
   },
 };
-
-key[37] = {
-  parent: key[1],
-  name: 'Kinga Sochacz',
-  email: 'kinga846@gmail.com',
-  title: 'UI/UX Designer',
-  openToWork: false,
-  active: true,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968751/members/84068257_3298497756846142_7079146718549245952_n.jpg.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/singa.kocha',
-    instagram: 'https://www.instagram.com/kingasochacz_',
-  },
-};
-
-// key[38] = {
-//   parent: key[37],
-//   name: 'Kinga Sochacz',
-//   email: 'kinga846@gmail.com',
-//   title: 'UI/UX Designer',
-//   openToWork: false,
-//   active: true,
-//   image:
-//     'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968751/members/84068257_3298497756846142_7079146718549245952_n.jpg.jpg',
-//   socials: {
-//     facebook: 'https://www.facebook.com/singa.kocha',
-//     instagram: 'https://www.instagram.com/kingasochacz_',
-//   },
-// };
 
 export const members = [...key];

@@ -5,5 +5,5 @@ export const StyledError = styled.p`
   color: ${colors.background.red};
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 80%;
+  font-size: 16px;
 `;

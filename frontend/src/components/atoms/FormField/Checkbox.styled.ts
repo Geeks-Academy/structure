@@ -8,9 +8,11 @@ export const StyledInput = styled(Checkbox)`
   margin-right: 10px;
 `;
 export const StyledWrapper = styled.div`
+  display: flex;
   margin: 5px 0;
 `;
 export const StyledLabel = styled.label`
   color: ${colors.background.darkGray};
   font-size: 15px;
+  margin-right: 10px;
 `;
