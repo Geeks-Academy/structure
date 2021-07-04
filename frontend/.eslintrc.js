@@ -56,5 +56,5 @@ module.exports = {
     'react-hooks/exhaustive-deps': 1,
     '@typescript-eslint/no-unused-vars': 1,
   },
-  ignorePatterns: 'src/pages/Structure/**/*.ts',
+  ignorePatterns: ['src/pages/Structure/**/*.ts', 'cypress'],
 };
