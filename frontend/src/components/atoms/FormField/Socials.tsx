@@ -10,7 +10,7 @@ import {
   StyledSocialWrapper,
 } from './Select.styled';
 import { StyledInput } from './Input.styled';
-import { ISocialPart, IUser, ISocial } from '../../../Types/interfaces';
+import { IUser, ISocial } from '../../../Types/interfaces';
 
 interface IProps {
   name: string;
