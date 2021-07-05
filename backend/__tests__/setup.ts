@@ -7,14 +7,12 @@ beforeAll(async () => {
   console.log = () => { };
   console.error = () => { };
   const uri = await mongod.getUri();
-  const mongooseOpts = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    poolSize: 10,
-  };
-  await mongoose.connect(uri, mongooseOpts);
+  mongoose.set('useNewUrlParser', true);
+  mongoose.set('useCreateIndex', true);
+  mongoose.set('useUnifiedTopology', true);
+  mongoose.set('useFindAndModify', false);
+  mongoose.set('poolSize', 10);
+  await mongoose.connect(uri);
 });
 
 beforeEach(async () => {
