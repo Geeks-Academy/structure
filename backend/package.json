@@ -7,7 +7,7 @@
     "start": "ts-node-dev ./src/index.ts",
     "build": "tsc",
     "prod": "cross-env NODE_ENV=production node dist/src/index.js",
-    "test": "jest --silent --",
+    "test": "jest --",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --silent --coverage"
   },

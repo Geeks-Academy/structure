@@ -12,19 +12,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
   },
-  "lint-staged": {
-    "backend/**/*.ts": [
-      "npx prettier --write --config ./backend/.prettierrc backend/**/*.ts",
-      "npx eslint --config backend/.eslintrc.js --fix"
-    ],
-    "frontend/**/*.{js,ts,tsx}": [
-      "npx prettier --write --config ./frontend/.prettierrc frontend/**/*.{js,ts,tsx}",
-      "npx eslint --config frontend/.eslintrc.js --fix"
-    ],
-    "frontend/**/*.styled.ts": [
-      "npx stylelint frontend/**/*.styled.ts"
-    ]
-  },
+  "lint-staged": {},
   "scripts": {
     "prepare": "husky install"
   }
