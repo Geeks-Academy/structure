@@ -45,7 +45,7 @@ const mapActualSocialsToAllSocials = (allSocials: ISocialPart[], currentUser: IU
       socialArr.push({ social, link: '' });
       if (currentUser && currentUser.socials) {
         currentUser.socials.forEach((userSocial) => {
-          if (userSocial.social.name === social.name) {
+          if (userSocial.social._id === social._id) {
             socialArr[idx].link = userSocial.link;
           }
         });
