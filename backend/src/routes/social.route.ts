@@ -1,5 +1,5 @@
 import express from 'express';
-import ash from 'express-async-handler'
+import ash from 'express-async-handler';
 import * as socialController from '../controllers/social.controller';
 import { validateBody, validateParameter } from '../validators';
 import schema from '../validators/social.validator';

@@ -1,5 +1,5 @@
 import express from 'express';
-import ash from 'express-async-handler'
+import ash from 'express-async-handler';
 import * as userController from '../controllers/user.controller';
 import * as cloudinaryController from '../controllers/cloudinary.controller';
 import { validateBody, validateParameter } from '../validators';
