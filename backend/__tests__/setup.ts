@@ -33,4 +33,5 @@ afterAll(async () => {
 
 afterEach(async () => {
   jest.restoreAllMocks();
+  jest.useFakeTimers();
 });
