@@ -6,16 +6,18 @@ const mongod = new MongoMemoryServer();
 beforeAll(async () => {
   console.log = () => { };
   console.error = () => { };
-  const uri = await mongod.getUri();
-  mongoose.set('useNewUrlParser', true);
-  mongoose.set('useCreateIndex', true);
-  mongoose.set('useUnifiedTopology', true);
-  mongoose.set('useFindAndModify', false);
-  mongoose.set('poolSize', 10);
-  await mongoose.connect(uri);
 });
 
 beforeEach(async () => {
+  const uri = await mongod.getUri();
+  const options = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    poolSize: 10
+  }
+  await mongoose.connect(uri, options);
   const collections = mongoose.connection.collections;
   for (const key in collections) {
     const collection = collections[key];
@@ -23,12 +25,9 @@ beforeEach(async () => {
   }
 });
 
-afterAll(async () => {
-  // await mongoose.connection.dropDatabase();
+afterEach(async () => {
+  jest.restoreAllMocks();
+  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
   await mongod.stop();
-});
-
-afterEach(() => {
-  jest.restoreAllMocks();
 });
