@@ -5,9 +5,6 @@ const mongod = new MongoMemoryServer();
 
 beforeAll(async () => {
   console.log = () => {};
-});
-
-beforeEach(async () => {
   const uri = await mongod.getUri();
   const mongooseOpts = {
     useNewUrlParser: true,
@@ -17,7 +14,9 @@ beforeEach(async () => {
     poolSize: 10,
   };
   await mongoose.connect(uri, mongooseOpts);
+});
 
+beforeEach(async () => {
   const collections = mongoose.connection.collections;
   for (const key in collections) {
     const collection = collections[key];
@@ -26,12 +25,12 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
+  await mongoose.connection.close();
   await mongod.stop();
 });
 
 afterEach(async () => {
   jest.restoreAllMocks();
-
+  console.info(mongoose.connection);
   await mongoose.connection.dropDatabase();
-  await mongoose.connection.close();
 });
