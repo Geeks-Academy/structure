@@ -316,7 +316,7 @@ describe('Social Controller', () => {
     const social = {
       name: 'Fb',
     };
-    jest.spyOn(Social, 'findOneAndUpdate').mockImplementation(() => {
+    jest.spyOn(Social, 'findByIdAndUpdate').mockImplementation(() => {
       throw new Error('Error');
     });
     await supertest(app)
