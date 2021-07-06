@@ -30,4 +30,4 @@ jobs:
         run: yarn build
 
       - name: Run tests for backend
-        run: npx jest -- --detectOpenHandles
+        run: yarn test
