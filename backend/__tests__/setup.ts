@@ -27,7 +27,7 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await mongod.stop();
-  // await mongoose.connection.dropDatabase();
+  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
 });
 
