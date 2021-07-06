@@ -26,12 +26,12 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongoose.connection.dropDatabase();
-
   await mongod.stop();
 });
 
 afterEach(async () => {
   jest.restoreAllMocks();
+
+  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
 });
