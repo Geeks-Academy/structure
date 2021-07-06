@@ -17,6 +17,7 @@ beforeEach(async () => {
     useFindAndModify: false,
     poolSize: 10
   }
+  await mongoose.disconnect();
   await mongoose.connect(uri, options);
   const collections = mongoose.connection.collections;
   for (const key in collections) {
@@ -27,7 +28,10 @@ beforeEach(async () => {
 
 afterEach(async () => {
   jest.restoreAllMocks();
+});
+
+afterAll(async () => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
   await mongod.stop();
-});
+})
