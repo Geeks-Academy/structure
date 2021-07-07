@@ -19,6 +19,7 @@ interface IProps {
   control: FormValues<socials[]>;
   register: UseFormRegister<IUser>;
   getValues: UseFormGetValues<IUser>;
+  setValue: UseSetValue<IUser>;
   socials: ISocial[];
 }
 
@@ -29,6 +30,7 @@ const Socials = ({
   error,
   register,
   getValues,
+  setValue,
   socials,
 }: IProps): JSX.Element => {
   useFieldArray({
@@ -36,44 +38,68 @@ const Socials = ({
     name,
   });
 
-  const [clickedIdx, setClickedIdx] = useState(null);
+  const [effectiveSocials, setEffectiveSocials] = useState<ISocial>([]);
+  const [availableSocials, setAvailableSocials] = useState<ISocial>([]);
+
+  const moveSocial = (social, reverse) => {
+    if (!reverse) {
+      setEffectiveSocials((prev) => [social, ...prev]);
+      setAvailableSocials((prev) => prev.filter((s) => social.social._id !== s.social._id));
+    } else {
+      setAvailableSocials((prev) => {
+        social.link = '';
+        return [social, ...prev];
+      });
+      setEffectiveSocials((prev) => prev.filter((s) => social.social._id !== s.social._id));
+    }
+  };
+
+  React.useEffect(() => {
+    setEffectiveSocials(socials.filter((social) => !!social.link));
+    setAvailableSocials(socials.filter((social) => !social.link));
+  }, [socials]);
 
   return (
     <StyledSelectWrapper>
       <StyledLabel>{label}</StyledLabel>
       <div>
-        {socials.map((social, idx) => {
-          if (clickedIdx !== idx) {
-            return (
-              <Tooltip title={social.social.name} placement="top">
-                <StyledSocialIcon
-                  key={social.id}
-                  src={social.social.image}
-                  onClick={() => setClickedIdx(idx)}
-                />
-              </Tooltip>
-            );
-          }
-          return null;
+        {availableSocials.map((social) => {
+          return (
+            <Tooltip title={social.social.name} placement="top">
+              <StyledSocialIcon
+                key={social.id}
+                src={social.social.image}
+                onClick={() => moveSocial(social)}
+              />
+            </Tooltip>
+          );
         })}
       </div>
-      {socials.map((val, idx) => {
-        if (clickedIdx === idx) {
+      {effectiveSocials.map((val, idx) => {
+        const indexOfSocial = socials.indexOf(val);
+        if (getValues(`${name}.${idx}`)) {
           return (
             <StyledSocialWrapper>
               <Tooltip title={val.social.name} placement="left">
                 <StyledSocialIcon
                   src={val.social.image}
                   key={val.social._id}
-                  onClick={() => setClickedIdx(null)}
+                  onClick={() => {
+                    moveSocial(val, true);
+                    setValue(`${name}.${indexOfSocial}.link`);
+                  }}
                 />
               </Tooltip>
               <StyledInput
                 key={val.social._id}
-                defaultValue={getValues(`${name}.${idx}.link`)}
-                {...register(`${name}.${idx}.link`)}
+                defaultValue={getValues(`${name}.${indexOfSocial}.link`)}
+                {...register(`${name}.${indexOfSocial}.link`)}
               />
-              <input type="hidden" value={val.social._id} {...register(`${name}.${idx}.social`)} />
+              <input
+                type="hidden"
+                value={val.social._id}
+                {...register(`${name}.${indexOfSocial}.social`)}
+              />
             </StyledSocialWrapper>
           );
         }
