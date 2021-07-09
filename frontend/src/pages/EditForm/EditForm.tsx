@@ -137,6 +137,7 @@ const EditForm = (): JSX.Element => {
             control={control}
             register={register}
             getValues={getValues}
+            setValue={setValue}
             socials={currentUser.socials!}
           />
           <ImageUploader name="image" setValue={setValue} control={control} />
