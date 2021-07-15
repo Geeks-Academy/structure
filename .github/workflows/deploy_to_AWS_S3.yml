@@ -26,10 +26,7 @@ jobs:
 
     - name: Generate .env file
       run: |
-        echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env
-        ls -la
-        pwd
-        cat .env
+        echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> ./frontend/.env
 
     - name: Build static website
       run: |
