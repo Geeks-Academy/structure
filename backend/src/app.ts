@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
-dotenv.config();
 import routes from './routes';
+import env from './env';
 import cors from 'cors';
 
 const app = express();
@@ -10,7 +9,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CLIENT_URL,
+    origin: env.CLIENT_URL,
   })
 );
 
