@@ -24,6 +24,13 @@ jobs:
         cd ./frontend
         npm install
 
+    - name: Generate .env file
+      run: |
+        echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> .env
+        ls -la
+        pwd
+        cat .env
+
     - name: Build static website
       run: |
         cd ./frontend
