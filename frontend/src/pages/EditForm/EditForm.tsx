@@ -87,12 +87,12 @@ const EditForm = (): JSX.Element => {
     const allSocials = await fetchAllSocials();
     const initialValues = await initValues();
     initialValues.socials = mapActualSocialsToAllSocials(allSocials, initialValues);
-    setCurrentUser(initialValues);
     reset(initialValues);
     const users = await getAllUsers();
     const mappedUsersToOptions = replaceUserInfoIntoSelectOptions(users);
     const usersWithoutCurrentUser = removeCurrentUser(initialValues, mappedUsersToOptions);
 
+    setCurrentUser(initialValues);
     setUsers(usersWithoutCurrentUser);
   });
 

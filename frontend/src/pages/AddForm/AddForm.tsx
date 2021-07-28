@@ -110,6 +110,7 @@ const AddForm = (): JSX.Element => {
             register={register}
             getValues={getValues}
             socials={allSocials}
+            setValue={setValue}
           />
           <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />

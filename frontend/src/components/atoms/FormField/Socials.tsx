@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { FieldError, useFieldArray, UseFormGetValues } from 'react-hook-form';
+import { FieldError, useFieldArray, UseFormGetValues, UseFormWatch } from 'react-hook-form';
 import ErrorMessage from 'components/atoms/ErrorMessage';
 import { Tooltip } from '@material-ui/core';
 import {
@@ -19,7 +19,7 @@ interface IProps {
   control: FormValues<socials[]>;
   register: UseFormRegister<IUser>;
   getValues: UseFormGetValues<IUser>;
-  setValue: UseSetValue<IUser>;
+  setValue?: UseSetValue<IUser>;
   socials: ISocial[];
 }
 
@@ -75,35 +75,32 @@ const Socials = ({
           );
         })}
       </div>
-      {effectiveSocials.map((val, idx) => {
+      {effectiveSocials.map((val) => {
         const indexOfSocial = socials.indexOf(val);
-        if (getValues(`${name}.${idx}`)) {
-          return (
-            <StyledSocialWrapper>
-              <Tooltip title={val.social.name} placement="left">
-                <StyledSocialIcon
-                  src={val.social.image}
-                  key={val.social._id}
-                  onClick={() => {
-                    moveSocial(val, true);
-                    setValue(`${name}.${indexOfSocial}.link`);
-                  }}
-                />
-              </Tooltip>
-              <StyledInput
+        return (
+          <StyledSocialWrapper>
+            <Tooltip title={val.social.name} placement="left">
+              <StyledSocialIcon
+                src={val.social.image}
                 key={val.social._id}
-                defaultValue={getValues(`${name}.${indexOfSocial}.link`)}
-                {...register(`${name}.${indexOfSocial}.link`)}
+                onClick={() => {
+                  moveSocial(val, true);
+                  setValue(`${name}.${indexOfSocial}.link`);
+                }}
               />
-              <input
-                type="hidden"
-                value={val.social._id}
-                {...register(`${name}.${indexOfSocial}.social`)}
-              />
-            </StyledSocialWrapper>
-          );
-        }
-        return null;
+            </Tooltip>
+            <StyledInput
+              key={val.social._id}
+              defaultValue={getValues(`${name}.${indexOfSocial}.link`)}
+              {...register(`${name}.${indexOfSocial}.link`)}
+            />
+            <input
+              type="hidden"
+              value={val.social._id}
+              {...register(`${name}.${indexOfSocial}.social`)}
+            />
+          </StyledSocialWrapper>
+        );
       })}
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </StyledSelectWrapper>
