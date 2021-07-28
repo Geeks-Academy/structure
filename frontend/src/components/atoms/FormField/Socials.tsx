@@ -1,14 +1,10 @@
 // @ts-nocheck
 import React, { useState } from 'react';
-import { FieldError, useFieldArray, UseFormGetValues, UseFormWatch } from 'react-hook-form';
+import { FieldError, useFieldArray, UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import ErrorMessage from 'components/atoms/ErrorMessage';
 import { Tooltip } from '@material-ui/core';
-import {
-  StyledLabel,
-  StyledSelectWrapper,
-  StyledSocialIcon,
-  StyledSocialWrapper,
-} from './Select.styled';
+import { StyledLabel, StyledSelectWrapper } from './Select.styled';
+import { StyledSocialIcon, StyledSocialWrapper } from './Socials.styled';
 import { StyledInput } from './Input.styled';
 import { IUser, ISocial } from '../../../Types/interfaces';
 
