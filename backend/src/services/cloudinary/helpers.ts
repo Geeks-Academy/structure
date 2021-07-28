@@ -1,5 +1,6 @@
 import { IDetectedImageResponse } from './types';
 import { cloudinary } from '../cloudinary';
+import env from '../../env';
 import axios from 'axios';
 
 export const cloudinaryUpload = async (image: string, options?: any) => {
@@ -13,7 +14,7 @@ export const cloudinaryUpload = async (image: string, options?: any) => {
 
 export const detectImage = async (photoObject: any): Promise<IDetectedImageResponse> => {
   const baseUrl = 'https://res.cloudinary.com';
-  const cloudName = process.env.CLOUDINARY_NAME;
+  const cloudName = env.CLOUDINARY_NAME;
   const params = 'c_thumb,g_face,w_300,h_300';
   const info = 'fl_getinfo';
 

@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
-
-const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING as string;
+import env from '../env';
 
 const connectDb = async () => {
   try {
-    await mongoose.connect(MONGO_CONNECTION_STRING, {
+    await mongoose.connect(env.MONGO_CONNECTION_STRING as string, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
