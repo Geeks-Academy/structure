@@ -4,14 +4,14 @@ import React, { useState } from 'react';
 import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { UserRequests } from 'Services';
+import { SocialRequests, UserRequests } from 'Services';
 import CustomSelect from 'components/atoms/FormField/Select';
 import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions, userPlaceholder } from 'helpers';
 import ImageUploader from 'components/molecules/ImageUploader';
-import { IUser, IUserOptions } from 'Types/interfaces';
+import { ISocial, ISocialPart, IUser, IUserOptions } from 'Types/interfaces';
 import {
   StyledBottomWrapper,
   StyledContainer,
@@ -22,8 +22,15 @@ import {
   StyledSubmitButton,
   StyledOutlineButton,
 } from './AddForm.styled';
+import Socials from '../../components/atoms/FormField/Socials';
 
+const { getAllSocials } = SocialRequests;
 const { getAllUsers, createUser } = UserRequests;
+
+const fetchAllSocials = async (): Promise<ISocialPart[]> => {
+  const socials = await getAllSocials();
+  return socials.data;
+};
 
 const defaultValues = {
   name: '',
@@ -31,6 +38,7 @@ const defaultValues = {
   email: '',
   image: userPlaceholder,
   title: '',
+  socials: [],
   manager: false,
   openToWork: false,
 };
@@ -38,12 +46,14 @@ const defaultValues = {
 const AddForm = (): JSX.Element => {
   const history = useHistory();
   const [users, setUsers] = useState<IUserOptions[]>([]);
-
+  const [allSocials, setAllSocials] = useState<ISocial[]>([]);
   const {
     handleSubmit,
     control,
     setValue,
+    getValues,
     setError,
+    register,
     formState: { errors },
   } = useForm<IUser>({
     resolver,
@@ -53,7 +63,17 @@ const AddForm = (): JSX.Element => {
   useAsyncEffect(async () => {
     const users = await getAllUsers();
     const data = replaceUserInfoIntoSelectOptions(users);
+    const allSocials = await fetchAllSocials();
+
     setUsers(data);
+    setAllSocials(
+      allSocials.map((social) => {
+        return {
+          social,
+          link: '',
+        };
+      })
+    );
   });
 
   const onCancel = () => history.replace('/admin');
@@ -82,6 +102,15 @@ const AddForm = (): JSX.Element => {
             control={control}
             options={users}
             error={errors.boss}
+          />
+          <Socials
+            label="Socials"
+            name="socials"
+            control={control}
+            register={register}
+            getValues={getValues}
+            socials={allSocials}
+            setValue={setValue}
           />
           <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />

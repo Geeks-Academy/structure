@@ -3,13 +3,13 @@ import { useAsyncEffect } from 'hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
-import { UserRequests } from 'Services';
+import { SocialRequests, UserRequests } from 'Services';
 import CustomSelect from 'components/atoms/FormField/Select';
 import CustomInput from 'components/atoms/FormField/Input';
 import CustomCheckbox from 'components/atoms/FormField/Checkbox';
 import { resolver } from 'helpers/Form/validation';
 import { replaceUserInfoIntoSelectOptions, removeCurrentUser } from 'helpers';
-import { IUserOptions, IUser } from 'Types/interfaces';
+import { IUserOptions, IUser, ISocial, ISocialPart } from 'Types/interfaces';
 import ImageUploader from 'components/molecules/ImageUploader';
 import {
   StyledBottomWrapper,
@@ -21,6 +21,7 @@ import {
   StyledSubmitButton,
   StyledOutlineButton,
 } from './EditForm.styled';
+import Socials from '../../components/atoms/FormField/Socials';
 
 const { getAllUsers, updateUser, getUser, deactivate } = UserRequests;
 
@@ -30,22 +31,44 @@ const defaultValues = {
   email: '',
   image: '',
   title: '',
+  socials: [],
   openToWork: true,
   manager: false,
+};
+
+const { getAllSocials } = SocialRequests;
+
+const mapActualSocialsToAllSocials = (allSocials: ISocialPart[], currentUser: IUser) => {
+  const socialArr: ISocial[] = [];
+  if (allSocials) {
+    allSocials.forEach((social, idx) => {
+      socialArr.push({ social, link: '' });
+      if (currentUser && currentUser.socials) {
+        currentUser.socials.forEach((userSocial) => {
+          if (userSocial.social._id === social._id) {
+            socialArr[idx].link = userSocial.link;
+          }
+        });
+      }
+    });
+  }
+  return socialArr;
 };
 
 const EditForm = (): JSX.Element => {
   const history = useHistory();
   const { params } = useRouteMatch<{ id: string }>();
   const [users, setUsers] = useState<IUserOptions[]>([]);
-  const [currentUser, setCurrentUser] = useState<IUser>();
+  const [currentUser, setCurrentUser] = useState<IUser>(defaultValues);
 
   const {
     handleSubmit,
     control,
     reset,
+    register,
     setValue,
     setError,
+    getValues,
     formState: { errors },
   } = useForm<IUser>({ defaultValues, resolver });
 
@@ -55,14 +78,21 @@ const EditForm = (): JSX.Element => {
     return currentUser.data;
   };
 
+  const fetchAllSocials = async (): Promise<ISocialPart[]> => {
+    const socials = await getAllSocials();
+    return socials.data;
+  };
+
   useAsyncEffect(async () => {
+    const allSocials = await fetchAllSocials();
     const initialValues = await initValues();
-    setCurrentUser(initialValues);
+    initialValues.socials = mapActualSocialsToAllSocials(allSocials, initialValues);
     reset(initialValues);
     const users = await getAllUsers();
     const mappedUsersToOptions = replaceUserInfoIntoSelectOptions(users);
     const usersWithoutCurrentUser = removeCurrentUser(initialValues, mappedUsersToOptions);
 
+    setCurrentUser(initialValues);
     setUsers(usersWithoutCurrentUser);
   });
 
@@ -100,6 +130,15 @@ const EditForm = (): JSX.Element => {
             control={control}
             options={users}
             error={errors.boss}
+          />
+          <Socials
+            label="Socials"
+            name="socials"
+            control={control}
+            register={register}
+            getValues={getValues}
+            setValue={setValue}
+            socials={currentUser.socials!}
           />
           <ImageUploader name="image" setValue={setValue} control={control} />
           <CustomCheckbox label="Manager" name="manager" control={control} error={errors.manager} />
