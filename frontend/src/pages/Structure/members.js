@@ -1,7 +1,9 @@
 import { UserRequests } from 'Services';
 
+
 export const transformUsers = async () => {
   const members = {};
+
 
   const users = await UserRequests.getAllUsers();
 
