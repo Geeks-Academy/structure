@@ -1,5 +1,5 @@
 # Create image based on the official Node 14 alpine image from dockerhub
-FROM node:16.4.0-buster-slim
+FROM node:16.5.0-buster-slim
 ARG REACT_APP_API_URL
 # Create a directory where our app will be placed
 RUN mkdir -p /usr/src/app
