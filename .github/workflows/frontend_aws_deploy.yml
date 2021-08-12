@@ -31,7 +31,7 @@ jobs:
         SECRET_LIST=$(sed -r 's/.*(REACT_APP\w*).*/\1/g' $FILE | grep "REACT")
         while read -r line
         do
-          echo "echo \"${line}=\\\${{ secrets.${line} }}\" >> ./frontend/.env" >> .tmp
+          echo "echo \"${line}=\\\$\{\{ secrets.${line} \}\}\" >> ./frontend/.env" >> .tmp
         done <<< "$SECRET_LIST"
 
         if [ -f "./.tmp" ]; then
