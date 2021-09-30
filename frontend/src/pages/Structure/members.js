@@ -52,7 +52,7 @@ key[11] = {
   title: 'UX Designer <br> Project Manager',
   manager: true,
   email: 'anika.kustra@gmail.com',
-  active: true,
+  active: false,
   openToWork: true,
   image:
     'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967087/members/90617470_206343937316896_5809877092514398208_n.jpg',
@@ -393,7 +393,7 @@ key[34] = {
   email: 'ac.gacek@gmail.com',
   title: 'UI/UX Designer',
   openToWork: false,
-  active: true,
+  active: false,
   image:
     'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968600/members/1600175131182.jpg',
   socials: {
@@ -424,7 +424,7 @@ key[36] = {
   email: 'kinga846@gmail.com',
   title: 'UI/UX Designer',
   openToWork: false,
-  active: true,
+  active: false,
   image:
     'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968751/members/84068257_3298497756846142_7079146718549245952_n.jpg.jpg',
   socials: {
