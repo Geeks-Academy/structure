@@ -7,7 +7,7 @@ const validateBody = (schema: Joi.ObjectSchema) => {
     try {
       await schema.validateAsync(req.body);
       next();
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return res.status(StatusCode.BAD_REQUEST).json(error.details);
     }

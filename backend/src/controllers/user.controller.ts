@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import StatusCode from '../utils/StatusCode';
 import User, { IUser } from '../models/user.model';
 
-export const getAll = async (_req: Request, res: Response): Promise<Response> => {
+export const getAll = async (_req: Request, res: Response): Promise<any> => {
   const users = await User.find().populate({
     path: 'socials',
     populate: {
@@ -16,7 +16,7 @@ export const getAll = async (_req: Request, res: Response): Promise<Response> =>
   return res.json(users);
 };
 
-export const getOne = async (req: Request, res: Response): Promise<Response> => {
+export const getOne = async (req: Request, res: Response): Promise<any> => {
   const userId = req.params.id;
   const user = await User.findById(userId).populate({
     path: 'socials',
@@ -31,7 +31,7 @@ export const getOne = async (req: Request, res: Response): Promise<Response> => 
   return res.json(user);
 };
 
-export const create = async (req: Request, res: Response): Promise<Response> => {
+export const create = async (req: Request, res: Response): Promise<any> => {
   const body = req.body as IUser;
   if (body.email) {
     const users = await User.findOne({ email: body.email }).countDocuments();
@@ -45,7 +45,7 @@ export const create = async (req: Request, res: Response): Promise<Response> => 
   return res.status(StatusCode.CREATED).json(result);
 };
 
-export const update = async (req: Request, res: Response): Promise<Response> => {
+export const update = async (req: Request, res: Response): Promise<any> => {
   const userId = req.params.id;
   if (req.body.boss === userId) {
     return res.status(StatusCode.BAD_REQUEST).json({
@@ -73,7 +73,7 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
   return res.json({ ok: true, message: 'User updated successfully' });
 };
 
-export const deactivate = async (req: Request, res: Response): Promise<Response> => {
+export const deactivate = async (req: Request, res: Response): Promise<any> => {
   const userId = req.params.id;
   const update = { active: false, openToWork: false };
   const user = await User.findByIdAndUpdate(userId, update);
@@ -83,7 +83,7 @@ export const deactivate = async (req: Request, res: Response): Promise<Response>
   return res.json({ ok: true, message: 'User deactivated successfully' });
 };
 
-export const deleteOne = async (req: Request, res: Response): Promise<Response> => {
+export const deleteOne = async (req: Request, res: Response): Promise<any> => {
   const userId = req.params.id;
 
   const user = await User.findById(userId);
