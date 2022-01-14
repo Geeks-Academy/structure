@@ -259,4 +259,16 @@ key[32] = {
   },
 };
 
+key[33] = {
+  parent: key[24],
+  name: '------',
+  title: '',
+  manager: false,
+  email: '------',
+  active: false,
+  openToWork: false,
+  image: '',
+  socials: {},
+};
+
 export const members = [...key];
