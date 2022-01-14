@@ -46,22 +46,6 @@ key[10] = {
   },
 };
 
-key[11] = {
-  parent: key[9],
-  name: 'Anika Kustra',
-  title: 'UX Designer <br> Project Manager',
-  manager: true,
-  email: 'anika.kustra@gmail.com',
-  active: false,
-  openToWork: true,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967087/members/90617470_206343937316896_5809877092514398208_n.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/AniQCat',
-    linkedin: 'https://www.linkedin.com/in/anika-kustra/',
-  },
-};
-
 key[12] = {
   parent: key[9],
   name: 'Monika Fularska',
@@ -78,26 +62,10 @@ key[12] = {
   },
 };
 
-key[13] = {
-  parent: key[9],
-  name: 'Agata Kuza',
-  title: 'UX Designer',
-  email: 'agata.kuza@hotmail.com',
-  active: false,
-  openToWork: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967242/members/86bf8911f564f7f4df4168023bef0d58.png',
-  socials: {
-    facebook: 'https://www.facebook.com/agata.kuza',
-    instagram: 'https://www.instagram.com/agatakuza/',
-    linkedin: 'https://www.linkedin.com/in/agatakuza/',
-  },
-};
-
 key[14] = {
   parent: key[1],
   name: 'Marek Kowalonek',
-  title: `Frontend Lead <br> Backend Lead`,
+  title: `Dev Lead`,
   email: 'marek.kowalonek@gmail.com',
   manager: true,
   active: true,
@@ -208,37 +176,6 @@ key[20] = {
   },
 };
 
-key[22] = {
-  parent: key[1],
-  name: 'Jacek Więckowski',
-  title: 'Java Developer',
-  email: 'wieckow44@gmail.com',
-  active: true,
-  openToWork: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967712/members/1517518394051.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/jacek.wieckowski.3',
-    github: 'https://github.com/jwieckow',
-    linkedin: 'https://www.linkedin.com/in/jacek-wieckowski-45a258117/',
-  },
-};
-
-key[23] = {
-  parent: key[22],
-  name: 'Piotr Mierzejewski',
-  email: 'piotr.mierzejewski@mail.com',
-  title: 'Java Developer',
-  active: true,
-  openToWork: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967782/members/T017TS5J06T-U01AKNF7G9X-gfd207e3c159-512.png',
-  socials: {
-    facebook: 'https://www.facebook.com/profile.php?id=100049666071393',
-    github: 'https://github.com/Posampas',
-  },
-};
-
 key[24] = {
   parent: key[1],
   name: 'Bartłomiej Więckowski',
@@ -253,42 +190,6 @@ key[24] = {
     facebook: 'https://www.facebook.com/profile.php?id=100004457194867',
     github: 'https://github.com/bwieckow',
     linkedin: 'https://www.linkedin.com/in/bart%C5%82omiej-wi%C4%99ckowski-a13b41119/',
-  },
-};
-
-key[25] = {
-  parent: key[24],
-  name: 'Piotr Wachulec',
-  email: 'p.wachulec@gmail.com',
-  title: 'DevOps',
-  active: true,
-  openToWork: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967901/members/T017TS5J06T-U01JFVCL3KP-b5835ae344b5-512.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/pwachulec',
-    github: 'https://github.com/PiotrWachulec',
-    instagram: 'https://www.instagram.com/piotr_wachulec/',
-    linkedin: 'https://www.linkedin.com/in/piotrwachulec/',
-    devto: 'https://dev.to/piotrwachulec',
-    youtube: 'https://www.youtube.com/channel/UC6L70fSSgyXBscFTgCnBLWg',
-    twitter: 'https://twitter.com/piotrwachulec',
-  },
-};
-
-key[26] = {
-  parent: key[22],
-  name: 'Rafał Maduzia',
-  title: 'Java Developer',
-  email: 'rafi11m@hotmail.com',
-  active: true,
-  openToWork: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967969/members/1529737263286.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/profile.php?id=100006118020280',
-    github: 'https://github.com/rmaduzia',
-    linkedin: 'https://www.linkedin.com/in/rafa%C5%82-maduzia/',
   },
 };
 
@@ -307,20 +208,6 @@ key[27] = {
     github: 'https://github.com/MarW5',
     instagram: 'https://www.instagram.com/marta.wiese_official/',
     linkedin: 'https://www.linkedin.com/in/marta-wiese/',
-  },
-};
-
-key[28] = {
-  parent: key[22],
-  name: 'Adam Kurjaniuk',
-  email: 'penq5@wp.pl',
-  title: 'Trainee Java Developer',
-  active: true,
-  openToWork: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621967782/members/T017TS5J06T-U01AKNF7G9X-gfd207e3c159-512.png',
-  socials: {
-    github: 'https://github.com/Z3tiX',
   },
 };
 
@@ -369,67 +256,6 @@ key[32] = {
   socials: {
     facebook: 'https://www.facebook.com/olga.m0',
     linkedin: 'https://www.linkedin.com/in/olga-m-32632b1a7/',
-  },
-};
-
-key[33] = {
-  parent: key[9],
-  name: 'Emilia Świątek',
-  email: 'emiliajulia.swiatek@gmail.com',
-  title: 'UI/UX Designer',
-  openToWork: false,
-  active: true,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968535/members/45375391_2023645807692619_131211929497632768_n.jpg.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/emilia.swiatek.3',
-    linkedin: 'https://www.linkedin.com/in/emilia-%C5%9Bwi%C4%85tek-0bb21ba2/',
-  },
-};
-
-key[34] = {
-  parent: key[9],
-  name: 'Aleksandra Gacek',
-  email: 'ac.gacek@gmail.com',
-  title: 'UI/UX Designer',
-  openToWork: false,
-  active: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968600/members/1600175131182.jpg',
-  socials: {
-    behance: 'https://www.behance.net/aleksandragacek',
-    facebook: 'https://www.facebook.com/gacekalexandra',
-    linkedin: 'https://www.linkedin.com/in/alexandragacek/',
-  },
-};
-
-key[35] = {
-  parent: key[9],
-  name: 'Aneta Pawłowska',
-  email: 'anetakarolinapawlowska@gmail.com',
-  title: 'UI/UX Designer',
-  openToWork: false,
-  active: true,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968689/members/1618670673238.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/aneta.pe21',
-    linkedin: 'https://www.linkedin.com/in/aneta-paw%C5%82owska-b02ab94b/',
-  },
-};
-
-key[36] = {
-  parent: key[9],
-  name: 'Kinga Sochacz',
-  email: 'kinga846@gmail.com',
-  title: 'UI/UX Designer',
-  openToWork: false,
-  active: false,
-  image:
-    'https://res.cloudinary.com/mras2303/image/upload/c_thumb,w_200/v1621968751/members/84068257_3298497756846142_7079146718549245952_n.jpg.jpg',
-  socials: {
-    facebook: 'https://www.facebook.com/singa.kocha',
-    instagram: 'https://www.instagram.com/kingasochacz_',
   },
 };
 
